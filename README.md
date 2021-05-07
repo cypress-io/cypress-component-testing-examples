@@ -1,3 +1,3 @@
-# cypress-component-examples
+# cypress-component-testing-examples
 
-coming soon
+readme coming soon
