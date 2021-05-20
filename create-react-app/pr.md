@@ -14,6 +14,5 @@
 
 Notes:
 
-- Current Create React App uses webpack@4 (2021-05-11)
-- Some older Create React App projects may need v4 of html-webpack-plugin, in which case you'd need to do:
+- Some older Create React App projects may need v4 of html-webpack-plugin, in which case you'd also need to do:
   - `yarn add -D html-webpack-plugin@4`
