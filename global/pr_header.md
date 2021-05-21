@@ -1,4 +1,4 @@
-This adds an example <TITLE> project with Cypress component testing.
+This adds an example **${TITLE}** project with Cypress component testing.
 
 - `yarn` to install the dependencies
 - `npx cypress open-ct` to run interactively

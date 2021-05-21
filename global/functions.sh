@@ -12,6 +12,11 @@ fi
 
 dir="$(basename "$0" .sh)"
 branch="$dir"
+parent_branch=main
+
+pr_header=$(<"$script_dir/global/pr_header.md")
+pr_footer=$(<"$script_dir/global/pr_footer.md")
+pr_body=$(<"$script_dir/$dir/pr.md")
 
 has_printed_header=
 function header() {
@@ -25,7 +30,7 @@ function create_branch() {
     rm -rf $dir
   fi
   header "CREATE BRANCH $branch"
-  git checkout -B $branch main
+  git checkout -B $branch $parent_branch
 }
 
 current_step=0
@@ -59,6 +64,21 @@ function commit_all() {
   git commit -m "$@" | head -n2
 }
 
+function process_template() {
+  export TITLE="$title"
+  export DIR="$dir"
+  export DATE="$(date '+%Y-%m-%d')"
+  export SCRIPT="$(basename "$0")"
+  commits=($(git log --pretty=format:"%H" --reverse $parent_branch..HEAD))
+  for i in "${!commits[@]}"; do
+    export COMMIT_$i=${commits[$i]}
+  done
+  for i in "${!commands[@]}"; do
+    export COMMAND_$i="${commands[$i]}"
+  done
+  envsubst
+}
+
 function show_pr_details() {
   header "DIFF WITH ORIGIN"
   origin_exists="$(git show-ref origin/$branch || true)"
@@ -69,32 +89,16 @@ function show_pr_details() {
     if [[ ! "$diff" ]]; then
       echo "(same as origin)"
       return
+    else
+      echo "$diff"
     fi
-    echo "$diff"
   fi
+  header "COMMITS"
+  git log --pretty=format:"%H" --reverse $parent_branch..HEAD
   header "PR TITLE"
   echo "$title"
   header "PR BODY"
-  pr="$(cat "$script_dir/global/pr_header.md" <(echo) "$script_dir/$dir/pr.md" <(echo) "$script_dir/global/pr_footer.md")"
-  declare -A tmpl
-  tmpl[TITLE]="$title"
-  tmpl[DIR]="$dir"
-  tmpl[DATE]="$(date '+%Y-%m-%d')"
-  tmpl[SCRIPT]="$(basename "$0")"
-  sed_cmd=
-  for t in "${!tmpl[@]}"; do
-    sed_cmd="${sed_cmd}s/<$t>/${tmpl[$t]}/g;"
-  done
-  pr="$(echo "$pr" | sed "$sed_cmd")"
-  commit_count=$(echo "$pr" | grep -c "<COMMIT>")
-  commits=($(git log --pretty=format:"%H" --reverse -n$commit_count))
-  for c in "${commits[@]}"; do
-    pr="$(echo "$pr" | sed "1,/<COMMIT>/s/<COMMIT>/$c/")"
-  done
-  for c in "${commands[@]}"; do
-    pr="$(echo "$pr" | sed "1,/<COMMAND>/s#<COMMAND>#$c#")"
-  done
-  echo "$pr"
+  echo -e "$pr_header\n\n$pr_body\n\n$pr_footer" | process_template
   header "UPDATE ORIGIN"
   echo "git push --force --set-upstream origin $branch"
 }
