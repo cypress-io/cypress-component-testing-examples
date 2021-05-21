@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-if (( "${BASH_VERSINFO[0]}${BASH_VERSINFO[1]}" < 43 )); then
+# https://stackoverflow.com/questions/4023830#comment92693604_4024263
+function verlte() { printf '%s\n%s' "$1" "$2" | sort -C -V; }
+function verlt() { ! verlte "$2" "$1"; }
+
+if verlt "$BASH_VERSION" 4.3.0; then
   echo "Error: please install bash 4.3 or newer"
   exit 1
 fi
@@ -17,6 +21,25 @@ parent_branch=main
 pr_header=$(<"$script_dir/global/pr_header.md")
 pr_footer=$(<"$script_dir/global/pr_footer.md")
 pr_body=$(<"$script_dir/$dir/pr.md")
+
+function process_args() {
+  while [[ "${1-}" ]]; do
+    case "$1" in
+      --revert)
+        revert_to_origin
+        exit
+        ;;
+      *)
+        echo "Unknown option (ignored): $1"
+        ;;
+    esac
+    shift
+  done
+}
+
+function revert_to_origin() {
+  git checkout -B $branch origin/$branch
+}
 
 has_printed_header=
 function header() {
@@ -102,3 +125,5 @@ function show_pr_details() {
   header "UPDATE ORIGIN"
   echo "git push --force --set-upstream origin $branch"
 }
+
+process_args "$@"
