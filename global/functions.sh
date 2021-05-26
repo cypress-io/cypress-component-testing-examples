@@ -16,29 +16,34 @@ fi
 
 dir="$(basename "$0" .sh)"
 branch="$dir"
-parent_branch=main
+parent_branch=origin/main
+repo_url='https://github.com/cypress-io/cypress-component-testing-examples'
+had_initial_remove_commit=
 
 pr_header=$(<"$script_dir/global/pr_header.md")
 pr_footer=$(<"$script_dir/global/pr_footer.md")
 pr_body=$(<"$script_dir/$dir/pr.md")
 
+ARGS=()
 function process_args() {
   while [[ "${1-}" ]]; do
     case "$1" in
       --revert)
-        revert_to_origin
+        revert_branch_to_origin
         exit
         ;;
       *)
         echo "Unknown option (ignored): $1"
         ;;
     esac
+    ARGS+=("$1")
     shift
   done
 }
 
-function revert_to_origin() {
-  git checkout -B $branch origin/$branch
+function revert_branch_to_origin() {
+  git fetch origin
+  git checkout -B $branch $parent_branch
 }
 
 has_printed_header=
@@ -52,8 +57,14 @@ function create_branch() {
     header "DELETE EXISTING DIR $dir"
     rm -rf $dir
   fi
-  header "CREATE BRANCH $branch"
-  git checkout -B $branch $parent_branch
+  header "CREATE BRANCH $branch FROM $parent_branch"
+  revert_branch_to_origin
+  if [[ "$(git ls-files $dir)" ]]; then
+    header "REMOVE EXISTING EXAMPLE FILES"
+    git rm -rf $dir
+    git commit -m "Remove existing example files"
+    had_initial_remove_commit=1
+  fi
 }
 
 current_step=0
@@ -90,38 +101,51 @@ function commit_all() {
 function process_template() {
   export TITLE="$title"
   export DIR="$dir"
+  export REPO_URL="$repo_url"
   export DATE="$(date '+%Y-%m-%d')"
   export SCRIPT="$(basename "$0")"
   commits=($(git log --pretty=format:"%H" --reverse $parent_branch..HEAD))
+  [[ "$had_initial_remove_commit" ]] && commits=("${commits[@]:1}")
   for i in "${!commits[@]}"; do
-    export COMMIT_$i=${commits[$i]}
+    export COMMIT_$i="Commit [\`$(echo "${commits[$i]}" | cut -c1-7)\`]($REPO_URL/commit/${commits[$i]})"
   done
   for i in "${!commands[@]}"; do
-    export COMMAND_$i="${commands[$i]}"
+    export COMMAND_$i="\`${commands[$i]}\`"
   done
   envsubst
 }
 
-function show_pr_details() {
-  header "DIFF WITH ORIGIN"
-  origin_exists="$(git show-ref origin/$branch || true)"
-  if [[ ! "$origin_exists" ]]; then
-    echo "(new branch)"
+function update_readme() {
+  header "COMMITS"
+  git log --pretty=format:"%H" --reverse $parent_branch..HEAD
+  header "README INSTRUCTIONS"
+  instructions=$(echo -e "$pr_header\n\n$pr_body\n\n$pr_footer" | process_template)
+  echo "$instructions"
+  echo -e "$instructions\n\n---\n\n$(cat README.md)" > README.md
+  commit_all "Add instructions to top of readme"
+}
+
+function finalize() {
+  update_readme
+  merge_commit_parent="$(git log --pretty=format:"%H" --merges --first-parent -n1 $parent_branch -- .)"
+  header "ORIGIN MERGE COMMIT"
+  if [[ ! "$merge_commit_parent" ]]; then
+    echo "(no prior merge commit containing the "$dir" directory)"
   else
-    diff="$(git diff --color=always origin/$branch -- "$dir" ':(exclude)*lock*')"
+    git log $merge_commit_parent -n1
+    header "DIFF"
+    diff="$(git diff --color=always $merge_commit_parent -- . ':(exclude)*lock*')"
     if [[ ! "$diff" ]]; then
-      echo "(same as origin)"
-      return
+      echo "(same as origin, nothing to do)"
     else
       echo "$diff"
     fi
   fi
-  header "COMMITS"
-  git log --pretty=format:"%H" --reverse $parent_branch..HEAD
   header "PR TITLE"
   echo "$title"
   header "PR BODY"
-  echo -e "$pr_header\n\n$pr_body\n\n$pr_footer" | process_template
+  url="$repo_url/tree/$branch/$dir"
+  echo "View the [$dir]($url) example directory, including the instructions at the [top of the README]($url#readme)."
   header "UPDATE ORIGIN"
   echo "git push --force --set-upstream origin $branch"
 }

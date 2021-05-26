@@ -40,4 +40,4 @@ cmd yarn add -D cypress @cypress/vue @cypress/webpack-dev-server webpack-dev-ser
 apply_patch
 commit_all "Add Cypress with example component and page tests"
 
-show_pr_details
+finalize

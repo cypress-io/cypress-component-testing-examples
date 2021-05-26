@@ -27,4 +27,4 @@ apply_patch global/create-next-app.patch
 apply_patch 
 commit_all "Add Cypress with example component and page tests"
 
-show_pr_details
+finalize

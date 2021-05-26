@@ -28,4 +28,4 @@ apply_patch global/create-react-app.patch
 apply_patch
 commit_all "Add Cypress with example component test"
 
-show_pr_details
+finalize
