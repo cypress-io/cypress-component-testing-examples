@@ -13,7 +13,7 @@ title='Vue CLI (Vue 2)'
 # cat ~/.vuerc | jq '.presets["vue-cli-2"]' | pbcopy
 export PRESET=$(cat <<'EOF'
 {
-  "useConfigFiles": true,
+  "useConfigFiles": false,
   "plugins": {
     "@vue/cli-plugin-babel": {},
     "@vue/cli-plugin-eslint": {
