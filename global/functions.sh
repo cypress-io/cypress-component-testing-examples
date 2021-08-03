@@ -121,7 +121,11 @@ function update_readme() {
   header "README INSTRUCTIONS"
   instructions=$(echo -e "$pr_header\n\n$pr_body\n\n$pr_footer" | process_template)
   echo "$instructions"
-  echo -e "$instructions\n\n---\n\n$(cat README.md)" > README.md
+  original_readme='(no original readme)'
+  if [[ -e README.md ]]; then
+    original_readme=$(cat README.md)
+  fi
+  echo -e "$instructions\n\n---\n\n$original_readme" > README.md
   commit_all "Add instructions to top of readme"
 }
 
