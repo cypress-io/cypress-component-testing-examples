@@ -7,7 +7,7 @@ index 0000000..a57b21f
 +{
 +  "component": {
 +    "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
-+    "componentFolder": "."
++    "componentFolder": "src"
 +  }
 +}
 diff --git a/vue-cli-2/cypress/fixtures/example.json b/vue-cli-2/cypress/fixtures/example.json
