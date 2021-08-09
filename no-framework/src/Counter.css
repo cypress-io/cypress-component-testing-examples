@@ -1,0 +1,29 @@
+div {
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
+span {
+  display: inline-block;
+  width: 2em;
+  font-size: 1.5em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+button {
+  display: inline-block;
+  background: rgb(4, 195, 142);
+  padding: 0.3em 1.2em;
+  margin: 0 0.1em 0.1em 0;
+  border: 0.16em solid rgb(0, 0, 0, 0);
+  border-radius: 2em;
+  font-weight: 700;
+  box-sizing: border-box;
+  color: #ffffff;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background: rgb(6, 136, 93);
+}
