@@ -8,7 +8,6 @@ const ROOT_ID = '__cy_root'
 
 // Is there a better way to get the port?
 const PORT = 9000
-const PROJECT_ROOT = path.join(__dirname, '..')
 
 // HTML that the Cypress test runner expects for the Component Test AUT Frame
 const getAUTFrameHtml = ({ projectRoot }) => `
@@ -40,14 +39,15 @@ const sendHtml = (config) => (req, res) => {
 }
 
 // Compile spec file (including any js/css imports) into a bundle in memory,
-// passing the bundle contents into onDone when ready
-const compileSpec = (src, onDone) => {
+// and return a promise that resolves with the bundle contents or rejects
+// with an error message
+const compileSpec = (projectRoot, specPath) => {
   const fs = createFsFromVolume(new Volume())
   const compiler = webpack({
     mode: 'development',
-    context: PROJECT_ROOT,
-    entry: src,
-    output: { filename: src.substring(1) },
+    context: projectRoot,
+    entry: specPath,
+    output: { filename: specPath.substring(1) },
     module: {
       rules: [
         {
@@ -58,21 +58,36 @@ const compileSpec = (src, onDone) => {
     },
   })
   compiler.outputFileSystem = fs
-  compiler.run((err, stats) => {
-    console.log(stats.toString({ chunks: false, colors: true }))
-    const content = fs.readFileSync(`dist${src}`)
-    onDone(content.toString())
+  return new Promise((resolve, reject) => {
+    compiler.run((err, stats) => {
+      if (err) {
+        console.error(err)
+        reject(err.message)
+      } else if (stats.hasErrors()) {
+        const info = stats.toJson()
+        console.error(info.errors[0].details)
+        reject(info.errors[0].message)
+      } else {
+        console.log(stats.toString({ chunks: false, colors: true }))
+        const content = fs.readFileSync(`dist${specPath}`)
+        resolve(content.toString())
+      }
+    })
   })
 }
 
 // Process spec file and send bundle as response
 const sendSpecBundle =
   ({ projectRoot }) =>
-  ({ path: scriptPath }, res) => {
-    compileSpec(scriptPath, (src) => {
-      res.setHeader('Content-Type', 'text/javascript')
-      res.send(src)
-    })
+  (req, res) => {
+    compileSpec(projectRoot, req.path)
+      .then((generatedScript) => {
+        res.setHeader('Content-Type', 'text/javascript')
+        res.send(generatedScript)
+      })
+      .catch((errMessage) => {
+        res.status(500).send(errMessage)
+      })
   }
 
 // Start the dev server
@@ -99,5 +114,6 @@ module.exports = { injectDevServer }
 // For testing purposes, if this script is run directly via node, start
 // a standalone dev server
 if (require.main === module) {
-  startDevServer(PORT, { projectRoot: PROJECT_ROOT })
+  const projectRoot = path.join(__dirname, '..')
+  startDevServer(PORT, { projectRoot })
 }
