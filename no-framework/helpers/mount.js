@@ -1,14 +1,20 @@
 import { ROOT_ID, setupHooks } from '@cypress/mount-utils'
 
 export const mount = (node) => {
-  const el = document.getElementById(ROOT_ID)
+  // Get existing root element or create one if necessary
+  let root = document.getElementById(ROOT_ID)
+  if (!root) {
+    root = document.createElement('div')
+    root.id = ROOT_ID
+    document.body.append(root)
+  }
 
-  // clean up each time we mount a new component
-  el.innerHTML = ''
+  // Clear out the root element before mounting the new component
+  root.innerHTML = ''
 
-  // mount component
-  el.append(node)
+  // Mount the component
+  root.append(node)
 
-  // initialize internal pre/post test hooks
+  // Initialize internal pre/post test hooks
   setupHooks()
 }

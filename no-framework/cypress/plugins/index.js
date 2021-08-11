@@ -1,6 +1,8 @@
-const { injectDevServer } = require('../../helpers/dev-server')
+const { getSetupDevServer } = require('../../helpers/dev-server')
+
+const setupDevServer = getSetupDevServer({ port: 9000 })
 
 module.exports = (on, config) => {
-  injectDevServer(on, config)
+  setupDevServer(on, config)
   return config
 }
