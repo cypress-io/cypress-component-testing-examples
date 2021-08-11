@@ -74,20 +74,22 @@ const startDevServer = (port, config) => {
 }
 
 // Inject Cypress dev server
-const getSetupDevServer = ({ port = 9000 } = {}) => (...args) => {
-  // Old CT plugin signature: setupDevServer(on, config)
-  if (typeof args[0] === 'function') {
-    const [on, config] = args
-    on('dev-server:start', (options) => {
-      return startDevServer(port, config)
-    })
+const getSetupDevServer =
+  ({ port = 9000 } = {}) =>
+  (...args) => {
+    // Old CT plugin signature: setupDevServer(on, config)
+    if (typeof args[0] === 'function') {
+      const [on, config] = args
+      on('dev-server:start', (options) => {
+        return startDevServer(port, config)
+      })
+    }
+    // New CT plugin signature: setupDevServer(options)
+    else {
+      const [options] = args
+      return startDevServer(port, options.config)
+    }
   }
-  // New CT plugin signature: setupDevServer(options)
-  else {
-    const [options] = args
-    return startDevServer(port, options.config)
-  }
-}
 
 module.exports = { getSetupDevServer }
 
