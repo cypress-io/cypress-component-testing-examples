@@ -1,102 +1,75 @@
+const fs = require('fs/promises')
 const path = require('path')
-const express = require('express')
-const webpack = require('webpack')
-const { createFsFromVolume, Volume } = require('memfs')
+const vite = require('vite')
 
-// Send AUT HTML as response
-const sendHtml = (req, res) => {
-  res.sendfile(path.join(__dirname, 'aut-frame.html'))
-}
-
-// Compile spec file (including any js/css imports) into a bundle in memory,
-// and return a promise that resolves with the bundle contents or rejects
-// with an error message
-const compileSpec = (projectRoot, specPath) => {
-  const fs = createFsFromVolume(new Volume())
-  const compiler = webpack({
-    mode: 'development',
-    context: projectRoot,
-    entry: specPath,
-    output: { filename: specPath.substring(1) },
-    module: {
-      rules: [
-        {
-          test: /\.css$/i,
-          use: ['style-loader', 'css-loader'],
+// Vite dev server plugin for serving the AUT Frame HTML
+const autFrameHtmlPlugin = (projectRoot) => {
+  return {
+    name: 'autFrameHtmlPlugin',
+    // Ensure the aut-cypress script knows the project root so it can calculate the
+    // proper path to load spec files
+    config() {
+      return {
+        define: {
+          __PROJECT_ROOT__: JSON.stringify(projectRoot),
         },
-      ],
-    },
-  })
-  compiler.outputFileSystem = fs
-  return new Promise((resolve, reject) => {
-    compiler.run((err, stats) => {
-      if (err) {
-        console.error(err)
-        reject(err.message)
-      } else if (stats.hasErrors()) {
-        const info = stats.toJson()
-        console.error(info.errors[0].details)
-        reject(info.errors[0].message)
-      } else {
-        console.log(stats.toString({ chunks: false, colors: true }))
-        const content = fs.readFileSync(`dist${specPath}`)
-        resolve(content.toString())
       }
-    })
-  })
+    },
+    // Ensure that requests to /__cypress/src/index.html (the URL the CT runner
+    // expects the AUT Frame HTML to be served from) serves up aut-frame.html
+    // with all necessary vite transforms
+    async configureServer(server) {
+      const html = await fs.readFile(path.join(__dirname, 'aut-frame.html'))
+      server.middlewares.use('/__cypress/src/index.html', (req, res) => {
+        server
+          .transformIndexHtml(req.url, html.toString())
+          .then((transformedHtml) => {
+            res.end(transformedHtml)
+          })
+      })
+    },
+  }
 }
 
-// Process spec file and send bundle as response
-const sendSpecBundle =
-  ({ projectRoot }) =>
-  (req, res) => {
-    const [, specPath] = req.path.split(projectRoot)
-    compileSpec(projectRoot, specPath)
-      .then((generatedScript) => {
-        res.setHeader('Content-Type', 'text/javascript')
-        res.send(generatedScript)
-      })
-      .catch((errMessage) => {
-        res.status(500).send(errMessage)
-      })
-  }
-
-// Start the dev server
-const startDevServer = (port, config) => {
-  const app = express()
-  // Serve HTML file that the AUT frame loads initially
-  app.get('/__cypress/src/index.html', sendHtml)
-  // Serve spec files, processed into a bundle
-  app.get('/spec/*', sendSpecBundle(config))
+// Start a dev server that:
+// * Serves the AUT Frame HTML at /__cypress/src/index.html
+// * Serves other files relative to the project root (eg. /src/Counter.spec.ct.js)
+// * Supports Hot Module Reloading
+const startDevServer = async (config) => {
+  // Configure server
+  const viteDevServer = await vite.createServer({
+    configFile: false,
+    root: config.projectRoot,
+    base: '/__cypress/src/',
+    plugins: [autFrameHtmlPlugin(config.projectRoot)],
+  })
   // Start server
-  const server = app.listen(port)
-  return { port, close: server.close }
+  const app = await viteDevServer.listen()
+  // Return what Cypress CT requires
+  return { port: app.config.server.port, close: app.httpServer.close }
 }
 
 // Inject Cypress dev server
-const getSetupDevServer =
-  ({ port = 9000 } = {}) =>
-  (...args) => {
-    // Old CT plugin signature: setupDevServer(on, config)
-    if (typeof args[0] === 'function') {
-      const [on, config] = args
-      on('dev-server:start', (options) => {
-        return startDevServer(port, config)
-      })
-    }
-    // New CT plugin signature: setupDevServer(options)
-    else {
-      const [options] = args
-      return startDevServer(port, options.config)
-    }
+const setupDevServer = (...args) => {
+  // Old CT plugin signature: setupDevServer(on, config)
+  if (typeof args[0] === 'function') {
+    const [on, config] = args
+    on('dev-server:start', (options) => {
+      return startDevServer(config)
+    })
   }
+  // New CT plugin signature: setupDevServer(options)
+  else {
+    const [options] = args
+    return startDevServer(options.config)
+  }
+}
 
-module.exports = { getSetupDevServer }
+module.exports = { setupDevServer }
 
 // For testing purposes, if this script is run directly via node, start
 // a standalone dev server
 if (require.main === module) {
   const projectRoot = path.join(__dirname, '..')
-  const port = process.env.PORT || 9000
-  startDevServer(port, { projectRoot })
+  startDevServer({ projectRoot })
 }
