@@ -1,0 +1,9 @@
+{
+  "name": "component-testing-no-framework",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "@cypress/mount-utils": "^1.0.2",
+    "cypress": "^8.2.0"
+  }
+}
