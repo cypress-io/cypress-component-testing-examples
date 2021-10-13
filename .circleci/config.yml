@@ -11,6 +11,7 @@ workflows:
   vue-cli-3-ct:
     jobs:
       - cypress/install:
+          name: "Setup Vue CLI 3"
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-3/package.json" }}
           post-checkout:
             - run: cd vue-cli-3
@@ -18,8 +19,30 @@ workflows:
           executor: with-chrome-and-firefox
 
       - cypress/run:
+          name: "Run Vue CLI 3 Component Tests"
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-3/package.json" }}
           working_directory: vue-cli-3
+          executor: with-chrome-and-firefox
+          wait-on: "http://localhost:8080"
+          yarn: true
+          start: yarn serve
+          command: yarn cypress run-ct
+          requires:
+            - cypress/install
+  vue-cli-2-ct:
+    jobs:
+      - cypress/install:
+          name: "Setup Vue CLI 2"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-2/package.json" }}
+          post-checkout:
+            - run: cd vue-cli-2
+          yarn: true
+          executor: with-chrome-and-firefox
+
+      - cypress/run:
+          name: "Run Vue CLI 2 Component Tests"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-2/package.json" }}
+          working_directory: vue-cli-2
           executor: with-chrome-and-firefox
           wait-on: "http://localhost:8080"
           yarn: true
