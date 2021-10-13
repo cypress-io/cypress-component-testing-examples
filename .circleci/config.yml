@@ -61,6 +61,7 @@ workflows:
             - run: cd vite-vue
           yarn: true
           executor: with-chrome-and-firefox
+          build: "yarn build"
 
       - cypress/run:
           name: "Run Vite Vue Component Tests"
@@ -69,7 +70,7 @@ workflows:
           executor: with-chrome-and-firefox
           wait-on: "http://localhost:3000"
           yarn: true
-          start: yarn dev --host 0.0.0.0
+          start: yarn serve
           command: yarn cypress run-ct
           timeout: 3m
           requires:
@@ -83,6 +84,7 @@ workflows:
             - run: cd vite-react
           yarn: true
           executor: with-chrome-and-firefox
+          build: "yarn build"
 
       - cypress/run:
           name: "Run Vite React Component Tests"
@@ -91,7 +93,7 @@ workflows:
           executor: with-chrome-and-firefox
           wait-on: "http://localhost:3000"
           yarn: true
-          start: yarn dev --host 0.0.0.0
+          start: yarn serve
           command: yarn cypress run-ct
           timeout: 3m
           requires:
