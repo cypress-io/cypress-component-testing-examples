@@ -19,8 +19,7 @@ workflows:
 
       - cypress/run:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-3/package.json" }}
-          post-checkout:
-            - run: cd vue-cli-3
+          working_directory: vue-cli-3
           executor: with-chrome-and-firefox
           wait-on: "http://localhost:3000"
           yarn: true
