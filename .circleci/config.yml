@@ -27,6 +27,7 @@ workflows:
           yarn: true
           start: yarn serve
           command: yarn cypress run-ct
+          timeout: 3m
           requires:
             - "Setup Vue CLI 3"
   vue-cli-2-ct:
@@ -48,6 +49,7 @@ workflows:
           yarn: true
           start: yarn serve
           command: yarn cypress run-ct
+          timeout: 3m
           requires:
             - "Setup Vue CLI 2"
   vite-vue-ct:
@@ -67,8 +69,9 @@ workflows:
           executor: with-chrome-and-firefox
           wait-on: "http://localhost:3000"
           yarn: true
-          start: yarn dev
+          start: yarn dev --host 0.0.0.0
           command: yarn cypress run-ct
+          timeout: 3m
           requires:
             - "Setup Vite Vue"
   vite-react-ct:
@@ -88,7 +91,96 @@ workflows:
           executor: with-chrome-and-firefox
           wait-on: "http://localhost:3000"
           yarn: true
-          start: yarn dev
+          start: yarn dev --host 0.0.0.0
           command: yarn cypress run-ct
+          timeout: 3m
           requires:
             - "Setup Vite React"
+  create-react-app-ct:
+    jobs:
+      - cypress/install:
+          name: "Setup Create React App"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app/package.json" }}
+          post-checkout:
+            - run: cd create-react-app
+          yarn: true
+          executor: with-chrome-and-firefox
+
+      - cypress/run:
+          name: "Run Create React App Component Tests"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app/package.json" }}
+          working_directory: create-react-app
+          executor: with-chrome-and-firefox
+          wait-on: "http://localhost:3000"
+          yarn: true
+          start: yarn start
+          command: yarn cypress run-ct
+          timeout: 3m
+          requires:
+            - "Setup Create React App"
+  create-react-app-react-router-ct:
+    jobs:
+      - cypress/install:
+          name: "Setup Create React App React Router"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-react-router/package.json" }}
+          post-checkout:
+            - run: cd create-react-app-react-router
+          yarn: true
+          executor: with-chrome-and-firefox
+
+      - cypress/run:
+          name: "Run Create React App React Router Component Tests"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-react-router/package.json" }}
+          working_directory: create-react-app-react-router
+          executor: with-chrome-and-firefox
+          wait-on: "http://localhost:3000"
+          yarn: true
+          start: yarn start
+          command: yarn cypress run-ct
+          timeout: 3m
+          requires:
+            - "Setup Create React App React Router"
+  create-react-app-redux-ct:
+    jobs:
+      - cypress/install:
+          name: "Setup Create React App Redux"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-redux/package.json" }}
+          post-checkout:
+            - run: cd create-react-app-redux
+          yarn: true
+          executor: with-chrome-and-firefox
+
+      - cypress/run:
+          name: "Run Create React App Redux Component Tests"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-redux/package.json" }}
+          working_directory: create-react-app-redux
+          executor: with-chrome-and-firefox
+          wait-on: "http://localhost:3000"
+          yarn: true
+          start: yarn start
+          command: yarn cypress run-ct
+          timeout: 3m
+          requires:
+            - "Setup Create React App Redux"
+  create-react-app-tailwind-ct:
+    jobs:
+      - cypress/install:
+          name: "Setup Create React App Tailwind"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-tailwind/package.json" }}
+          post-checkout:
+            - run: cd create-react-app-tailwind
+          yarn: true
+          executor: with-chrome-and-firefox
+
+      - cypress/run:
+          name: "Run Create React App Tailwind Component Tests"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-tailwind/package.json" }}
+          working_directory: create-react-app-tailwind
+          executor: with-chrome-and-firefox
+          wait-on: "http://localhost:3000"
+          yarn: true
+          start: yarn start
+          command: yarn cypress run-ct
+          timeout: 3m
+          requires:
+            - "Setup Create React App Tailwind"
