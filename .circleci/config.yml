@@ -65,7 +65,7 @@ workflows:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-vue/package.json" }}
           working_directory: vite-vue
           executor: with-chrome-and-firefox
-          wait-on: "http://localhost:3000"
+          wait-on: "http://localhost:5000"
           yarn: true
           start: yarn serve
           command: yarn cypress run-ct
@@ -87,7 +87,7 @@ workflows:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-react/package.json" }}
           working_directory: vite-react
           executor: with-chrome-and-firefox
-          wait-on: "http://localhost:3000"
+          wait-on: "http://localhost:5000"
           yarn: true
           start: yarn serve
           command: yarn cypress run-ct
