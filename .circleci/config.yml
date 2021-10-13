@@ -21,7 +21,7 @@ workflows:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-3/package.json" }}
           working_directory: vue-cli-3
           executor: with-chrome-and-firefox
-          wait-on: "http://localhost:3000"
+          wait-on: "http://localhost:8080"
           yarn: true
           start: yarn serve
           command: yarn cypress run-ct
