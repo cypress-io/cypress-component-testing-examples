@@ -28,7 +28,7 @@ workflows:
           start: yarn serve
           command: yarn cypress run-ct
           requires:
-            - cypress/install
+            - "Setup Vue CLI 3"
   vue-cli-2-ct:
     jobs:
       - cypress/install:
@@ -49,4 +49,4 @@ workflows:
           start: yarn serve
           command: yarn cypress run-ct
           requires:
-            - cypress/install
+            - "Setup Vue CLI 2"
