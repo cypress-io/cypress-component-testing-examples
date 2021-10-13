@@ -1,0 +1,28 @@
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.28.0
+
+executors:
+  with-chrome-and-firefox:
+    docker:
+      - image: "cypress/browsers:node14.17.0-chrome88-ff89"
+
+workflows:
+  vue-cli-3-ct:
+    jobs:
+      - cypress/install:
+          pre-steps:
+            - run: cd vue-cli-3
+          yarn: true
+          executor: with-chrome-and-firefox
+
+      - cypress/run:
+          pre-steps:
+            - run: cd vue-cli-3
+          executor: with-chrome-and-firefox
+          wait-on: "http://localhost:3000"
+          yarn: true
+          start: yarn start
+          command: yarn cypress run-ct
+          requires:
+            - cypress/install
