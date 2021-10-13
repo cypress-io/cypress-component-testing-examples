@@ -11,13 +11,13 @@ workflows:
   vue-cli-3-ct:
     jobs:
       - cypress/install:
-          pre-steps:
+          post-checkout:
             - run: cd vue-cli-3
           yarn: true
           executor: with-chrome-and-firefox
 
       - cypress/run:
-          pre-steps:
+          post-checkout:
             - run: cd vue-cli-3
           executor: with-chrome-and-firefox
           wait-on: "http://localhost:3000"
