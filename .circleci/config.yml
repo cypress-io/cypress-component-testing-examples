@@ -24,7 +24,7 @@ workflows:
           executor: with-chrome-and-firefox
           wait-on: "http://localhost:3000"
           yarn: true
-          start: yarn start
+          start: yarn serve
           command: yarn cypress run-ct
           requires:
             - cypress/install
