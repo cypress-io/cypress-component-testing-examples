@@ -1,0 +1,80 @@
+diff --git a/create-react-app-react-router/src/App.css b/create-react-app-react-router/src/App.css
+index 74b5e05..f9c712b 100644
+--- a/create-react-app-react-router/src/App.css
++++ b/create-react-app-react-router/src/App.css
+@@ -28,6 +28,10 @@
+   color: #61dafb;
+ }
+ 
++.App-link-active {
++  color: #24fc1d;
++}
++
+ @keyframes App-logo-spin {
+   from {
+     transform: rotate(0deg);
+diff --git a/create-react-app-react-router/src/App.js b/create-react-app-react-router/src/App.js
+index 3784575..f5c2d27 100644
+--- a/create-react-app-react-router/src/App.js
++++ b/create-react-app-react-router/src/App.js
+@@ -1,22 +1,28 @@
++import { Switch, Route, NavLink } from 'react-router-dom';
+ import logo from './logo.svg';
+ import './App.css';
+ 
++const PageLink = (props) => (
++  <NavLink className="App-link" activeClassName="App-link-active" {...props} />
++);
++
+ function App() {
+   return (
+     <div className="App">
+       <header className="App-header">
++        <div className="Page">
++          <Switch>
++            <Route exact path="/">
++              Home page content
++            </Route>
++            <Route path="/about">About page content</Route>
++          </Switch>
++        </div>
+         <img src={logo} className="App-logo" alt="logo" />
+-        <p>
+-          Edit <code>src/App.js</code> and save to reload.
+-        </p>
+-        <a
+-          className="App-link"
+-          href="https://reactjs.org"
+-          target="_blank"
+-          rel="noopener noreferrer"
+-        >
+-          Learn React
+-        </a>
++        <PageLink exact to="/">
++          Home
++        </PageLink>
++        <PageLink to="/about">About</PageLink>
+       </header>
+     </div>
+   );
+diff --git a/create-react-app-react-router/src/index.js b/create-react-app-react-router/src/index.js
+index ef2edf8..3e60e62 100644
+--- a/create-react-app-react-router/src/index.js
++++ b/create-react-app-react-router/src/index.js
+@@ -1,12 +1,15 @@
+ import React from 'react';
+ import ReactDOM from 'react-dom';
++import { BrowserRouter } from 'react-router-dom';
+ import './index.css';
+ import App from './App';
+ import reportWebVitals from './reportWebVitals';
+ 
+ ReactDOM.render(
+   <React.StrictMode>
+-    <App />
++    <BrowserRouter>
++      <App />
++    </BrowserRouter>
+   </React.StrictMode>,
+   document.getElementById('root')
+ );

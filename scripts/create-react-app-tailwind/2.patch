@@ -1,0 +1,35 @@
+diff --git a/create-react-app-tailwind/src/App.css b/create-react-app-tailwind/src/App.css
+index 74b5e05..c90c74b 100644
+--- a/create-react-app-tailwind/src/App.css
++++ b/create-react-app-tailwind/src/App.css
+@@ -13,17 +13,6 @@
+   }
+ }
+ 
+-.App-header {
+-  background-color: #282c34;
+-  min-height: 100vh;
+-  display: flex;
+-  flex-direction: column;
+-  align-items: center;
+-  justify-content: center;
+-  font-size: calc(10px + 2vmin);
+-  color: white;
+-}
+-
+ .App-link {
+   color: #61dafb;
+ }
+diff --git a/create-react-app-tailwind/src/App.js b/create-react-app-tailwind/src/App.js
+index 3784575..b4bc980 100644
+--- a/create-react-app-tailwind/src/App.js
++++ b/create-react-app-tailwind/src/App.js
+@@ -4,7 +4,7 @@ import './App.css';
+ function App() {
+   return (
+     <div className="App">
+-      <header className="App-header">
++      <header className="flex flex-col items-center justify-center min-h-screen text-2xl bg-gray-900 text-white">
+         <img src={logo} className="App-logo" alt="logo" />
+         <p>
+           Edit <code>src/App.js</code> and save to reload.
