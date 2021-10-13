@@ -13,8 +13,7 @@ workflows:
       - cypress/install:
           name: "Setup Vue CLI 3"
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-3/package.json" }}
-          post-checkout:
-            - run: cd vue-cli-3
+          working_directory: vue-cli-3
           yarn: true
           executor: with-chrome-and-firefox
 
@@ -35,8 +34,7 @@ workflows:
       - cypress/install:
           name: "Setup Vue CLI 2"
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-2/package.json" }}
-          post-checkout:
-            - run: cd vue-cli-2
+          working_directory: vue-cli-2
           yarn: true
           executor: with-chrome-and-firefox
 
@@ -57,8 +55,7 @@ workflows:
       - cypress/install:
           name: "Setup Vite Vue"
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-vue/package.json" }}
-          post-checkout:
-            - run: cd vite-vue
+          working_directory: vite-vue
           yarn: true
           executor: with-chrome-and-firefox
           build: "yarn build"
@@ -80,8 +77,7 @@ workflows:
       - cypress/install:
           name: "Setup Vite React"
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-react/package.json" }}
-          post-checkout:
-            - run: cd vite-react
+          working_directory: vite-react
           yarn: true
           executor: with-chrome-and-firefox
           build: "yarn build"
@@ -103,8 +99,7 @@ workflows:
       - cypress/install:
           name: "Setup Create React App"
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app/package.json" }}
-          post-checkout:
-            - run: cd create-react-app
+          working_directory: create-react-app
           yarn: true
           executor: with-chrome-and-firefox
 
@@ -125,8 +120,7 @@ workflows:
       - cypress/install:
           name: "Setup Create React App React Router"
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-react-router/package.json" }}
-          post-checkout:
-            - run: cd create-react-app-react-router
+          working_directory: create-react-app-react-router
           yarn: true
           executor: with-chrome-and-firefox
 
@@ -147,8 +141,7 @@ workflows:
       - cypress/install:
           name: "Setup Create React App Redux"
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-redux/package.json" }}
-          post-checkout:
-            - run: cd create-react-app-redux
+          working_directory: create-react-app-redux
           yarn: true
           executor: with-chrome-and-firefox
 
@@ -169,8 +162,7 @@ workflows:
       - cypress/install:
           name: "Setup Create React App Tailwind"
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-tailwind/package.json" }}
-          post-checkout:
-            - run: cd create-react-app-tailwind
+          working_directory: create-react-app-tailwind
           yarn: true
           executor: with-chrome-and-firefox
 
