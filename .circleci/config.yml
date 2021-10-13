@@ -50,3 +50,45 @@ workflows:
           command: yarn cypress run-ct
           requires:
             - "Setup Vue CLI 2"
+  vite-vue-ct:
+    jobs:
+      - cypress/install:
+          name: "Setup Vite Vue"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-vue/package.json" }}
+          post-checkout:
+            - run: cd vite-vue
+          yarn: true
+          executor: with-chrome-and-firefox
+
+      - cypress/run:
+          name: "Run Vite Vue Component Tests"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-vue/package.json" }}
+          working_directory: vite-vue
+          executor: with-chrome-and-firefox
+          wait-on: "http://localhost:3000"
+          yarn: true
+          start: yarn dev
+          command: yarn cypress run-ct
+          requires:
+            - "Setup Vite Vue"
+  vite-react-ct:
+    jobs:
+      - cypress/install:
+          name: "Setup Vite React"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-react/package.json" }}
+          post-checkout:
+            - run: cd vite-react
+          yarn: true
+          executor: with-chrome-and-firefox
+
+      - cypress/run:
+          name: "Run Vite React Component Tests"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-react/package.json" }}
+          working_directory: vite-react
+          executor: with-chrome-and-firefox
+          wait-on: "http://localhost:3000"
+          yarn: true
+          start: yarn dev
+          command: yarn cypress run-ct
+          requires:
+            - "Setup Vite React"
