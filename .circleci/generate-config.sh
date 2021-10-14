@@ -42,14 +42,10 @@ function add_workflow() {
 EOF
 }
 
-add_workflow create-next-app-webpack-5 "Create Next App + Webpack 5"
-add_workflow create-next-app "Create Next App"
-add_workflow create-nuxt-app "Create Nuxt App"
-add_workflow create-react-app-react-router "Create React App + React Router"
-add_workflow create-react-app-redux "Create React App + Redux"
-add_workflow create-react-app-tailwind "Create React App + Tailwind CSS"
-add_workflow create-react-app "Create React App"
-add_workflow vite-react "Vite + React"
-add_workflow vite-vue "Vite + Vue"
-add_workflow vue-cli-2 "Vue CLI (Vue 2)"
-add_workflow vue-cli-3 "Vue CLI (Vue 3)"
+for dir in */; do
+  dir=$(basename $dir)
+  [[ ! -e "$dir/README.md" ]] && continue
+  name="$(less $dir/README.md | sed -n 's/# Component Testing Example: //p')"
+  [[ ! "$name" ]] && continue
+  add_workflow $dir "$name"
+done
