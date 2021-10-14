@@ -35,7 +35,6 @@ function add_workflow() {
           executor: with-chrome-and-firefox
           wait-on: "http://localhost:8080"
           yarn: true
-          start: yarn serve
           command: yarn cypress run-ct
           timeout: 3m
           requires:
