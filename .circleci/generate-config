@@ -2,6 +2,19 @@
 
 outfile=generated_config.yml
 
+cat > $outfile <<EOF
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1.28.0
+
+executors:
+  with-chrome-and-firefox:
+    docker:
+      - image: "cypress/browsers:node14.17.0-chrome88-ff89"
+
+workflows:
+EOF
+
 function add_workflow() {
   local dir="$1"
   local name="$2"
@@ -29,19 +42,6 @@ function add_workflow() {
             - "Setup $name"
 EOF
 }
-
-cat > $outfile <<EOF
-version: 2.1
-orbs:
-  cypress: cypress-io/cypress@1.28.0
-
-executors:
-  with-chrome-and-firefox:
-    docker:
-      - image: "cypress/browsers:node14.17.0-chrome88-ff89"
-
-workflows:
-EOF
 
 add_workflow create-next-app-webpack-5 "Create Next App + Webpack 5"
 add_workflow create-next-app "Create Next App"

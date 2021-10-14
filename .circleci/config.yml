@@ -1,3 +1,4 @@
+# https://circleci.com/docs/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration
 version: 2.1
 
 # this allows you to use CircleCI's dynamic configuration feature
