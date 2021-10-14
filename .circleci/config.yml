@@ -1,130 +1,27 @@
 version: 2.1
+
+# this allows you to use CircleCI's dynamic configuration feature
+setup: true
+
+# the continuation orb is required in order to use dynamic configuration
 orbs:
-  cypress: cypress-io/cypress@1.28.0
+  continuation: circleci/continuation@0.1.2
 
-executors:
-  with-chrome-and-firefox:
-    docker:
-      - image: "cypress/browsers:node14.17.0-chrome88-ff89"
-
+# our defined job, and its steps
 jobs:
-  cypress/install:
-    name: "Setup << parameters.name >>"
-    cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "<< parameters.working_directory >>/package.json" }}
-    working_directory: "<< parameters.working_directory >>"
-    yarn: true
-    executor: with-chrome-and-firefox
+  setup:
+    executor: continuation/default
+    steps:
+      - checkout # checkout code
+      - run: # run a command
+          name: Generate config
+          command: |
+            ./generate-config > generated_config.yml
+      - continuation/continue:
+          configuration_path: generated_config.yml # use newly generated config to continue
 
-  cypress/run:
-    name: "<< parameters.name >> Component Tests"
-    cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "<< parameters.working_directory >>/package.json" }}
-    working_directory: "<< parameters.working_directory >>"
-    executor: with-chrome-and-firefox
-    wait-on: "http://localhost:8080"
-    yarn: true
-    start: yarn serve
-    command: yarn cypress run-ct
-    timeout: 3m
-    requires:
-      - "Setup << parameters.name >>"
-
+# our single workflow, that triggers the setup job defined above
 workflows:
-  vue-cli-2:
+  setup:
     jobs:
-      - cypress/install:
-          parameters:
-            name: "Vue CLI 2"
-            working_directory: vue-cli-2
-      - cypress/run:
-          name: "Vue CLI 2"
-          working_directory: vue-cli-2
-  vue-cli-3:
-    jobs:
-      - cypress/install:
-          parameters:
-            name: "Vue CLI 3"
-            working_directory: vue-cli-3
-      - cypress/run:
-          name: "Vue CLI 3"
-          working_directory: vue-cli-3
-  vite-vue:
-    jobs:
-      - cypress/install:
-          parameters:
-            name: "Vite Vue"
-            working_directory: vite-vue
-      - cypress/run:
-          name: "Vite Vue"
-          working_directory: vite-vue
-  vite-react:
-    jobs:
-      - cypress/install:
-          parameters:
-            name: "Vite React"
-            working_directory: vite-react
-      - cypress/run:
-          name: "Vite React"
-          working_directory: vite-react
-  create-react-app:
-    jobs:
-      - cypress/install:
-          parameters:
-            name: "Create React App"
-            working_directory: create-react-app
-      - cypress/run:
-          name: "Create React App"
-          working_directory: create-react-app
-  create-react-app-react-router:
-    jobs:
-      - cypress/install:
-          parameters:
-            name: "Create React App React Router"
-            working_directory: create-react-app-react-router
-      - cypress/run:
-          name: "Create React App React Router"
-          working_directory: create-react-app-react-router
-  create-react-app-redux:
-    jobs:
-      - cypress/install:
-          parameters:
-            name: "Create React App Redux"
-            working_directory: create-react-app-redux
-      - cypress/run:
-          name: "Create React App Redux"
-          working_directory: create-react-app-redux
-  create-react-app-tailwind:
-    jobs:
-      - cypress/install:
-          parameters:
-            name: "Create React App Tailwind"
-            working_directory: create-react-app-tailwind
-      - cypress/run:
-          name: "Create React App Tailwind"
-          working_directory: create-react-app-tailwind
-  create-next-app:
-    jobs:
-      - cypress/install:
-          parameters:
-            name: "Create Next App"
-            working_directory: create-next-app
-      - cypress/run:
-          name: "Create Next App"
-          working_directory: create-next-app
-  create-next-app-webpack-5:
-    jobs:
-      - cypress/install:
-          parameters:
-            name: "Create Next App Webpack 5"
-            working_directory: create-next-app-webpack-5
-      - cypress/run:
-          name: "Create Next App Webpack 5"
-          working_directory: create-next-app-webpack-5
-  create-nuxt-app:
-    jobs:
-      - cypress/install:
-          parameters:
-            name: "Create Nuxt App"
-            working_directory: create-nuxt-app
-      - cypress/run:
-          name: "Create Nuxt App"
-          working_directory: create-nuxt-app
+      - setup
