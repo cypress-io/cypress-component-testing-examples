@@ -7,237 +7,124 @@ executors:
     docker:
       - image: "cypress/browsers:node14.17.0-chrome88-ff89"
 
+jobs:
+  cypress/install:
+    name: "Setup << parameters.name >>"
+    cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "<< parameters.working_directory >>/package.json" }}
+    working_directory: "<< parameters.working_directory >>"
+    yarn: true
+    executor: with-chrome-and-firefox
+
+  cypress/run:
+    name: "<< parameters.name >> Component Tests"
+    cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "<< parameters.working_directory >>/package.json" }}
+    working_directory: "<< parameters.working_directory >>"
+    executor: with-chrome-and-firefox
+    wait-on: "http://localhost:8080"
+    yarn: true
+    start: yarn serve
+    command: yarn cypress run-ct
+    timeout: 3m
+    requires:
+      - "Setup << parameters.name >>"
+
 workflows:
-  vue-cli-3-ct:
+  vue-cli-2:
     jobs:
       - cypress/install:
-          name: "Setup Vue CLI 3"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-3/package.json" }}
-          working_directory: vue-cli-3
-          yarn: true
-          executor: with-chrome-and-firefox
-
+          parameters:
+            name: "Vue CLI 2"
+            working_directory: vue-cli-2
       - cypress/run:
-          name: "Run Vue CLI 3 Component Tests"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-3/package.json" }}
-          working_directory: vue-cli-3
-          executor: with-chrome-and-firefox
-          wait-on: "http://localhost:8080"
-          yarn: true
-          start: yarn serve
-          command: yarn cypress run-ct
-          timeout: 3m
-          requires:
-            - "Setup Vue CLI 3"
-  vue-cli-2-ct:
-    jobs:
-      - cypress/install:
-          name: "Setup Vue CLI 2"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-2/package.json" }}
+          name: "Vue CLI 2"
           working_directory: vue-cli-2
-          yarn: true
-          executor: with-chrome-and-firefox
-
-      - cypress/run:
-          name: "Run Vue CLI 2 Component Tests"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-2/package.json" }}
-          working_directory: vue-cli-2
-          executor: with-chrome-and-firefox
-          wait-on: "http://localhost:8080"
-          yarn: true
-          start: yarn serve
-          command: yarn cypress run-ct
-          timeout: 3m
-          requires:
-            - "Setup Vue CLI 2"
-  vite-vue-ct:
+  vue-cli-3:
     jobs:
       - cypress/install:
-          name: "Setup Vite Vue"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-vue/package.json" }}
+          parameters:
+            name: "Vue CLI 3"
+            working_directory: vue-cli-3
+      - cypress/run:
+          name: "Vue CLI 3"
+          working_directory: vue-cli-3
+  vite-vue:
+    jobs:
+      - cypress/install:
+          parameters:
+            name: "Vite Vue"
+            working_directory: vite-vue
+      - cypress/run:
+          name: "Vite Vue"
           working_directory: vite-vue
-          yarn: true
-          executor: with-chrome-and-firefox
-          build: "yarn build"
-
-      - cypress/run:
-          name: "Run Vite Vue Component Tests"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-vue/package.json" }}
-          working_directory: vite-vue
-          executor: with-chrome-and-firefox
-          wait-on: "http://localhost:5000"
-          yarn: true
-          start: yarn serve
-          command: yarn cypress run-ct
-          timeout: 3m
-          requires:
-            - "Setup Vite Vue"
-  vite-react-ct:
+  vite-react:
     jobs:
       - cypress/install:
-          name: "Setup Vite React"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-react/package.json" }}
+          parameters:
+            name: "Vite React"
+            working_directory: vite-react
+      - cypress/run:
+          name: "Vite React"
           working_directory: vite-react
-          yarn: true
-          executor: with-chrome-and-firefox
-          build: "yarn build"
-
-      - cypress/run:
-          name: "Run Vite React Component Tests"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-react/package.json" }}
-          working_directory: vite-react
-          executor: with-chrome-and-firefox
-          wait-on: "http://localhost:5000"
-          yarn: true
-          start: yarn serve
-          command: yarn cypress run-ct
-          timeout: 3m
-          requires:
-            - "Setup Vite React"
-  create-react-app-ct:
+  create-react-app:
     jobs:
       - cypress/install:
-          name: "Setup Create React App"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app/package.json" }}
+          parameters:
+            name: "Create React App"
+            working_directory: create-react-app
+      - cypress/run:
+          name: "Create React App"
           working_directory: create-react-app
-          yarn: true
-          executor: with-chrome-and-firefox
-
-      - cypress/run:
-          name: "Run Create React App Component Tests"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app/package.json" }}
-          working_directory: create-react-app
-          executor: with-chrome-and-firefox
-          wait-on: "http://localhost:3000"
-          yarn: true
-          start: yarn start
-          command: yarn cypress run-ct
-          timeout: 3m
-          requires:
-            - "Setup Create React App"
-  create-react-app-react-router-ct:
+  create-react-app-react-router:
     jobs:
       - cypress/install:
-          name: "Setup Create React App React Router"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-react-router/package.json" }}
+          parameters:
+            name: "Create React App React Router"
+            working_directory: create-react-app-react-router
+      - cypress/run:
+          name: "Create React App React Router"
           working_directory: create-react-app-react-router
-          yarn: true
-          executor: with-chrome-and-firefox
-
-      - cypress/run:
-          name: "Run Create React App React Router Component Tests"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-react-router/package.json" }}
-          working_directory: create-react-app-react-router
-          executor: with-chrome-and-firefox
-          wait-on: "http://localhost:3000"
-          yarn: true
-          start: yarn start
-          command: yarn cypress run-ct
-          timeout: 3m
-          requires:
-            - "Setup Create React App React Router"
-  create-react-app-redux-ct:
+  create-react-app-redux:
     jobs:
       - cypress/install:
-          name: "Setup Create React App Redux"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-redux/package.json" }}
+          parameters:
+            name: "Create React App Redux"
+            working_directory: create-react-app-redux
+      - cypress/run:
+          name: "Create React App Redux"
           working_directory: create-react-app-redux
-          yarn: true
-          executor: with-chrome-and-firefox
-
-      - cypress/run:
-          name: "Run Create React App Redux Component Tests"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-redux/package.json" }}
-          working_directory: create-react-app-redux
-          executor: with-chrome-and-firefox
-          wait-on: "http://localhost:3000"
-          yarn: true
-          start: yarn start
-          command: yarn cypress run-ct
-          timeout: 3m
-          requires:
-            - "Setup Create React App Redux"
-  create-react-app-tailwind-ct:
+  create-react-app-tailwind:
     jobs:
       - cypress/install:
-          name: "Setup Create React App Tailwind"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-tailwind/package.json" }}
+          parameters:
+            name: "Create React App Tailwind"
+            working_directory: create-react-app-tailwind
+      - cypress/run:
+          name: "Create React App Tailwind"
           working_directory: create-react-app-tailwind
-          yarn: true
-          executor: with-chrome-and-firefox
-
-      - cypress/run:
-          name: "Run Create React App Tailwind Component Tests"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-tailwind/package.json" }}
-          working_directory: create-react-app-tailwind
-          executor: with-chrome-and-firefox
-          wait-on: "http://localhost:3000"
-          yarn: true
-          start: yarn start
-          command: yarn cypress run-ct
-          timeout: 3m
-          requires:
-            - "Setup Create React App Tailwind"
-  create-next-app-ct:
+  create-next-app:
     jobs:
       - cypress/install:
-          name: "Setup Create Next App"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app/package.json" }}
+          parameters:
+            name: "Create Next App"
+            working_directory: create-next-app
+      - cypress/run:
+          name: "Create Next App"
           working_directory: create-next-app
-          yarn: true
-          executor: with-chrome-and-firefox
-
-      - cypress/run:
-          name: "Run Create Next App Component Tests"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app/package.json" }}
-          working_directory: create-next-app
-          executor: with-chrome-and-firefox
-          wait-on: "http://localhost:3000"
-          yarn: true
-          start: yarn dev
-          command: yarn cypress run-ct
-          timeout: 3m
-          requires:
-            - "Setup Create Next App"
-  create-next-app-webpack-5-ct:
+  create-next-app-webpack-5:
     jobs:
       - cypress/install:
-          name: "Setup Create Next App Webpack 5"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app-webpack-5/package.json" }}
-          working_directory: create-next-app-webpack-5
-          yarn: true
-          executor: with-chrome-and-firefox
-
+          parameters:
+            name: "Create Next App Webpack 5"
+            working_directory: create-next-app-webpack-5
       - cypress/run:
-          name: "Run Create Next App Webpack 5 Component Tests"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app-webpack-5/package.json" }}
+          name: "Create Next App Webpack 5"
           working_directory: create-next-app-webpack-5
-          executor: with-chrome-and-firefox
-          wait-on: "http://localhost:3000"
-          yarn: true
-          start: yarn dev
-          command: yarn cypress run-ct
-          timeout: 3m
-          requires:
-            - "Setup Create Next App Webpack 5"
-  create-nuxt-app-ct:
+  create-nuxt-app:
     jobs:
       - cypress/install:
-          name: "Setup Create Nuxt App"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-nuxt-app/package.json" }}
-          working_directory: create-nuxt-app
-          yarn: true
-          executor: with-chrome-and-firefox
-
+          parameters:
+            name: "Create Nuxt App"
+            working_directory: create-nuxt-app
       - cypress/run:
-          name: "Run Create Nuxt App Component Tests"
-          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-nuxt-app/package.json" }}
+          name: "Create Nuxt App"
           working_directory: create-nuxt-app
-          executor: with-chrome-and-firefox
-          wait-on: "http://localhost:3000"
-          yarn: true
-          start: yarn dev
-          command: yarn cypress run-ct
-          timeout: 3m
-          requires:
-            - "Setup Create Nuxt App"
