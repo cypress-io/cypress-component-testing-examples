@@ -178,3 +178,66 @@ workflows:
           timeout: 3m
           requires:
             - "Setup Create React App Tailwind"
+  create-next-app-ct:
+    jobs:
+      - cypress/install:
+          name: "Setup Create Next App"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app/package.json" }}
+          working_directory: create-next-app
+          yarn: true
+          executor: with-chrome-and-firefox
+
+      - cypress/run:
+          name: "Run Create Next App Component Tests"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app/package.json" }}
+          working_directory: create-next-app
+          executor: with-chrome-and-firefox
+          wait-on: "http://localhost:3000"
+          yarn: true
+          start: yarn dev
+          command: yarn cypress run-ct
+          timeout: 3m
+          requires:
+            - "Setup Create Next App"
+  create-next-app-webpack-5-ct:
+    jobs:
+      - cypress/install:
+          name: "Setup Create Next App Webpack 5"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app-webpack-5/package.json" }}
+          working_directory: create-next-app-webpack-5
+          yarn: true
+          executor: with-chrome-and-firefox
+
+      - cypress/run:
+          name: "Run Create Next App Webpack 5 Component Tests"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app-webpack-5/package.json" }}
+          working_directory: create-next-app-webpack-5
+          executor: with-chrome-and-firefox
+          wait-on: "http://localhost:3000"
+          yarn: true
+          start: yarn dev
+          command: yarn cypress run-ct
+          timeout: 3m
+          requires:
+            - "Setup Create Next App Webpack 5"
+  create-nuxt-app-ct:
+    jobs:
+      - cypress/install:
+          name: "Setup Create Nuxt App"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-nuxt-app/package.json" }}
+          working_directory: create-nuxt-app
+          yarn: true
+          executor: with-chrome-and-firefox
+
+      - cypress/run:
+          name: "Run Create Nuxt App Component Tests"
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-nuxt-app/package.json" }}
+          working_directory: create-nuxt-app
+          executor: with-chrome-and-firefox
+          wait-on: "http://localhost:3000"
+          yarn: true
+          start: yarn dev
+          command: yarn cypress run-ct
+          timeout: 3m
+          requires:
+            - "Setup Create Nuxt App"
