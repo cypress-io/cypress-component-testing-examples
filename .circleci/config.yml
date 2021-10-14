@@ -1,4 +1,6 @@
+# Based on this example:
 # https://circleci.com/docs/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration
+
 version: 2.1
 
 # this allows you to use CircleCI's dynamic configuration feature
@@ -17,7 +19,7 @@ jobs:
       - run: # run a command
           name: Generate config
           command: |
-            ./generate-config > generated_config.yml
+            .circleci/generate-config.sh > generated_config.yml
       - continuation/continue:
           configuration_path: generated_config.yml # use newly generated config to continue
 
