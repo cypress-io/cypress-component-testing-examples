@@ -1,3 +1,17 @@
 {
-    "extension": [ ".js", ".vue" ]
+  "include": [
+    "src/**/*.{ts,js,vue}"
+  ],
+  "exclude": [
+    "**/*.{spec,test}*.{js,ts}",
+    "**/*.d.ts",
+    "*/types/**/*.ts"
+  ],
+  "extension": [
+    ".ts",
+    ".js",
+    ".vue"
+  ],
+  "all": true,
+  "check-coverage": false
 }
