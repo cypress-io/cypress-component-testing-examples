@@ -2,5 +2,9 @@
   "component": {
     "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
     "componentFolder": "src"
+  },
+  "imageConfig": {
+    "threshold": 0.50,
+    "thresholdType": "percent"
   }
 }
