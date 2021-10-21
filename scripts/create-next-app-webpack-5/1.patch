@@ -1,0 +1,11 @@
+diff --git a/create-next-app-webpack-5/next.config.js b/create-next-app-webpack-5/next.config.js
+new file mode 100644
+index 0000000..24f5022
+--- /dev/null
++++ b/create-next-app-webpack-5/next.config.js
+@@ -0,0 +1,5 @@
++module.exports = {
++  future: {
++    webpack5: true,
++  },
++}
