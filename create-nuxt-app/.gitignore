@@ -88,3 +88,10 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# code coverage
+/.nyc_output
+
+# cypress
+cypress/videos
+cypress/images

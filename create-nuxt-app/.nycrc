@@ -1,0 +1,18 @@
+{
+  "include": [
+    "pages/**/*.{vue,js}",
+    "layouts/**/*.{vue,js}",
+    "components/**/*.{vue,js}",
+    "module/**/*.js",
+    "mixin/**/*.js",
+    "store/**/*.js"
+  ],
+  "exclude": [
+    "**/*.{spec,test}*.js"
+  ],
+  "extension": [
+    ".js",
+    ".vue"
+  ],
+  "all": true
+}
