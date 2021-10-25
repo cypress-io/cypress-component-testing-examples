@@ -18,3 +18,9 @@
    5. `npx cypress open-ct` (Notice that the background doesn't inherit global app styles)
    6. Edit [cypress/support/index.js](cypress/support/index.js) to import global app styles, the Cypress test preview should update automatically
    7. ${COMMIT_3}
+4. Add Cypress Code Coverage
+   1. ${COMMAND_4}
+   2. Edit [cypress.json](cypress.json) to enable `coverage`
+   3. Edit [cypress/plugins/index.js](cypress/plugins/index.js) to configure the Cypress code coverage task with Istanbul
+   4. Edit [cypress/support/commands.js](cypress/support/commands.js) to import Cypress code coverage support
+   5. ${COMMIT_4}

@@ -1,0 +1,47 @@
+diff --git a/vite-react/cypress.json b/vite-react/cypress.json
+index ab25fd8..e44ce02 100644
+--- a/vite-react/cypress.json
++++ b/vite-react/cypress.json
+@@ -1,4 +1,5 @@
+ {
++  "coverage": true,
+   "component": {
+     "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
+     "componentFolder": "src"
+diff --git a/vite-react/cypress/plugins/index.js b/vite-react/cypress/plugins/index.js
+index 523f1fd..e111f19 100644
+--- a/vite-react/cypress/plugins/index.js
++++ b/vite-react/cypress/plugins/index.js
+@@ -1,15 +1,20 @@
+ const path = require('path')
+ const { startDevServer } = require('@cypress/vite-dev-server')
++const codeCoverageTask = require('@cypress/code-coverage/task')
++const istanbul = require('vite-plugin-istanbul')
+ 
+ module.exports = (on, config) => {
+   on('dev-server:start', (options) => {
+     return startDevServer({
+       options,
+       viteConfig: {
+-        configFile: path.resolve(__dirname, '../../vite.config.js'),
++        clearScreen: false,
++        plugins: [istanbul({})],
+       },
+     })
+   })
+ 
++  codeCoverageTask(on, config);
++
+   return config
+ }
+diff --git a/vite-react/cypress/support/commands.js b/vite-react/cypress/support/commands.js
+index 119ab03..50f60e1 100644
+--- a/vite-react/cypress/support/commands.js
++++ b/vite-react/cypress/support/commands.js
+@@ -23,3 +23,5 @@
+ //
+ // -- This will overwrite an existing command --
+ // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
++
++import '@cypress/code-coverage/support'
+\ No newline at end of file
