@@ -1,0 +1,56 @@
+diff --git a/ionic-react/cypress/support/index.ts b/ionic-react/cypress/support/index.ts
+index d68db96..4096d5a 100644
+--- a/ionic-react/cypress/support/index.ts
++++ b/ionic-react/cypress/support/index.ts
+@@ -18,3 +18,23 @@ import './commands'
+ 
+ // Alternatively you can use CommonJS syntax:
+ // require('./commands')
++
++// Ensure global app styles are loaded:
++/* Core CSS required for Ionic components to work properly */
++import '@ionic/react/css/core.css';
++
++/* Basic CSS for apps built with Ionic */
++import '@ionic/react/css/normalize.css';
++import '@ionic/react/css/structure.css';
++import '@ionic/react/css/typography.css';
++
++/* Optional CSS utils that can be commented out */
++import '@ionic/react/css/padding.css';
++import '@ionic/react/css/float-elements.css';
++import '@ionic/react/css/text-alignment.css';
++import '@ionic/react/css/text-transformation.css';
++import '@ionic/react/css/flex-utils.css';
++import '@ionic/react/css/display.css';
++
++/* Theme variables */
++import '../../src/theme/variables.css';
+diff --git a/ionic-react/package.json b/ionic-react/package.json
+index 1f79329..956124c 100644
+--- a/ionic-react/package.json
++++ b/ionic-react/package.json
+@@ -49,7 +49,8 @@
+   "eslintConfig": {
+     "extends": [
+       "react-app",
+-      "react-app/jest"
++      "react-app/jest",
++      "plugin:cypress/recommended"
+     ]
+   },
+   "browserslist": {
+diff --git a/ionic-react/src/pages/Tab1.spec.ct.tsx b/ionic-react/src/pages/Tab1.spec.ct.tsx
+new file mode 100644
+index 0000000..708fccf
+--- /dev/null
++++ b/ionic-react/src/pages/Tab1.spec.ct.tsx
+@@ -0,0 +1,8 @@
++import React from 'react';
++import { mount } from '@cypress/react';
++import Tab1 from './Tab1';
++
++it('has a title of Tab1', () => {
++  mount(<Tab1 />);
++  cy.get('ion-title').contains('Tab 1').should('be.visible');
++});
