@@ -1,4 +1,4 @@
-diff--git a / create - react - app - typescript / cypress.json b / create - react - app - typescript / cypress.json
+diff --git a/create-react-app-typescript/cypress.json b/create-react-app-typescript/cypress.json
 new file mode 100644
 index 0000000..ee59bec
 --- /dev/null
