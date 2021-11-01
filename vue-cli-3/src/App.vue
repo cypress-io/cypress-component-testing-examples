@@ -2,7 +2,7 @@
   <div>
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <p data-test="count">{{count}}</p>
+    Times clicked: <p data-test="count">{{count}}</p>
     <button @click="increment">Increment</button>
   </div>
 </template>
