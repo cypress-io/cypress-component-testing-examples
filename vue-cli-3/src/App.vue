@@ -10,10 +10,6 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 
-function incrementFunction(count) {
-  return count + 1;
-}
-
 export default {
   name: 'App',
   data (){
@@ -26,8 +22,7 @@ export default {
   },
   methods: {
     increment() {
-      console.log('THE COUNT', this.count)
-      this.count = incrementFunction(this.count)
+      this.count = count + 1
     }
   }
 }
