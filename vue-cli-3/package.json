@@ -6,6 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
+    "cypress:openct": "CYPRESS=true cypress open-ct",
+    "cypress:runct": "CYPRESS=true cypress run-ct",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
