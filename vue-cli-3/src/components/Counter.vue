@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Total clicks: {{ count }}</p>
+    <p data-test="count">Total clicks: {{ count }}</p>
     <button @click="increment">increment</button>
   </div>
 </template>
