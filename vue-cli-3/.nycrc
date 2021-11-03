@@ -3,7 +3,7 @@
     "src/**/*.{js,vue}"
   ],
   "exclude": [
-    "**/*.{spec,test}*.js"
+    "src/**/*.spec.ct.js"
   ],
   "extension": [
     ".js",
