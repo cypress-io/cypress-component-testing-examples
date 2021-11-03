@@ -1,13 +1,20 @@
 
-const plugins = []
-
-if (process.env.CYPRESS === true) {
-  plugins.push("istanbul")
-}
 
 module.exports = {
-  plugins,
-  presets: [
-    '@vue/cli-plugin-babel/preset'
-  ]
+  overrides: [{
+    test: [
+      './src',
+      './tests',
+    ],
+    // presets for app and test files
+    presets: [
+      '@vue/cli-plugin-babel/preset'
+    ]
+  }, {
+    test: [
+      './cypress',
+    ],
+    // overrides for cypress files
+    plugins: ["istanbul"]
+  }],
 }
