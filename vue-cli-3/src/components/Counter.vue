@@ -6,15 +6,15 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      count: 0,
-    }),
+export default {
+  data: () => ({
+    count: 0,
+  }),
 
-    methods: {
-      increment() {
-        this.count++
-      },
+  methods: {
+    increment() {
+      this.count++
     },
-  }
+  },
+}
 </script>
