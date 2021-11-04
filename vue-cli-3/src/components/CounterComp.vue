@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="increment">Increment</button>
-    <p>Total clicks: {{ count }}</p>
+    <p data-test="count">Total clicks: {{ count }}</p>
   </div>
 </template>
 
