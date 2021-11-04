@@ -22,9 +22,8 @@ diff --git a/vite-react/src/App.jsx b/vite-react/src/App.jsx
 index 0939547..ff835a2 100644
 --- a/vite-react/src/App.jsx
 +++ b/vite-react/src/App.jsx
-@@ -1,19 +1,16 @@
--import React, { useState } from 'react'
-+import React from 'react'
+@@ -1,19 +1,15 @@
+-import { useState } from 'react'
  import logo from './logo.svg'
 +import { Counter } from './Counter'
  import './App.css'
@@ -60,7 +59,7 @@ index 0000000..6990784
 --- /dev/null
 +++ b/vite-react/src/Counter.jsx
 @@ -0,0 +1,12 @@
-+import React, { useState } from 'react'
++import { useState } from 'react'
 +import './Counter.css'
 +
 +export const Counter = () => {
