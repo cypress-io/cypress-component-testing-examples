@@ -1,6 +1,6 @@
 const plugins = []
 
-if (process.env.CYPRESS_INTERNAL_ENV === 'production') {
+if (process.env.CYPRESS_INTERNAL_ENV) {
   plugins.push('istanbul')
 }
 
