@@ -1,0 +1,39 @@
+diff --git a/create-react-app-typescript/cypress/support/index.ts b/create-react-app-typescript/cypress/support/index.ts
+index d68db96..c63e2c9 100644
+--- a/create-react-app-typescript/cypress/support/index.ts
++++ b/create-react-app-typescript/cypress/support/index.ts
+@@ -18,3 +18,6 @@ import './commands'
+ 
+ // Alternatively you can use CommonJS syntax:
+ // require('./commands')
++
++// Ensure global app styles are loaded:
++import '../../src/index.css'
+diff --git a/create-react-app-typescript/package.json b/create-react-app-typescript/package.json
+index b12408e..5343d42 100644
+--- a/create-react-app-typescript/package.json
++++ b/create-react-app-typescript/package.json
+@@ -25,7 +25,8 @@
+   "eslintConfig": {
+     "extends": [
+       "react-app",
+-      "react-app/jest"
++      "react-app/jest",
++      "plugin:cypress/recommended"
+     ]
+   },
+   "browserslist": {
+diff --git a/create-react-app-typescript/src/App.spec.ct.tsx b/create-react-app-typescript/src/App.spec.ct.tsx
+new file mode 100644
+index 0000000..21daa26
+--- /dev/null
++++ b/create-react-app-typescript/src/App.spec.ct.tsx
+@@ -0,0 +1,8 @@
++import React from 'react';
++import { mount } from '@cypress/react';
++import App from './App';
++
++it('renders learn react link', () => {
++  mount(<App />);
++  cy.get('a').contains('Learn React');
++});
