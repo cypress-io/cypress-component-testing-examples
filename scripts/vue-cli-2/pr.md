@@ -22,7 +22,8 @@
    5. Update [src/App.spec.ct.js](src/App.spec.ct.js), [src/components/Counter.spec.ct.js](src/components/Counter.spec.ct.js) for interactivity
    6. Add [src/CounterComp.vue](src/components/CounterComp.vue), a Composition API component and add component test in [src/components/CounterComp.spec.ct.js](src/components/CounterComp.spec.ct.js) 
    7. Update [babel.config.js](babel.config.js) to conditionally use `babel-plugin-istanbul` when Cypress Component tests are running
-   8. ${COMMIT_3}
+   8. Add [.nycrc](.nycrc)
+   9. ${COMMIT_3}
 
 Notes:
 
