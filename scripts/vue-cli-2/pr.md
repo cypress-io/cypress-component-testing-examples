@@ -14,6 +14,14 @@
    5. `npx cypress open-ct` (Notice that the fonts don't inherit global app styles)
    6. Edit [cypress/support/index.js](cypress/support/index.js) to import global app styles, the Cypress test preview should update automatically
    7. ${COMMIT_2}
+4. Add Cypress Code Coverage
+   1. ${COMMAND_3}
+   2. Edit [cypress.json](cypress.json) to enable `coverage`
+   3. Edit [cypress/plugins/index.js](cypress/plugins/index.js) to configure the Cypress code coverage task with Istanbul
+   4. Edit [cypress/support/commands.js](cypress/support/commands.js) to import Cypress code coverage support
+   5. Update [src/App.spec.ct.js](src/App.spec.ct.js), [src/components/Counter.spec.ct.js](src/components/Counter.spec.ct.js) for interactivity
+   6. Add [src/CounterComp.vue](src/components/CounterComp.vue), a Composition API component and add component test in [src/components/CounterComp.spec.ct.js](src/components/CounterComp.spec.ct.js) 
+   7. ${COMMIT_3}
 
 Notes:
 
