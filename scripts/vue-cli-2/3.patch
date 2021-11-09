@@ -1,21 +1,19 @@
-diff --git a/vue-cli-3/.gitignore b/vue-cli-3/.gitignore
-index 403adbc..f6061b7 100644
---- a/vue-cli-3/.gitignore
-+++ b/vue-cli-3/.gitignore
-@@ -2,6 +2,8 @@
- node_modules
- /dist
- 
+diff --git a/vue-cli-2/.gitignore b/vue-cli-2/.gitignore
+index 403adbc..372a13f 100644
+--- a/vue-cli-2/.gitignore
++++ b/vue-cli-2/.gitignore
+@@ -21,3 +21,6 @@ pnpm-debug.log*
+ *.njsproj
+ *.sln
+ *.sw?
++
 +.nyc_output
 +coverage
- 
- # local env files
- .env.local
-diff --git a/vue-cli-3/.nycrc b/vue-cli-3/.nycrc
+diff --git a/vue-cli-2/.nycrc b/vue-cli-2/.nycrc
 new file mode 100644
 index 0000000..3a40283
 --- /dev/null
-+++ b/vue-cli-3/.nycrc
++++ b/vue-cli-2/.nycrc
 @@ -0,0 +1,13 @@
 +{
 +  "include": [
@@ -31,40 +29,42 @@ index 0000000..3a40283
 +  "all": true
 +}
 \ No newline at end of file
-diff --git a/vue-cli-3/babel.config.js b/vue-cli-3/babel.config.js
-index e955840..9f7fe23 100644
---- a/vue-cli-3/babel.config.js
-+++ b/vue-cli-3/babel.config.js
+diff --git a/vue-cli-2/babel.config.js b/vue-cli-2/babel.config.js
+index e955840..f4b8fdb 100644
+--- a/vue-cli-2/babel.config.js
++++ b/vue-cli-2/babel.config.js
 @@ -1,5 +1,12 @@
+-module.exports = {
+-  presets: [
+-    '@vue/cli-plugin-babel/preset'
+-  ]
 +const plugins = []
 +
 +if (process.env.CYPRESS_INTERNAL_ENV) {
 +  plugins.push('istanbul')
-+}
+ }
 +
- module.exports = {
-   presets: [
-     '@vue/cli-plugin-babel/preset'
--  ]
--}
++module.exports = {
++   presets: [
++     '@vue/cli-plugin-babel/preset'
 +  ],
 +  plugins
 +}
 \ No newline at end of file
-diff --git a/vue-cli-3/cypress.json b/vue-cli-3/cypress.json
+diff --git a/vue-cli-2/cypress.json b/vue-cli-2/cypress.json
 index ee59bec..622829d 100644
---- a/vue-cli-3/cypress.json
-+++ b/vue-cli-3/cypress.json
+--- a/vue-cli-2/cypress.json
++++ b/vue-cli-2/cypress.json
 @@ -1,4 +1,5 @@
  {
 +  "coverage": true,
    "component": {
      "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
      "componentFolder": "src"
-diff --git a/vue-cli-3/cypress/plugins/index.js b/vue-cli-3/cypress/plugins/index.js
-index 3590bd9..1f08a26 100644
---- a/vue-cli-3/cypress/plugins/index.js
-+++ b/vue-cli-3/cypress/plugins/index.js
+diff --git a/vue-cli-2/cypress/plugins/index.js b/vue-cli-2/cypress/plugins/index.js
+index 3590bd9..9fa1b7a 100644
+--- a/vue-cli-2/cypress/plugins/index.js
++++ b/vue-cli-2/cypress/plugins/index.js
 @@ -1,5 +1,6 @@
  const { startDevServer } = require('@cypress/webpack-dev-server')
  const webpackConfig = require('@vue/cli-service/webpack.config')
@@ -72,18 +72,17 @@ index 3590bd9..1f08a26 100644
  
  module.exports = (on, config) => {
    on('dev-server:start', (options) => {
-@@ -8,5 +9,7 @@ module.exports = (on, config) => {
+@@ -8,5 +9,6 @@ module.exports = (on, config) => {
        webpackConfig,
      })
    })
-+
 +  codeCoverageTask(on, config)
    return config
  }
-diff --git a/vue-cli-3/cypress/support/index.js b/vue-cli-3/cypress/support/index.js
+diff --git a/vue-cli-2/cypress/support/index.js b/vue-cli-2/cypress/support/index.js
 index 9b7843f..05cf3eb 100644
---- a/vue-cli-3/cypress/support/index.js
-+++ b/vue-cli-3/cypress/support/index.js
+--- a/vue-cli-2/cypress/support/index.js
++++ b/vue-cli-2/cypress/support/index.js
 @@ -13,6 +13,8 @@
  // https://on.cypress.io/configuration
  // ***********************************************************
@@ -93,10 +92,10 @@ index 9b7843f..05cf3eb 100644
  // Import commands.js using ES2015 syntax:
  import './commands'
  
-diff --git a/vue-cli-3/src/App.spec.ct.js b/vue-cli-3/src/App.spec.ct.js
+diff --git a/vue-cli-2/src/App.spec.ct.js b/vue-cli-2/src/App.spec.ct.js
 index 4a912ba..acdf39d 100644
---- a/vue-cli-3/src/App.spec.ct.js
-+++ b/vue-cli-3/src/App.spec.ct.js
+--- a/vue-cli-2/src/App.spec.ct.js
++++ b/vue-cli-2/src/App.spec.ct.js
 @@ -5,4 +5,7 @@ it('shows the App', () => {
    mount(App)
    cy.get('[alt="Vue logo"]')
@@ -105,19 +104,16 @@ index 4a912ba..acdf39d 100644
 +  cy.get('[data-test=count]').should("have.text", "Total clicks: 1")
 +  cy.get('button').click()
  })
-diff --git a/vue-cli-3/src/App.vue b/vue-cli-3/src/App.vue
-index a92fd03..3d9f207 100644
---- a/vue-cli-3/src/App.vue
-+++ b/vue-cli-3/src/App.vue
-@@ -1,15 +1,25 @@
- <template>
--  <img alt="Vue logo" src="./assets/logo.png">
--  <HelloWorld msg="Welcome to Your Vue.js App"/>
-+  <div>
-+    <img alt="Vue logo" src="./assets/logo.png">
-+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+diff --git a/vue-cli-2/src/App.vue b/vue-cli-2/src/App.vue
+index b9ac61a..7988bf5 100644
+--- a/vue-cli-2/src/App.vue
++++ b/vue-cli-2/src/App.vue
+@@ -2,16 +2,19 @@
+   <div id="app">
+     <img alt="Vue logo" src="./assets/logo.png">
+     <HelloWorld msg="Welcome to Your Vue.js App"/>
 +    <Counter />
-+  </div>
+   </div>
  </template>
  
  <script>
@@ -126,11 +122,6 @@ index a92fd03..3d9f207 100644
  
  export default {
    name: 'App',
-+  data (){
-+    return {
-+      count: 0
-+    }
-+  },
    components: {
 -    HelloWorld
 +    HelloWorld,
@@ -138,11 +129,11 @@ index a92fd03..3d9f207 100644
    }
  }
  </script>
-diff --git a/vue-cli-3/src/components/Counter.vue b/vue-cli-3/src/components/Counter.vue
+diff --git a/vue-cli-2/src/components/Counter.vue b/vue-cli-2/src/components/Counter.vue
 new file mode 100644
 index 0000000..5eb6269
 --- /dev/null
-+++ b/vue-cli-3/src/components/Counter.vue
++++ b/vue-cli-2/src/components/Counter.vue
 @@ -0,0 +1,20 @@
 +<template>
 +  <div>
@@ -165,11 +156,11 @@ index 0000000..5eb6269
 +}
 +</script>
 \ No newline at end of file
-diff --git a/vue-cli-3/src/components/CounterComp.spec.ct.js b/vue-cli-3/src/components/CounterComp.spec.ct.js
+diff --git a/vue-cli-2/src/components/CounterComp.spec.ct.js b/vue-cli-2/src/components/CounterComp.spec.ct.js
 new file mode 100644
-index 0000000..afd7e21
+index 0000000..18d014a
 --- /dev/null
-+++ b/vue-cli-3/src/components/CounterComp.spec.ct.js
++++ b/vue-cli-2/src/components/CounterComp.spec.ct.js
 @@ -0,0 +1,10 @@
 +import { mount } from '@cypress/vue'
 +import CounterComp from './CounterComp.vue'
@@ -181,11 +172,12 @@ index 0000000..afd7e21
 +  cy.get('button').click()
 +  cy.get('[data-test=count]').should("have.text", "Total clicks: 2")
 +})
-diff --git a/vue-cli-3/src/components/CounterComp.vue b/vue-cli-3/src/components/CounterComp.vue
+\ No newline at end of file
+diff --git a/vue-cli-2/src/components/CounterComp.vue b/vue-cli-2/src/components/CounterComp.vue
 new file mode 100644
 index 0000000..bb58451
 --- /dev/null
-+++ b/vue-cli-3/src/components/CounterComp.vue
++++ b/vue-cli-2/src/components/CounterComp.vue
 @@ -0,0 +1,19 @@
 +<template>
 +  <div>
