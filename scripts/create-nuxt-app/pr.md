@@ -9,6 +9,16 @@
    4. Add [pages/index.spec.ct.js](pages/index.spec.ct.js), [components/Logo.spec.ct.js](components/Logo.spec.ct.js)
    5. `npx cypress open-ct`
    6. ${COMMIT_1}
+3. Add Cypress Code Coverage
+   1. ${COMMAND_2}
+   2. Edit [cypress.json](cypress.json) to enable `coverage`
+   3. Edit [cypress/plugins/index.js](cypress/plugins/index.js) to configure the Cypress code coverage task with Istanbul
+   4. Edit [cypress/support/commands.js](cypress/support/commands.js) to import Cypress code coverage support
+   5. Add [components/Counter.spec.ct.js](components/Counter.spec.ct.js)
+   5. Update [src/index.spec.ct.js](src/index.spec.ct.js) to use Counter for interactivity
+   7. Update [.babelrc](.babelrc) to use `babel-plugin-istanbul` for Cypress Component tests
+   8. Add [.nycrc](.nycrc)
+   9. Commit
 
 Notes:
 

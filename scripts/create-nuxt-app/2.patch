@@ -1,0 +1,192 @@
+diff --git a/create-nuxt-app/.babelrc b/create-nuxt-app/.babelrc
+new file mode 100644
+index 0000000..ccccfd2
+--- /dev/null
++++ b/create-nuxt-app/.babelrc
+@@ -0,0 +1,11 @@
++{
++  "presets": [
++    [
++      "@nuxt/babel-preset-app",
++      {
++        "corejs": { "version": 3 }
++      }
++    ]
++  ],
++  "plugins":["istanbul"]
++}
+diff --git a/create-nuxt-app/.gitignore b/create-nuxt-app/.gitignore
+index e8f682b..66f81fd 100644
+--- a/create-nuxt-app/.gitignore
++++ b/create-nuxt-app/.gitignore
+@@ -88,3 +88,10 @@ sw.*
+ 
+ # Vim swap files
+ *.swp
++
++# code coverage
++/.nyc_output
+diff --git a/create-nuxt-app/.nycrc b/create-nuxt-app/.nycrc
+new file mode 100644
+index 0000000..cf03018
+--- /dev/null
++++ b/create-nuxt-app/.nycrc
+@@ -0,0 +1,18 @@
++{
++  "include": [
++    "pages/**/*.{vue,js}",
++    "layouts/**/*.{vue,js}",
++    "components/**/*.{vue,js}",
++    "module/**/*.js",
++    "mixin/**/*.js",
++    "store/**/*.js"
++  ],
++  "exclude": [
++    "**/*.{spec,test}*.js"
++  ],
++  "extension": [
++    ".js",
++    ".vue"
++  ],
++  "all": true
++}
+diff --git a/create-nuxt-app/components/Counter.vue b/create-nuxt-app/components/Counter.vue
+new file mode 100644
+index 0000000..bdcd69f
+--- /dev/null
++++ b/create-nuxt-app/components/Counter.vue
+@@ -0,0 +1,19 @@
++<template>
++  <div>
++    <p data-test="count">Total clicks: {{ count }}</p>
++    <button @click="increment">increment</button>
++  </div>
++</template>
++
++<script>
++export default {
++  data: () => ({
++    count: 0,
++  }),
++  methods: {
++    increment() {
++      this.count++
++    },
++  },
++}
++</script> 
+\ No newline at end of file
+diff --git a/create-nuxt-app/cypress.json b/create-nuxt-app/cypress.json
+index a57b21f..a80c4f4 100644
+--- a/create-nuxt-app/cypress.json
++++ b/create-nuxt-app/cypress.json
+@@ -1,4 +1,5 @@
+ {
++  "coverage": true,
+   "component": {
+     "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
+     "componentFolder": "."
+diff --git a/create-nuxt-app/cypress/plugins/index.js b/create-nuxt-app/cypress/plugins/index.js
+index ba79b66..d9cb9f2 100644
+--- a/create-nuxt-app/cypress/plugins/index.js
++++ b/create-nuxt-app/cypress/plugins/index.js
+@@ -1,13 +1,16 @@
+-const { startDevServer } = require('@cypress/webpack-dev-server')
+-const { getWebpackConfig } = require('nuxt')
++const { startDevServer } = require("@cypress/webpack-dev-server");
++const codeCoverageTask = require("@cypress/code-coverage/task");
++const { getWebpackConfig } = require("nuxt");
+ 
+ module.exports = (on, config) => {
+-  on('dev-server:start', async (options) => {
+-    const webpackConfig = await getWebpackConfig()
++  on("dev-server:start", async options => {
++    const webpackConfig = await getWebpackConfig();
+     return startDevServer({
+       options,
+-      webpackConfig,
+-    })
+-  })
+-  return config
+-}
++      webpackConfig
++    });
++  });
++
++  codeCoverageTask(on, config);
++  return config;
++};
+diff --git a/create-nuxt-app/cypress/support/index.js b/create-nuxt-app/cypress/support/index.js
+index d68db96..afa41e4 100644
+--- a/create-nuxt-app/cypress/support/index.js
++++ b/create-nuxt-app/cypress/support/index.js
+@@ -13,6 +13,8 @@
+ // https://on.cypress.io/configuration
+ // ***********************************************************
+ 
++import '@cypress/code-coverage/support'
++
+ // Import commands.js using ES2015 syntax:
+ import './commands'
+ 
+diff --git a/create-nuxt-app/nuxt.config.js b/create-nuxt-app/nuxt.config.js
+index 34bcb9e..520df6f 100644
+--- a/create-nuxt-app/nuxt.config.js
++++ b/create-nuxt-app/nuxt.config.js
+@@ -36,5 +36,8 @@ export default {
+ 
+   // Build Configuration: https://go.nuxtjs.dev/config-build
+   build: {
++    babel: {
++      babelrc: true
++    }
+   }
+ }
+diff --git a/create-nuxt-app/pages/index.spec.ct.js b/create-nuxt-app/pages/index.spec.ct.js
+index 02161f9..2b2ac53 100644
+--- a/create-nuxt-app/pages/index.spec.ct.js
++++ b/create-nuxt-app/pages/index.spec.ct.js
+@@ -1,8 +1,11 @@
+-import { mount } from '@cypress/vue'
+-import Index from './index.vue'
++import { mount } from "@cypress/vue";
++import Index from "./index.vue";
+ 
+-it('shows the index', () => {
+-  mount(Index)
+-  cy.get('h1').contains('create-nuxt-app')
+-  cy.get('a').should('have.length', 2)
+-})
++it("shows the index", () => {
++  mount(Index);
++  cy.get("h1").contains("create-nuxt-app");
++  cy.get("a").should("have.length", 2);
++  cy.get("button").click();
++  cy.get("[data-test=count]").should("have.text", "Total clicks: 1");
++  cy.get("button").click();
++});
+diff --git a/create-nuxt-app/pages/index.vue b/create-nuxt-app/pages/index.vue
+index 59f1bd1..402bd40 100644
+--- a/create-nuxt-app/pages/index.vue
++++ b/create-nuxt-app/pages/index.vue
+@@ -23,12 +23,19 @@
+           GitHub
+         </a>
+       </div>
++      <Counter />
+     </div>
+   </div>
+ </template>
+ 
+ <script>
+-export default {}
++import Counter from '../components/Counter.vue'
++
++export default {
++  components: {
++    Counter
++  }
++}
+ </script>
+ 
+ <style>
