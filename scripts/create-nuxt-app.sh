@@ -10,7 +10,23 @@ source "$script_dir/global/functions.sh"
 
 title='Create Nuxt App'
 
-export ANSWERS='{ "name": "create-nuxt-app", "language": "js", "pm": "yarn", "ui": "none", "features": [], "linter": [], "test": "none", "mode": "universal", "target": "server", "devTools": [], "gitUsername": "none", "vcs": "none" }'
+export ANSWERS=$(tr -d "\n" <<'EOF'
+{
+  "name": "create-nuxt-app",
+  "language": "js",
+  "pm": "yarn",
+  "ui": "none",
+  "features": [],
+  "linter": [],
+  "test": "none",
+  "mode": "universal",
+  "target": "server",
+  "devTools": [],
+  "gitUsername": "none",
+  "vcs": "none"
+}
+EOF
+)
 
 create_branch
 
