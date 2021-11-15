@@ -190,3 +190,21 @@ index 8360af7..c7b8627 100644
 +  }
 +}
  </script>
+diff --git a/create-nuxt-app/components/Logo.spec.ct.js b/create-nuxt-app/components/Logo.spec.ct.js
+index 4f160f8..addcf77 100644
+--- a/create-nuxt-app/components/Logo.spec.ct.js
++++ b/create-nuxt-app/components/Logo.spec.ct.js
+@@ -1,7 +1,7 @@
+-import { mount } from '@cypress/vue'
+-import Logo from './Logo.vue'
++import { mount } from "@cypress/vue";
++import NuxtLogo from "./NuxtLogo.vue";
+
+-it('shows the logo', () => {
+-  mount(Logo)
+-  cy.get('svg').should('have.class', 'NuxtLogo')
+-})
++it("shows the logo", () => {
++  mount(NuxtLogo);
++  cy.get("svg").should("have.class", "nuxt-logo");
++});
