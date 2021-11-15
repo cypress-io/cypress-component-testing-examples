@@ -19,7 +19,7 @@ diff --git a/create-nuxt-app/.gitignore b/create-nuxt-app/.gitignore
 index e8f682b..66f81fd 100644
 --- a/create-nuxt-app/.gitignore
 +++ b/create-nuxt-app/.gitignore
-@@ -88,3 +88,10 @@ sw.*
+@@ -88,3 +88,6 @@ sw.*
  
  # Vim swap files
  *.swp
@@ -166,27 +166,27 @@ index 02161f9..2b2ac53 100644
 +  cy.get("button").click();
 +});
 diff --git a/create-nuxt-app/pages/index.vue b/create-nuxt-app/pages/index.vue
-index 59f1bd1..402bd40 100644
+index 8360af7..c7b8627 100644
 --- a/create-nuxt-app/pages/index.vue
 +++ b/create-nuxt-app/pages/index.vue
-@@ -23,12 +23,19 @@
-           GitHub
-         </a>
-       </div>
-+      <Counter />
-     </div>
-   </div>
+@@ -1,7 +1,18 @@
+ <template>
+-  <Tutorial/>
++  <div>
++    <Counter />
++    <Tutorial />
++  </div>
  </template>
- 
+
  <script>
 -export default {}
++import Tutorial from '../components/Tutorial.vue'
 +import Counter from '../components/Counter.vue'
 +
 +export default {
 +  components: {
-+    Counter
++    Counter,
++    Tutorial
 +  }
 +}
  </script>
- 
- <style>
