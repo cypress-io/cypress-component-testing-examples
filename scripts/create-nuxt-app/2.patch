@@ -133,10 +133,13 @@ diff --git a/create-nuxt-app/nuxt.config.js b/create-nuxt-app/nuxt.config.js
 index 34bcb9e..520df6f 100644
 --- a/create-nuxt-app/nuxt.config.js
 +++ b/create-nuxt-app/nuxt.config.js
-@@ -36,5 +36,8 @@ export default {
+@@ -37,5 +37,11 @@ export default {
  
    // Build Configuration: https://go.nuxtjs.dev/config-build
    build: {
++    extend(config) {
++      config.performance.hints = false
++    },
 +    babel: {
 +      babelrc: true
 +    }
@@ -146,7 +149,7 @@ diff --git a/create-nuxt-app/pages/index.spec.ct.js b/create-nuxt-app/pages/inde
 index 02161f9..2b2ac53 100644
 --- a/create-nuxt-app/pages/index.spec.ct.js
 +++ b/create-nuxt-app/pages/index.spec.ct.js
-@@ -1,8 +1,11 @@
+@@ -1,8 +1,10 @@
 -import { mount } from '@cypress/vue'
 -import Index from './index.vue'
 +import { mount } from "@cypress/vue";
@@ -159,8 +162,7 @@ index 02161f9..2b2ac53 100644
 -})
 +it("shows the index", () => {
 +  mount(Index);
-+  cy.get("h1").contains("create-nuxt-app");
-+  cy.get("a").should("have.length", 2);
++  cy.get("h2").should("contain", "Welcome to your Nuxt Application");
 +  cy.get("button").click();
 +  cy.get("[data-test=count]").should("have.text", "Total clicks: 1");
 +  cy.get("button").click();
