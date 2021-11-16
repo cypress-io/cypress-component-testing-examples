@@ -74,7 +74,7 @@ index 0000000..bdcd69f
 +    },
 +  },
 +}
-+</script> 
++</script>
 \ No newline at end of file
 diff --git a/create-nuxt-app/cypress.json b/create-nuxt-app/cypress.json
 index a57b21f..a80c4f4 100644
