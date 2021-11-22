@@ -1,18 +1,18 @@
-import { useMemo, useState } from 'react';
-import './LoginForm.css';
+import { useState } from 'react'
+import './LoginForm.css'
 
-export const LoginForm = ({ onLogin, title = 'Log In' }) => {
-  const [submitted, setSubmitted] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const LoginForm = ({ onLogin, title = 'Log In' }) => {
+  const [submitted, setSubmitted] = useState(false)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   const formSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     if (username && password) {
-      onLogin({ username, password });
+      onLogin({ username, password })
     }
-    setSubmitted(true);
-  };
+    setSubmitted(true)
+  }
 
   return (
     <form className="login-form" onSubmit={formSubmit}>
@@ -45,5 +45,7 @@ export const LoginForm = ({ onLogin, title = 'Log In' }) => {
         <button type="submit">Login</button>
       </fieldset>
     </form>
-  );
-};
+  )
+}
+
+export default LoginForm

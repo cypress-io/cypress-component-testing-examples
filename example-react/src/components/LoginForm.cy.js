@@ -1,5 +1,5 @@
 import { mount } from '@cypress/react'
-import { LoginForm } from './LoginForm'
+import LoginForm from './LoginForm'
 
 describe('LoginForm', () => {
   it('should mount the component', () => {
