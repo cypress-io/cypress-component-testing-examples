@@ -1,0 +1,50 @@
+diff --git a/create-react-app/.gitignore b/create-react-app/.gitignore
+index 4d29575..84bbb0f 100644
+--- a/create-react-app/.gitignore
++++ b/create-react-app/.gitignore
+@@ -21,3 +21,6 @@
+ npm-debug.log*
+ yarn-debug.log*
+ yarn-error.log*
++
++# code coverage
++/.nyc_output
+\ No newline at end of file
+diff --git a/create-react-app/cypress.json b/create-react-app/cypress.json
+index ee59bec..622829d 100644
+--- a/create-react-app/cypress.json
++++ b/create-react-app/cypress.json
+@@ -1,4 +1,5 @@
+ {
++  "coverage": true,
+   "component": {
+     "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
+     "componentFolder": "src"
+diff --git a/create-react-app/cypress/plugins/index.js b/create-react-app/cypress/plugins/index.js
+index 5398153..e10b251 100644
+--- a/create-react-app/cypress/plugins/index.js
++++ b/create-react-app/cypress/plugins/index.js
+@@ -1,6 +1,9 @@
+ const injectDevServer = require("@cypress/react/plugins/react-scripts");
++require("@cypress/instrument-cra");
++const registerCoverageTasks = require("@cypress/code-coverage/task");
+ 
+ module.exports = (on, config) => {
+   injectDevServer(on, config);
++  registerCoverageTasks(on, config);
+   return config;
+ };
+diff --git a/create-react-app/cypress/support/index.js b/create-react-app/cypress/support/index.js
+index c63e2c9..8d6376f 100644
+--- a/create-react-app/cypress/support/index.js
++++ b/create-react-app/cypress/support/index.js
+@@ -13,6 +13,9 @@
+ // https://on.cypress.io/configuration
+ // ***********************************************************
+ 
++// Load code coverage
++import '@cypress/code-coverage/support'
++
+ // Import commands.js using ES2015 syntax:
+ import './commands'
+ 
