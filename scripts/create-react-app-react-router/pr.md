@@ -19,5 +19,5 @@
    1. ${COMMAND_4}
    2. Edit [cypress.json](cypress.json) to enable `coverage`
    3. Edit [cypress/plugins/index.js](cypress/plugins/index.js) to configure the Cypress code coverage task
-   4. Edit [cypress/support/commands.js](cypress/support/commands.js) to import Cypress code coverage support
+   4. Edit [cypress/support/index.js](cypress/support/index.js) to import Cypress code coverage support
    5. ${COMMIT_3}
