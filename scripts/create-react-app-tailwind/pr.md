@@ -20,6 +20,7 @@
 4. Add Cypress Code Coverage
    1. ${COMMAND_3}
    2. Edit [cypress.json](cypress.json) to enable `coverage`
-   3. Edit [cypress/plugins/index.js](cypress/plugins/index.js) to configure the Cypress code coverage task
-   4. Edit [cypress/support/index.js](cypress/support/index.js) to import Cypress code coverage support
-   8. ${COMMIT_4}
+   3. Edit [.gitignore](.gitignore) to ignore .nyc_output directory
+   4. Edit [cypress/plugins/index.js](cypress/plugins/index.js) to configure the Cypress code coverage task
+   5. Edit [cypress/support/index.js](cypress/support/index.js) to import Cypress code coverage support
+   6. ${COMMIT_4}

@@ -1,14 +1,15 @@
 diff --git a/create-react-app-typescript/.gitignore b/create-react-app-typescript/.gitignore
-index 4d29575..84bbb0f 100644
+index 4d29575..5d716fe 100644
 --- a/create-react-app-typescript/.gitignore
 +++ b/create-react-app-typescript/.gitignore
-@@ -21,3 +21,6 @@
- npm-debug.log*
- yarn-debug.log*
- yarn-error.log*
-+
-+# code coverage
+@@ -7,6 +7,7 @@
+
+ # testing
+ /coverage
 +/.nyc_output
+
+ # production
+ /build
 \ No newline at end of file
 diff --git a/create-react-app-typescript/cypress.json b/create-react-app-typescript/cypress.json
 index ee59bec..622829d 100644
