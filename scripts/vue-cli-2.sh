@@ -50,6 +50,6 @@ commit_all "Add Cypress with example component and page tests"
 step
 cmd yarn add -D @cypress/code-coverage babel-plugin-istanbul
 apply_patch
-commit_all "Configure Cypress Code Coverage plugin and add additional component tests"
+commit_all "Configure Cypress Code Coverage plugin"
 
 finalize
