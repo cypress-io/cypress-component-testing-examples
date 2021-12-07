@@ -45,7 +45,7 @@ commit_all "Update app to move global styles into main.css file"
 step
 cmd yarn add -D cypress @cypress/vue@3 @cypress/webpack-dev-server webpack-dev-server
 apply_patch
-commit_all "Add Cypress with example component and page tests"
+commit_all "Add Cypress with example components and page tests"
 
 step
 cmd yarn add -D @cypress/code-coverage babel-plugin-istanbul
