@@ -10,7 +10,7 @@
    1. ${COMMAND_2}
    2. Add [cypress.json](cypress.json)
    3. Add [cypress/plugins/index.js](cypress/plugins/index.js)
-   4. Add [src/App.spec.ct.js](src/App.spec.ct.js), [src/components/HelloWorld.spec.ct.js](src/components/HelloWorld.spec.ct.js)
+   4. Add [src/App.spec.ct.js](src/App.spec.ct.js), [src/components/HelloWorld.spec.ct.js](src/components/HelloWorld.spec.ct.js), [src/Counter.vue](src/Counter.vue), [src/components/Counter.spec.ct.js](src/components/Counter.spec.ct.js)
    5. `npx cypress open-ct` (Notice that the fonts don't inherit global app styles)
    6. Edit [cypress/support/index.js](cypress/support/index.js) to import global app styles, the Cypress test preview should update automatically
    7. ${COMMIT_2}
@@ -19,11 +19,10 @@
    2. Edit [cypress.json](cypress.json) to enable `coverage`
    3. Edit [cypress/plugins/index.js](cypress/plugins/index.js) to configure the Cypress code coverage task with Istanbul
    4. Edit [cypress/support/commands.js](cypress/support/commands.js) to import Cypress code coverage support
-   5. Update [src/App.spec.ct.js](src/App.spec.ct.js), [src/components/Counter.spec.ct.js](src/components/Counter.spec.ct.js) for interactivity
-   6. Add [src/CounterComp.vue](src/components/CounterComp.vue), a Composition API component and add component test in [src/components/CounterComp.spec.ct.js](src/components/CounterComp.spec.ct.js) 
-   7. Update [babel.config.js](babel.config.js) to conditionally use `babel-plugin-istanbul` when Cypress Component tests are running
-   8. Add [.nycrc](.nycrc)
-   9. ${COMMIT_3}
+   5. Update [babel.config.js](babel.config.js) to conditionally use `babel-plugin-istanbul` when Cypress Component tests are running
+   6. Add [.nycrc](.nycrc)
+   7. Edit [.gitignore](.gitignore) to ignore coverage and .nyc_output directories
+   8. ${COMMIT_3}
 
 Notes:
 
