@@ -21,7 +21,7 @@
    3. Edit [cypress/plugins/index.js](cypress/plugins/index.js) to configure the Cypress code coverage task with Istanbul
    4. Edit [cypress/support/index.js](cypress/support/index.js) to import Cypress code coverage support
    5. Update [babel.config.js](babel.config.js) to conditionally use `babel-plugin-istanbul` when Cypress Component tests are running
-   6. Add [.nycrc](.nycrc)
+   6. Add [.nycrc](.nycrc) to configure istanbul
    7. Edit [.gitignore](.gitignore) to ignore coverage and .nyc_output directories
    8. ${COMMIT_3}
 
