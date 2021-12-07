@@ -12,12 +12,14 @@
     "vue": "^2.6.11"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.9.12",
     "@cypress/vue": "^2.2.3",
     "@cypress/webpack-dev-server": "^1.7.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-istanbul": "^6.1.1",
     "cypress": "^9.1.1",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
