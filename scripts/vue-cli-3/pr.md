@@ -20,7 +20,7 @@
    1. ${COMMAND_3}
    2. Edit [cypress.json](cypress.json) to enable `coverage`
    3. Edit [cypress/plugins/index.js](cypress/plugins/index.js) to configure the Cypress code coverage task with Istanbul
-   4. Edit [cypress/support/commands.js](cypress/support/commands.js) to import Cypress code coverage support
+   4. Edit [cypress/support/index.js](cypress/support/index.js) to import Cypress code coverage support
    5. Update [babel.config.js](babel.config.js) to conditionally use `babel-plugin-istanbul` when Cypress Component tests are running
    6. Add [.nycrc](.nycrc)
    7. Edit [.gitignore](.gitignore) to ignore coverage and .nyc_output directories
