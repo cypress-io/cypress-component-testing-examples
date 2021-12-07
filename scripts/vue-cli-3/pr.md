@@ -10,7 +10,8 @@
    1. ${COMMAND_2}
    2. Add [cypress.json](cypress.json)
    3. Add [cypress/plugins/index.js](cypress/plugins/index.js)
-   4. Add [src/App.spec.ct.js](src/App.spec.ct.js), [src/components/HelloWorld.spec.ct.js](src/components/HelloWorld.spec.ct.js), [src/Counter.vue](src/Counter.vue), [src/components/Counter.spec.ct.js](src/components/Counter.spec.ct.js)
+   1. Update [src/App.vue](src/App.vue) to reference new [src/components/Counter.vue](src/components/Counter.vue) component
+   1. Add [src/App.spec.ct.js](src/App.spec.ct.js), [src/components/HelloWorld.spec.ct.js](src/components/HelloWorld.spec.ct.js), [src/components/Counter.spec.ct.js](src/components/Counter.spec.ct.js) spec files
    5. Add [src/CounterCompositionApi.vue](src/components/CounterCompositionApi.vue), a Composition API component and test in [src/components/CounterCompositionApi.spec.ct.js](src/components/CounterCompositionApi.spec.ct.js)
    6. `npx cypress open-ct` (Notice that the fonts don't inherit global app styles)
    7. Edit [cypress/support/index.js](cypress/support/index.js) to import global app styles, the Cypress test preview should update automatically
