@@ -18,7 +18,7 @@ cmd cd $dir
 commit_all "Run: ${commands[-2]}"
 
 step
-cmd yarn add react-router-dom
+cmd yarn add react-router-dom@5
 apply_patch
 commit_all "Add react-router and update app to use it"
 
@@ -27,5 +27,10 @@ cmd yarn add -D cypress @cypress/react @cypress/webpack-dev-server eslint-plugin
 apply_patch global/create-react-app.patch
 apply_patch
 commit_all "Add Cypress with example component test"
+
+step
+cmd yarn add -D @cypress/code-coverage @cypress/instrument-cra
+apply_patch global/create-react-app-code-coverage.patch
+commit_all "Configure Cypress Code Coverage plugin"
 
 finalize
