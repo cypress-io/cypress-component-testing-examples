@@ -18,9 +18,9 @@ cmd cd $dir
 commit_all "Run: ${commands[-2]}"
 
 step
-cmd yarn add -D cypress @cypress/react @cypress/webpack-dev-server webpack-dev-server html-webpack-plugin
+cmd yarn add -D cypress @cypress/react @cypress/webpack-dev-server webpack-dev-server@3 html-webpack-plugin@5
 apply_patch global/create-next-app.patch
-apply_patch
+apply_patch 
 commit_all "Add Cypress with example component and page tests"
 
 finalize
