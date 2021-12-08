@@ -3,7 +3,7 @@ new file mode 100644
 index 0000000..a57b21f
 --- /dev/null
 +++ b/create-next-app/cypress.json
-@@ -0,0 +1,6 @@
+@@ -0,0 +1,7 @@
 +{
 +  "component": {
 +    "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
