@@ -13,7 +13,7 @@ title='Create Next App'
 create_branch
 
 step
-cmd npx create-next-app --example nested-components $dir
+cmd yarn create next-app --example nested-components $dir
 cmd cd $dir
 commit_all "Run: ${commands[-2]}"
 

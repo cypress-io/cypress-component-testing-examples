@@ -14,7 +14,7 @@ create_branch
 
 step
 ## Lock version of create-next-app to version 10 for webpack 4
-cmd npx create-next-app@10 --example nested-components $dir
+cmd yarn create next-app@10 --example nested-components $dir
 cmd cd $dir
 commit_all "Run: ${commands[-2]}"
 
