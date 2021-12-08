@@ -8,7 +8,8 @@ index 0000000..a57b21f
 +  "component": {
 +    "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
 +    "componentFolder": "."
-+  }
++  },
++  "nodeVersion": "system"
 +}
 diff --git a/create-next-app/cypress/fixtures/example.json b/create-next-app/cypress/fixtures/example.json
 new file mode 100644
