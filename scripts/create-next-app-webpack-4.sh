@@ -14,12 +14,12 @@ create_branch
 
 step
 ## Lock version of create-next-app to version 10 for webpack 4
-cmd yarn create next-app@10 --example nested-components $dir
+cmd npx create-next-app@10 --example nested-components $dir
 cmd cd $dir
 commit_all "Run: ${commands[-2]}"
 
 step
-cmd yarn add -D cypress @cypress/react @cypress/webpack-dev-server webpack-dev-server html-webpack-plugin
+cmd npm install -D cypress @cypress/react @cypress/webpack-dev-server webpack-dev-server html-webpack-plugin
 apply_patch global/create-next-app.patch
 apply_patch
 commit_all "Add Cypress with example component and page tests"
