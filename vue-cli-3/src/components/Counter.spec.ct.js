@@ -1,11 +1,10 @@
 import { mount } from '@cypress/vue'
-import App from './App.vue'
+import Counter from './Counter.vue'
 
-it('shows the App', () => {
-  mount(App)
-  cy.get('[alt="Vue logo"]')
-  cy.get('h1').contains('Welcome to Your Vue.js App')
+it('shows the Counter', () => {
+  mount(Counter)
   cy.get('button').click()
   cy.get('[data-test=count]').should("have.text", "Total clicks: 1")
   cy.get('button').click()
+  cy.get('[data-test=count]').should("have.text", "Total clicks: 2")
 })
