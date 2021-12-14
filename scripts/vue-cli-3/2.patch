@@ -133,22 +133,25 @@ index 0000000..bbbb6c3
 +  })
 +  cy.get('h1').contains('Hello World')
 +})
-diff --git a/vue-cli-2/src/App.vue b/vue-cli-2/src/App.vue
-index b9ac61a..7988bf5 100644
---- a/vue-cli-2/src/App.vue
-+++ b/vue-cli-2/src/App.vue
-@@ -2,16 +2,19 @@
-   <div id="app">
-     <img alt="Vue logo" src="./assets/logo.png">
-     <HelloWorld msg="Welcome to Your Vue.js App"/>
+diff --git a/vue-cli-3/src/App.vue b/vue-cli-3/src/App.vue
+index a92fd03..3d9f207 100644
+--- a/vue-cli-3/src/App.vue
++++ b/vue-cli-3/src/App.vue
+@@ -1,15 +1,20 @@
+ <template>
+-  <img alt="Vue logo" src="./assets/logo.png">
+-  <HelloWorld msg="Welcome to Your Vue.js App"/>
++  <div>
++    <img alt="Vue logo" src="./assets/logo.png">
++    <HelloWorld msg="Welcome to Your Vue.js App"/>
 +    <Counter />
-   </div>
++  </div>
  </template>
- 
+
  <script>
  import HelloWorld from './components/HelloWorld.vue'
 +import Counter from './components/Counter.vue'
- 
+
  export default {
    name: 'App',
    components: {
@@ -158,11 +161,11 @@ index b9ac61a..7988bf5 100644
    }
  }
  </script>
-diff --git a/vue-cli-2/src/components/Counter.vue b/vue-cli-2/src/components/Counter.vue
+diff --git a/vue-cli-3/src/components/Counter.vue b/vue-cli-3/src/components/Counter.vue
 new file mode 100644
 index 0000000..5eb6269
 --- /dev/null
-+++ b/vue-cli-2/src/components/Counter.vue
++++ b/vue-cli-3/src/components/Counter.vue
 @@ -0,0 +1,20 @@
 +<template>
 +  <div>
@@ -185,11 +188,11 @@ index 0000000..5eb6269
 +}
 +</script>
 \ No newline at end of file
-diff --git a/vue-cli-2/src/components/Counter.spec.ct.js b/vue-cli-2/src/components/Counter.spec.ct.js
+diff --git a/vue-cli-3/src/components/Counter.spec.ct.js b/vue-cli-3/src/components/Counter.spec.ct.js
 new file mode 100644
 index 0000000..afd7e21
 --- /dev/null
-+++ b/vue-cli-2/src/components/Counter.spec.ct.js
++++ b/vue-cli-3/src/components/Counter.spec.ct.js
 @@ -0,0 +1,10 @@
 +import { mount } from '@cypress/vue'
 +import Counter from './Counter.vue'
@@ -201,3 +204,45 @@ index 0000000..afd7e21
 +  cy.get('button').click()
 +  cy.get('[data-test=count]').should("have.text", "Total clicks: 2")
 +})
+diff --git a/vue-cli-3/src/components/CounterCompositionApi.spec.ct.js b/vue-cli-3/src/components/CounterCompositionApi.spec.ct.js
+new file mode 100644
+index 0000000..afd7e21
+--- /dev/null
++++ b/vue-cli-3/src/components/CounterCompositionApi.spec.ct.js
+@@ -0,0 +1,10 @@
++import { mount } from '@cypress/vue'
++import CounterCompositionApi from './CounterCompositionApi.vue'
++
++it('shows the CounterCompositionApi', () => {
++  mount(CounterCompositionApi)
++  cy.get('button').click()
++  cy.get('[data-test=count]').should("have.text", "Total clicks: 1")
++  cy.get('button').click()
++  cy.get('[data-test=count]').should("have.text", "Total clicks: 2")
++})
+diff --git a/vue-cli-3/src/components/CounterCompositionApi.vue b/vue-cli-3/src/components/CounterCompositionApi.vue
+new file mode 100644
+index 0000000..bb58451
+--- /dev/null
++++ b/vue-cli-3/src/components/CounterCompositionApi.vue
+@@ -0,0 +1,19 @@
++<template>
++  <div>
++    <button @click="increment">Increment</button>
++    <p data-test="count">Total clicks: {{ count }}</p>
++  </div>
++</template>
++
++<script>
++import { ref } from 'vue'
++
++export default {
++  setup() {
++    const count = ref(0)
++    const increment = () => ++count.value
++
++    return { count, increment }
++  }
++}
++</script>
+\ No newline at end of file
