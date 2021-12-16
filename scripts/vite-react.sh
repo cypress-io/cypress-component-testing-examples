@@ -30,4 +30,9 @@ cmd yarn add -D cypress @cypress/react @cypress/vite-dev-server
 apply_patch 
 commit_all "Add Cypress with example component and page tests"
 
+step
+cmd yarn add -D @cypress/code-coverage vite-plugin-istanbul
+apply_patch
+commit_all "Configure Cypress Code Coverage plugin"
+
 finalize
