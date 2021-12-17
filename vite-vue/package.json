@@ -10,10 +10,12 @@
     "vue": "^3.2.25"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.9.12",
     "@cypress/vite-dev-server": "^2.2.2",
     "@cypress/vue": "3",
     "@vitejs/plugin-vue": "^2.0.0",
     "cypress": "^9.1.1",
-    "vite": "^2.7.2"
+    "vite": "^2.7.2",
+    "vite-plugin-istanbul": "^2.3.0"
   }
 }
