@@ -1,7 +1,7 @@
 import { mount } from '@cypress/vue'
-import Logo from './Logo.vue'
+import NuxtLogo from './NuxtLogo.vue';
 
 it('shows the logo', () => {
-  mount(Logo)
-  cy.get('svg').should('have.class', 'NuxtLogo')
+  mount(NuxtLogo)
+  cy.get('svg').should('have.class', 'nuxt-logo');
 })
