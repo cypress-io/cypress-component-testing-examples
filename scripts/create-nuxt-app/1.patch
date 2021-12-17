@@ -5,12 +5,63 @@ index 0000000..4f160f8
 +++ b/create-nuxt-app/components/Logo.spec.ct.js
 @@ -0,0 +1,7 @@
 +import { mount } from '@cypress/vue'
-+import Logo from './Logo.vue'
++import NuxtLogo from './NuxtLogo.vue';
 +
 +it('shows the logo', () => {
-+  mount(Logo)
-+  cy.get('svg').should('have.class', 'NuxtLogo')
++  mount(NuxtLogo)
++  cy.get('svg').should('have.class', 'nuxt-logo');
 +})
+diff --git a/create-nuxt-app/components/Counter.vue b/create-nuxt-app/components/Counter.vue
+new file mode 100644
+index 0000000..bdcd69f
+--- /dev/null
++++ b/create-nuxt-app/components/Counter.vue
+@@ -0,0 +1,19 @@
++<template>
++  <div>
++    <p data-test="count">Total clicks: {{ count }}</p>
++    <button @click="increment">increment</button>
++  </div>
++</template>
++
++<script>
++export default {
++  data: () => ({
++    count: 0,
++  }),
++  methods: {
++    increment() {
++      this.count++
++    },
++  },
++}
++</script>
+\ No newline at end of file
+diff --git a/create-nuxt-app/pages/index.vue b/create-nuxt-app/pages/index.vue
+index 8360af7..c7b8627 100644
+--- a/create-nuxt-app/pages/index.vue
++++ b/create-nuxt-app/pages/index.vue
+@@ -1,7 +1,18 @@
+ <template>
+-  <Tutorial/>
++  <div>
++    <Counter />
++    <Tutorial />
++  </div>
+ </template>
+
+ <script>
+-export default {}
++import Tutorial from '../components/Tutorial.vue'
++import Counter from '../components/Counter.vue'
++
++export default {
++  components: {
++    Counter,
++    Tutorial
++  }
++}
+ </script>
 diff --git a/create-nuxt-app/cypress.json b/create-nuxt-app/cypress.json
 new file mode 100644
 index 0000000..a57b21f
@@ -115,12 +166,14 @@ new file mode 100644
 index 0000000..02161f9
 --- /dev/null
 +++ b/create-nuxt-app/pages/index.spec.ct.js
-@@ -0,0 +1,8 @@
+@@ -0,0 +1,10 @@
 +import { mount } from '@cypress/vue'
 +import Index from './index.vue'
 +
 +it('shows the index', () => {
 +  mount(Index)
-+  cy.get('h1').contains('create-nuxt-app')
-+  cy.get('a').should('have.length', 2)
++  cy.get("h2").should("contain", "Welcome to your Nuxt Application");
++  cy.get("button").click();
++  cy.get("[data-test=count]").should("have.text", "Total clicks: 1");
++  cy.get("button").click();
 +})
