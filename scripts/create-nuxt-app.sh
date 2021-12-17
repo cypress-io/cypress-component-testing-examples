@@ -10,7 +10,7 @@ source "$script_dir/global/functions.sh"
 
 title='Create Nuxt App'
 
-export ANSWERS=$(tr -d "\n" <<'EOF'
+export ANSWERS=$(cat <<'EOF'
 {
   "name": "create-nuxt-app",
   "language": "js",
@@ -31,7 +31,7 @@ EOF
 create_branch
 
 step
-npx create-nuxt-app $dir --answers "$ANSWERS"
+npx create-nuxt-app $dir --answers "${ANSWERS//$'\n'/}"
 cmd cd $dir
 commit_all "Run: npx create-nuxt-app $dir"
 
