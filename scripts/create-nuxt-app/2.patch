@@ -1,0 +1,121 @@
+diff --git a/create-nuxt-app/.babelrc b/create-nuxt-app/.babelrc
+new file mode 100644
+index 0000000..ccccfd2
+--- /dev/null
++++ b/create-nuxt-app/.babelrc
+@@ -0,0 +1,11 @@
++{
++  "presets": [
++    [
++      "@nuxt/babel-preset-app",
++      {
++        "corejs": { "version": 3 }
++      }
++    ]
++  ],
++  "plugins":["istanbul"]
++}
+diff --git a/create-nuxt-app/.gitignore b/create-nuxt-app/.gitignore
+index e8f682b..66f81fd 100644
+--- a/create-nuxt-app/.gitignore
++++ b/create-nuxt-app/.gitignore
+@@ -88,3 +88,6 @@ sw.*
+ 
+ # Vim swap files
+ *.swp
++
++# code coverage
++/.nyc_output
+diff --git a/create-nuxt-app/.nycrc b/create-nuxt-app/.nycrc
+new file mode 100644
+index 0000000..cf03018
+--- /dev/null
++++ b/create-nuxt-app/.nycrc
+@@ -0,0 +1,18 @@
++{
++  "include": [
++    "pages/**/*.{vue,js}",
++    "layouts/**/*.{vue,js}",
++    "components/**/*.{vue,js}",
++    "module/**/*.js",
++    "mixin/**/*.js",
++    "store/**/*.js"
++  ],
++  "exclude": [
++    "**/*.{spec,test}*.js"
++  ],
++  "extension": [
++    ".js",
++    ".vue"
++  ],
++  "all": true
++}
+diff --git a/create-nuxt-app/cypress.json b/create-nuxt-app/cypress.json
+index a57b21f..a80c4f4 100644
+--- a/create-nuxt-app/cypress.json
++++ b/create-nuxt-app/cypress.json
+@@ -1,4 +1,5 @@
+ {
++  "coverage": true,
+   "component": {
+     "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
+     "componentFolder": "."
+diff --git a/create-nuxt-app/cypress/plugins/index.js b/create-nuxt-app/cypress/plugins/index.js
+index ba79b66..d9cb9f2 100644
+--- a/create-nuxt-app/cypress/plugins/index.js
++++ b/create-nuxt-app/cypress/plugins/index.js
+@@ -1,13 +1,16 @@
+-const { startDevServer } = require('@cypress/webpack-dev-server')
+-const { getWebpackConfig } = require('nuxt')
++const { startDevServer } = require("@cypress/webpack-dev-server");
++const codeCoverageTask = require("@cypress/code-coverage/task");
++const { getWebpackConfig } = require("nuxt");
+ 
+ module.exports = (on, config) => {
+-  on('dev-server:start', async (options) => {
+-    const webpackConfig = await getWebpackConfig()
++  on("dev-server:start", async options => {
++    const webpackConfig = await getWebpackConfig();
+     return startDevServer({
+       options,
+-      webpackConfig,
+-    })
+-  })
+-  return config
+-}
++      webpackConfig
++    });
++  });
++
++  codeCoverageTask(on, config);
++  return config;
++};
+diff --git a/create-nuxt-app/cypress/support/index.js b/create-nuxt-app/cypress/support/index.js
+index d68db96..afa41e4 100644
+--- a/create-nuxt-app/cypress/support/index.js
++++ b/create-nuxt-app/cypress/support/index.js
+@@ -13,6 +13,8 @@
+ // https://on.cypress.io/configuration
+ // ***********************************************************
+ 
++import '@cypress/code-coverage/support'
++
+ // Import commands.js using ES2015 syntax:
+ import './commands'
+ 
+diff --git a/create-nuxt-app/nuxt.config.js b/create-nuxt-app/nuxt.config.js
+index 34bcb9e..520df6f 100644
+--- a/create-nuxt-app/nuxt.config.js
++++ b/create-nuxt-app/nuxt.config.js
+@@ -37,5 +37,11 @@ export default {
+ 
+   // Build Configuration: https://go.nuxtjs.dev/config-build
+   build: {
++    extend(config) {
++      config.performance.hints = false
++    },
++    babel: {
++      babelrc: true
++    }
+   }
+ }

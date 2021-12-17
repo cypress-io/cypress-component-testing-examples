@@ -31,7 +31,7 @@ EOF
 create_branch
 
 step
-npx create-nuxt-app $dir --answers "$ANSWERS"
+npx create-nuxt-app $dir --answers "${ANSWERS//$'\n'/}"
 cmd cd $dir
 commit_all "Run: npx create-nuxt-app $dir"
 
@@ -39,5 +39,10 @@ step
 cmd yarn add -D cypress @cypress/vue @cypress/webpack-dev-server webpack-dev-server
 apply_patch
 commit_all "Add Cypress with example component and page tests"
+
+step
+cmd yarn add -D @cypress/code-coverage babel-plugin-istanbul
+apply_patch
+commit_all "Configure Cypress Code Coverage plugin and add additional component tests"
 
 finalize
