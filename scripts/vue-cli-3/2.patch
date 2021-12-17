@@ -1,0 +1,248 @@
+diff --git a/vue-cli-2/cypress.json b/vue-cli-2/cypress.json
+new file mode 100644
+index 0000000..a57b21f
+--- /dev/null
++++ b/vue-cli-2/cypress.json
+@@ -0,0 +1,6 @@
++{
++  "component": {
++    "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
++    "componentFolder": "src"
++  }
++}
+diff --git a/vue-cli-2/cypress/fixtures/example.json b/vue-cli-2/cypress/fixtures/example.json
+new file mode 100644
+index 0000000..02e4254
+--- /dev/null
++++ b/vue-cli-2/cypress/fixtures/example.json
+@@ -0,0 +1,5 @@
++{
++  "name": "Using fixtures to represent data",
++  "email": "hello@cypress.io",
++  "body": "Fixtures are a great way to mock data for responses to routes"
++}
+diff --git a/vue-cli-2/cypress/plugins/index.js b/vue-cli-2/cypress/plugins/index.js
+new file mode 100644
+index 0000000..3590bd9
+--- /dev/null
++++ b/vue-cli-2/cypress/plugins/index.js
+@@ -0,0 +1,12 @@
++const { startDevServer } = require('@cypress/webpack-dev-server')
++const webpackConfig = require('@vue/cli-service/webpack.config')
++
++module.exports = (on, config) => {
++  on('dev-server:start', (options) => {
++    return startDevServer({
++      options,
++      webpackConfig,
++    })
++  })
++  return config
++}
+diff --git a/vue-cli-2/cypress/support/commands.js b/vue-cli-2/cypress/support/commands.js
+new file mode 100644
+index 0000000..119ab03
+--- /dev/null
++++ b/vue-cli-2/cypress/support/commands.js
+@@ -0,0 +1,25 @@
++// ***********************************************
++// This example commands.js shows you how to
++// create various custom commands and overwrite
++// existing commands.
++//
++// For more comprehensive examples of custom
++// commands please read more here:
++// https://on.cypress.io/custom-commands
++// ***********************************************
++//
++//
++// -- This is a parent command --
++// Cypress.Commands.add('login', (email, password) => { ... })
++//
++//
++// -- This is a child command --
++// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
++//
++//
++// -- This is a dual command --
++// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
++//
++//
++// -- This will overwrite an existing command --
++// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+diff --git a/vue-cli-2/cypress/support/index.js b/vue-cli-2/cypress/support/index.js
+new file mode 100644
+index 0000000..9b7843f
+--- /dev/null
++++ b/vue-cli-2/cypress/support/index.js
+@@ -0,0 +1,23 @@
++// ***********************************************************
++// This example support/index.js is processed and
++// loaded automatically before your test files.
++//
++// This is a great place to put global configuration and
++// behavior that modifies Cypress.
++//
++// You can change the location of this file or turn off
++// automatically serving support files with the
++// 'supportFile' configuration option.
++//
++// You can read more here:
++// https://on.cypress.io/configuration
++// ***********************************************************
++
++// Import commands.js using ES2015 syntax:
++import './commands'
++
++// Alternatively you can use CommonJS syntax:
++// require('./commands')
++
++// Ensure global app styles are loaded:
++import '../../src/main.css'
+diff --git a/vue-cli-2/src/App.spec.ct.js b/vue-cli-2/src/App.spec.ct.js
+new file mode 100644
+index 0000000..4a912ba
+--- /dev/null
++++ b/vue-cli-2/src/App.spec.ct.js
+@@ -0,0 +1,11 @@
++import { mount } from '@cypress/vue'
++import App from './App.vue'
++
++it('shows the App', () => {
++  mount(App)
++  cy.get('[alt="Vue logo"]')
++  cy.get('h1').contains('Welcome to Your Vue.js App')
++  cy.get('button').click()
++  cy.get('[data-test=count]').should("have.text", "Total clicks: 1")
++  cy.get('button').click()
++})
+diff --git a/vue-cli-2/src/components/HelloWorld.spec.ct.js b/vue-cli-2/src/components/HelloWorld.spec.ct.js
+new file mode 100644
+index 0000000..bbbb6c3
+--- /dev/null
++++ b/vue-cli-2/src/components/HelloWorld.spec.ct.js
+@@ -0,0 +1,11 @@
++import { mount } from '@cypress/vue'
++import HelloWorld from './HelloWorld.vue'
++
++it('shows the header', () => {
++  mount(HelloWorld, {
++    propsData: {
++      msg: 'Hello World'
++    }
++  })
++  cy.get('h1').contains('Hello World')
++})
+diff --git a/vue-cli-3/src/App.vue b/vue-cli-3/src/App.vue
+index a92fd03..3d9f207 100644
+--- a/vue-cli-3/src/App.vue
++++ b/vue-cli-3/src/App.vue
+@@ -1,15 +1,20 @@
+ <template>
+-  <img alt="Vue logo" src="./assets/logo.png">
+-  <HelloWorld msg="Welcome to Your Vue.js App"/>
++  <div>
++    <img alt="Vue logo" src="./assets/logo.png">
++    <HelloWorld msg="Welcome to Your Vue.js App"/>
++    <Counter />
++  </div>
+ </template>
+
+ <script>
+ import HelloWorld from './components/HelloWorld.vue'
++import Counter from './components/Counter.vue'
+
+ export default {
+   name: 'App',
+   components: {
+-    HelloWorld
++    HelloWorld,
++    Counter
+   }
+ }
+ </script>
+diff --git a/vue-cli-3/src/components/Counter.vue b/vue-cli-3/src/components/Counter.vue
+new file mode 100644
+index 0000000..5eb6269
+--- /dev/null
++++ b/vue-cli-3/src/components/Counter.vue
+@@ -0,0 +1,20 @@
++<template>
++  <div>
++    <p data-test="count">Total clicks: {{ count }}</p>
++    <button @click="increment">increment</button>
++  </div>
++</template>
++
++<script>
++export default {
++  data: () => ({
++    count: 0,
++  }),
++
++  methods: {
++    increment() {
++      this.count++
++    },
++  },
++}
++</script>
+\ No newline at end of file
+diff --git a/vue-cli-3/src/components/Counter.spec.ct.js b/vue-cli-3/src/components/Counter.spec.ct.js
+new file mode 100644
+index 0000000..afd7e21
+--- /dev/null
++++ b/vue-cli-3/src/components/Counter.spec.ct.js
+@@ -0,0 +1,10 @@
++import { mount } from '@cypress/vue'
++import Counter from './Counter.vue'
++
++it('shows the Counter', () => {
++  mount(Counter)
++  cy.get('button').click()
++  cy.get('[data-test=count]').should("have.text", "Total clicks: 1")
++  cy.get('button').click()
++  cy.get('[data-test=count]').should("have.text", "Total clicks: 2")
++})
+diff --git a/vue-cli-3/src/components/CounterCompositionApi.spec.ct.js b/vue-cli-3/src/components/CounterCompositionApi.spec.ct.js
+new file mode 100644
+index 0000000..afd7e21
+--- /dev/null
++++ b/vue-cli-3/src/components/CounterCompositionApi.spec.ct.js
+@@ -0,0 +1,10 @@
++import { mount } from '@cypress/vue'
++import CounterCompositionApi from './CounterCompositionApi.vue'
++
++it('shows the CounterCompositionApi', () => {
++  mount(CounterCompositionApi)
++  cy.get('button').click()
++  cy.get('[data-test=count]').should("have.text", "Total clicks: 1")
++  cy.get('button').click()
++  cy.get('[data-test=count]').should("have.text", "Total clicks: 2")
++})
+diff --git a/vue-cli-3/src/components/CounterCompositionApi.vue b/vue-cli-3/src/components/CounterCompositionApi.vue
+new file mode 100644
+index 0000000..bb58451
+--- /dev/null
++++ b/vue-cli-3/src/components/CounterCompositionApi.vue
+@@ -0,0 +1,19 @@
++<template>
++  <div>
++    <button @click="increment">Increment</button>
++    <p data-test="count">Total clicks: {{ count }}</p>
++  </div>
++</template>
++
++<script>
++import { ref } from 'vue'
++
++export default {
++  setup() {
++    const count = ref(0)
++    const increment = () => ++count.value
++
++    return { count, increment }
++  }
++}
++</script>
+\ No newline at end of file

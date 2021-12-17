@@ -13,6 +13,13 @@
    1. Rename `cypress/support/index.js` to `index.ts`, and `cypress/support/commands.js` to `commands.ts`
    1. Edit [cypress/support/index.ts](cypress/support/index.ts) to import global app styles, the Cypress test preview should update automatically   
    1. ${COMMIT_1}   
+1. Add Cypress Code Coverage
+   1. ${COMMAND_3}
+   2. Edit [cypress.json](cypress.json) to enable `coverage`
+   3. Edit [.gitignore](.gitignore) to ignore .nyc_output directory
+   4. Edit [cypress/plugins/index.ts](cypress/plugins/index.ts) to configure the Cypress code coverage task
+   5. Edit [cypress/support/index.ts](cypress/support/index.ts) to import Cypress code coverage support
+   6. ${COMMIT_2}
    
 Notes:
 

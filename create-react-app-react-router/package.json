@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "5",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
@@ -38,9 +38,11 @@
     ]
   },
   "devDependencies": {
-    "@cypress/react": "^5.8.0",
-    "@cypress/webpack-dev-server": "^1.3.0",
-    "cypress": "^7.4.0",
-    "eslint-plugin-cypress": "^2.11.3"
+    "@cypress/code-coverage": "^3.9.12",
+    "@cypress/instrument-cra": "^1.4.0",
+    "@cypress/react": "^5.10.3",
+    "@cypress/webpack-dev-server": "^1.7.0",
+    "cypress": "^9.1.1",
+    "eslint-plugin-cypress": "^2.12.1"
   }
 }

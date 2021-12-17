@@ -15,3 +15,10 @@
    6. `npx cypress open-ct` (Notice that the fonts don't inherit global app styles)
    7. Edit [cypress/support/index.js](cypress/support/index.js) to import global app styles, the Cypress test preview should update automatically
    8. ${COMMIT_2}
+4. Add Cypress Code Coverage
+   1. ${COMMAND_4}
+   2. Edit [cypress.json](cypress.json) to enable `coverage`
+   3. Edit [.gitignore](.gitignore) to ignore .nyc_output directory
+   4. Edit [cypress/plugins/index.js](cypress/plugins/index.js) to configure the Cypress code coverage task
+   5. Edit [cypress/support/index.js](cypress/support/index.js) to import Cypress code coverage support
+   6. ${COMMIT_3}
