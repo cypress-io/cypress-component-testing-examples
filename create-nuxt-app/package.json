@@ -12,5 +12,10 @@
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@cypress/vue": "^2.2.3",
+    "@cypress/webpack-dev-server": "^1.8.0",
+    "cypress": "^9.1.1",
+    "webpack-dev-server": "^4.6.0"
+  }
 }

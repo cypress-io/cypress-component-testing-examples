@@ -1,7 +1,18 @@
 <template>
-  <Tutorial/>
+  <div>
+    <Counter />
+    <Tutorial />
+  </div>
 </template>
 
 <script>
-export default {}
+import Tutorial from '../components/Tutorial.vue'
+import Counter from '../components/Counter.vue'
+
+export default {
+  components: {
+    Counter,
+    Tutorial
+  }
+}
 </script>
