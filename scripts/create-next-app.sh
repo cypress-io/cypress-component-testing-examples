@@ -18,7 +18,7 @@ cmd cd $dir
 commit_all "Run: ${commands[-2]}"
 
 step
-cmd npm install -D cypress @cypress/react @cypress/webpack-dev-server webpack-dev-server@3 html-webpack-plugin@5
+cmd npm install -D cypress@8.7.0 @cypress/react @cypress/webpack-dev-server webpack-dev-server@3 html-webpack-plugin@5
 apply_patch global/create-next-app.patch
 apply_patch 
 commit_all "Add Cypress with example component and page tests"
