@@ -1,0 +1,61 @@
+diff --git a/vite-vue/.gitignore b/vite-vue/.gitignore
+index 53f7466..cb02162 100644
+--- a/vite-vue/.gitignore
++++ b/vite-vue/.gitignore
+@@ -2,4 +2,6 @@ node_modules
+ .DS_Store
+ dist
+ dist-ssr
+-*.local
+\ No newline at end of file
++*.local
++.nyc_output
++coverage
+diff --git a/vite-vue/cypress.json b/vite-vue/cypress.json
+index ab25fd8..e44ce02 100644
+--- a/vite-vue/cypress.json
++++ b/vite-vue/cypress.json
+@@ -1,4 +1,5 @@
+ {
++  "coverage": true,
+   "component": {
+     "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
+     "componentFolder": "src"
+diff --git a/vite-vue/cypress/plugins/index.js b/vite-vue/cypress/plugins/index.js
+index 523f1fd..e111f19 100644
+--- a/vite-vue/cypress/plugins/index.js
++++ b/vite-vue/cypress/plugins/index.js
+@@ -1,15 +1,20 @@
+ const path = require('path')
+ const { startDevServer } = require('@cypress/vite-dev-server')
++const codeCoverageTask = require('@cypress/code-coverage/task')
++const istanbul = require('vite-plugin-istanbul')
+ 
+ module.exports = (on, config) => {
+   on('dev-server:start', (options) => {
+     return startDevServer({
+       options,
+       viteConfig: {
+-        configFile: path.resolve(__dirname, '../../vite.config.js'),
++        clearScreen: false,
++        plugins: [istanbul({})],
+       },
+     })
+   })
+ 
++  codeCoverageTask(on, config);
++
+   return config
+ }
+diff --git a/vite-vue/cypress/support/index.js b/vite-vue/cypress/support/index.js
+index 9b7843f..05cf3eb 100644
+--- a/vite-vue/cypress/support/index.js
++++ b/vite-vue/cypress/support/index.js
+@@ -13,6 +13,8 @@
+ // https://on.cypress.io/configuration
+ // ***********************************************************
+
++import '@cypress/code-coverage/support'
++
+ // Import commands.js using ES2015 syntax:
+ import './commands'
