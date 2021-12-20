@@ -1,0 +1,296 @@
+diff --git a/guide-getting-started-vue-complete/cypress.json b/guide-getting-started-vue-complete/cypress.json
+new file mode 100644
+index 0000000..a57b21f
+--- /dev/null
++++ b/guide-getting-started-vue-complete/cypress.json
+@@ -0,0 +1,6 @@
++{
++  "component": {
++    "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
++    "componentFolder": "src"
++  }
++}
+diff --git a/guide-getting-started-vue-complete/cypress/fixtures/example.json b/guide-getting-started-vue-complete/cypress/fixtures/example.json
+new file mode 100644
+index 0000000..02e4254
+--- /dev/null
++++ b/guide-getting-started-vue-complete/cypress/fixtures/example.json
+@@ -0,0 +1,5 @@
++{
++  "name": "Using fixtures to represent data",
++  "email": "hello@cypress.io",
++  "body": "Fixtures are a great way to mock data for responses to routes"
++}
+diff --git a/guide-getting-started-vue-complete/cypress/plugins/index.js b/guide-getting-started-vue-complete/cypress/plugins/index.js
+new file mode 100644
+index 0000000..3590bd9
+--- /dev/null
++++ b/guide-getting-started-vue-complete/cypress/plugins/index.js
+@@ -0,0 +1,12 @@
++const { startDevServer } = require('@cypress/webpack-dev-server')
++const webpackConfig = require('@vue/cli-service/webpack.config')
++
++module.exports = (on, config) => {
++  on('dev-server:start', (options) => {
++    return startDevServer({
++      options,
++      webpackConfig,
++    })
++  })
++  return config
++}
+diff --git a/guide-getting-started-vue-complete/cypress/support/commands.js b/guide-getting-started-vue-complete/cypress/support/commands.js
+new file mode 100644
+index 0000000..119ab03
+--- /dev/null
++++ b/guide-getting-started-vue-complete/cypress/support/commands.js
+@@ -0,0 +1,25 @@
++// ***********************************************
++// This example commands.js shows you how to
++// create various custom commands and overwrite
++// existing commands.
++//
++// For more comprehensive examples of custom
++// commands please read more here:
++// https://on.cypress.io/custom-commands
++// ***********************************************
++//
++//
++// -- This is a parent command --
++// Cypress.Commands.add('login', (email, password) => { ... })
++//
++//
++// -- This is a child command --
++// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
++//
++//
++// -- This is a dual command --
++// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
++//
++//
++// -- This will overwrite an existing command --
++// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+diff --git a/guide-getting-started-vue-complete/cypress/support/index.js b/guide-getting-started-vue-complete/cypress/support/index.js
+new file mode 100644
+index 0000000..9b7843f
+--- /dev/null
++++ b/guide-getting-started-vue-complete/cypress/support/index.js
+@@ -0,0 +1,23 @@
++// ***********************************************************
++// This example support/index.js is processed and
++// loaded automatically before your test files.
++//
++// This is a great place to put global configuration and
++// behavior that modifies Cypress.
++//
++// You can change the location of this file or turn off
++// automatically serving support files with the
++// 'supportFile' configuration option.
++//
++// You can read more here:
++// https://on.cypress.io/configuration
++// ***********************************************************
++
++// Import commands.js using ES2015 syntax:
++import './commands'
++
++// Alternatively you can use CommonJS syntax:
++// require('./commands')
++
++// Ensure global app styles are loaded:
++import '../../src/main.css'
+diff --git a/guide-getting-started-vue-complete/src/App.spec.ct.js b/guide-getting-started-vue-complete/src/App.spec.ct.js
+new file mode 100644
+index 0000000..4a912ba
+--- /dev/null
++++ b/guide-getting-started-vue-complete/src/App.spec.ct.js
+@@ -0,0 +1,8 @@
++import { mount } from '@cypress/vue'
++import App from './App.vue'
++
++it('shows the App', () => {
++  mount(App)
++  cy.get('[alt="Vue logo"]')
++  cy.get('h1').contains('Welcome to Your Vue.js App')
++})
++
+diff --git a/guide-getting-started-vue-complete/src/components/LoginForm.vue b/guide-getting-started-vue-complete/src/components/LoginForm.vue
+new file mode 100644
+index 0000000..5b023cb
+--- /dev/null
++++ b/guide-getting-started-vue-complete/src/components/LoginForm.vue
+@@ -0,0 +1,72 @@
++<template>
++  <form @submit.prevent="formSubmit" class="login-form">
++    <fieldset>
++      <legend>{{ title }}</legend>
++      <label>
++        Username:
++        <input type="text" name="username" v-model="username" />
++        <span v-if="submitted && !username" class="error">
++          Username is required
++        </span>
++      </label>
++      <label>
++        Password:
++        <input type="password" name="password" v-model="password" />
++        <span v-if="submitted && !password" class="error">
++          Password is required
++        </span>
++      </label>
++      <button type="submit">Login</button>
++    </fieldset>
++  </form>
++</template>
++
++<script>
++import { computed, ref } from 'vue';
++export default {
++  name: 'LoginForm',
++  props: {
++    title: String,
++    onLogin: Function,
++  },
++  setup(props) {
++    const title = computed(() => props.title || 'Log In');
++    const username = ref('');
++    const password = ref('');
++    const submitted = ref(false);
++    const formSubmit = () => {
++      if (username.value && password.value) {
++        props.onLogin({ username: username.value, password: password.value });
++      }
++      submitted.value = true;
++    };
++    return { formSubmit, title, username, password, submitted };
++  },
++};
++</script>
++
++<style scoped>
++.login-form {
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++}
++.login-form fieldset,
++.login-form label {
++  display: flex;
++  flex-direction: column;
++  align-items: flex-start;
++}
++.login-form fieldset {
++  border: 1px solid lightgray;
++  padding: 10px 80px;
++}
++.login-form input,
++.login-form button {
++  margin: 4px 0;
++}
++.login-form .error {
++  margin: -2px 0 4px 0;
++  color: red;
++}
++</style>
++
+diff --git a/guide-getting-started-vue-complete/src/components/LoginForm.spec.ct.js b/guide-getting-started-vue-complete/src/components/LoginForm.spec.ct.js
+new file mode 100644
+index 0000000..6c134dc
+--- /dev/null
++++ b/guide-getting-started-vue-complete/src/components/LoginForm.spec.ct.js
+@@ -0,0 +1,94 @@
++import { mount } from '@cypress/vue'
++import LoginForm from './LoginForm'
++
++describe('LoginForm', () => {
++  it('should mount the component', () => {
++    mount(LoginForm)
++  })
++
++  it('should have password input of type password', () => {
++    mount(LoginForm)
++    cy.contains('Password')
++      .find('input')
++      .should('have.attr', 'type', 'password')
++  })
++
++  it('should render title with default text', () => {
++    mount(LoginForm)
++    cy.get('legend').should('have.text', 'Log In')
++  })
++
++  it('should render title with specified text', () => {
++    const title = 'Please Authenticate'
++    mount(LoginForm, {
++      propsData: {
++        title,
++      },
++    })
++    cy.get('legend').should('have.text', title)
++  })
++
++  describe('form tests', () => {
++    const username = 'testuser123'
++    const password = 's3cret'
++
++    beforeEach(() => {
++      const onLoginSpy = cy.spy().as('onLoginSpy')
++      mount(LoginForm, {
++        propsData: {
++          onLogin: onLoginSpy,
++        },
++      })
++      cy.contains('Username').find('input').as('usernameInput')
++      cy.contains('Password').find('input').as('passwordInput')
++      cy.get('button').contains('Login').as('loginButton')
++    })
++
++    it('should call onLogin with username and password when the Login button is clicked', () => {
++      cy.get('@usernameInput').type(username)
++      cy.get('@passwordInput').type(password)
++      cy.get('@loginButton').click()
++      cy.get('@onLoginSpy').should('have.been.calledWith', {
++        username,
++        password,
++      })
++    })
++
++    it('should call onLogin with username and password when enter is pressed in an input', () => {
++      cy.get('@usernameInput').type(username)
++      cy.get('@passwordInput').type(password).type('{enter}')
++      cy.get('@onLoginSpy').should('have.been.calledWith', {
++        username,
++        password,
++      })
++    })
++
++    it('should show both validation errors if login is attempted without entering username or password', () => {
++      cy.get('@loginButton').click()
++      cy.contains('Username is required')
++      cy.contains('Password is required')
++      cy.get('@onLoginSpy').should('not.have.been.called')
++    })
++
++    it('should only show password validation error if login is attempted without entering password', () => {
++      cy.get('@usernameInput').type(username)
++      cy.get('@loginButton').click()
++      cy.contains('Username is required').should('not.exist')
++      cy.contains('Password is required')
++      cy.get('@onLoginSpy').should('not.have.been.called')
++    })
++
++    it('should only show username validation error if login is attempted without entering username', () => {
++      cy.get('@passwordInput').type(password)
++      cy.get('@loginButton').click()
++      cy.contains('Username is required')
++      cy.contains('Password is required').should('not.exist')
++      cy.get('@onLoginSpy').should('not.have.been.called')
++    })
++
++    it('should not show any validation errors before login is attempted', () => {
++      cy.contains('Username is required').should('not.exist')
++      cy.contains('Password is required').should('not.exist')
++    })
++  })
++})
++
