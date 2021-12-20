@@ -1,0 +1,181 @@
+diff --git a/guide-getting-started-react-complete/src/components/LoginForm.css b/guide-getting-started-react-complete/src/components/LoginForm.css
+new file mode 100644
+index 0000000..2747603
+--- /dev/null
++++ b/guide-getting-started-react-complete/src/components/LoginForm.css
+@@ -0,0 +1,25 @@
++.login-form {
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++}
++
++.login-form fieldset, .login-form label {
++  display: flex;
++  flex-direction: column;
++  align-items: flex-start;
++}
++
++.login-form fieldset {  
++  border: 1px solid lightgray;
++  padding: 10px 80px;
++}
++
++.login-form input, .login-form button {
++  margin: 4px 0;
++}
++
++.login-form .error {
++  margin: -2px 0 4px 0;
++  color: red;
++}
+\ No newline at end of file
+diff --git a/guide-getting-started-react-complete/src/components/LoginForm.cy.js b/guide-getting-started-react-complete/src/components/LoginForm.cy.js
+new file mode 100644
+index 0000000..cef552a
+--- /dev/null
++++ b/guide-getting-started-react-complete/src/components/LoginForm.spec.ct.js
+@@ -0,0 +1,86 @@
++import { mount } from '@cypress/react'
++import LoginForm from './LoginForm'
++
++describe('LoginForm', () => {
++  it('should mount the component', () => {
++    mount(<LoginForm />)
++  })
++
++  it('should have password input of type password', () => {
++    mount(<LoginForm />)
++    cy.contains('Password')
++      .find('input')
++      .should('have.attr', 'type', 'password')
++  })
++
++  it('should render title with default text', () => {
++    mount(<LoginForm />)
++    cy.get('legend').should('have.text', 'Log In')
++  })
++
++  it('should render title with specified text', () => {
++    const title = 'Please Authenticate'
++    mount(<LoginForm title={title} />)
++    cy.get('legend').should('have.text', title)
++  })
++
++  describe('form tests', () => {
++    const username = 'testuser123'
++    const password = 's3cret'
++
++    beforeEach(() => {
++      const onLoginSpy = cy.spy().as('onLoginSpy')
++      mount(<LoginForm onLogin={onLoginSpy} />)
++      cy.contains('Username').find('input').as('usernameInput')
++      cy.contains('Password').find('input').as('passwordInput')
++      cy.get('button').contains('Login').as('loginButton')
++    })
++
++    it('should call onLogin with username and password when the Login button is clicked', () => {
++      cy.get('@usernameInput').type(username)
++      cy.get('@passwordInput').type(password)
++      cy.get('@loginButton').click()
++      cy.get('@onLoginSpy').should('have.been.calledWith', {
++        username,
++        password,
++      })
++    })
++
++    it('should call onLogin with username and password when enter is pressed in an input', () => {
++      cy.get('@usernameInput').type(username)
++      cy.get('@passwordInput').type(password).type('{enter}')
++      cy.get('@onLoginSpy').should('have.been.calledWith', {
++        username,
++        password,
++      })
++    })
++
++    it('should show both validation errors if login is attempted without entering username or password', () => {
++      cy.get('@loginButton').click()
++      cy.contains('Username is required')
++      cy.contains('Password is required')
++      cy.get('@onLoginSpy').should('not.have.been.called')
++    })
++
++    it('should only show password validation error if login is attempted without entering password', () => {
++      cy.get('@usernameInput').type(username)
++      cy.get('@loginButton').click()
++      cy.contains('Username is required').should('not.exist')
++      cy.contains('Password is required')
++      cy.get('@onLoginSpy').should('not.have.been.called')
++    })
++
++    it('should only show username validation error if login is attempted without entering username', () => {
++      cy.get('@passwordInput').type(password)
++      cy.get('@loginButton').click()
++      cy.contains('Username is required')
++      cy.contains('Password is required').should('not.exist')
++      cy.get('@onLoginSpy').should('not.have.been.called')
++    })
++
++    it('should not show any validation errors before login is attempted', () => {
++      cy.contains('Username is required').should('not.exist')
++      cy.contains('Password is required').should('not.exist')
++    })
++  })
++})
+diff --git a/guide-getting-started-react-complete/src/components/LoginForm.js b/guide-getting-started-react-complete/src/components/LoginForm.js
+new file mode 100644
+index 0000000..b314b76
+--- /dev/null
++++ b/guide-getting-started-react-complete/src/components/LoginForm.js
+@@ -0,0 +1,51 @@
++import { useState } from 'react'
++import './LoginForm.css'
++
++const LoginForm = ({ onLogin, title = 'Log In' }) => {
++  const [submitted, setSubmitted] = useState(false)
++  const [username, setUsername] = useState('')
++  const [password, setPassword] = useState('')
++
++  const formSubmit = (event) => {
++    event.preventDefault()
++    if (username && password) {
++      onLogin({ username, password })
++    }
++    setSubmitted(true)
++  }
++
++  return (
++    <form className="login-form" onSubmit={formSubmit}>
++      <fieldset>
++        <legend>{title}</legend>
++        <label>
++          Username:
++          <input
++            type="text"
++            name="username"
++            value={username}
++            onChange={(e) => setUsername(e.target.value)}
++          />
++          {submitted && !username && (
++            <span className="error">Username is required</span>
++          )}
++        </label>
++        <label>
++          Password:
++          <input
++            type="password"
++            name="password"
++            value={password}
++            onChange={(e) => setPassword(e.target.value)}
++          />
++          {submitted && !password && (
++            <span className="error">Password is required</span>
++          )}
++        </label>
++        <button type="submit">Login</button>
++      </fieldset>
++    </form>
++  )
++}
++
++export default LoginForm

@@ -1,0 +1,28 @@
+diff --git a/guide-getting-started-react-complete/package.json b/guide-getting-started-react-complete/package.json
+index 2dfdaa4..c341cb6 100644
+--- a/guide-getting-started-react-complete/package.json
++++ b/guide-getting-started-react-complete/package.json
+@@ -20,7 +20,8 @@
+   "eslintConfig": {
+     "extends": [
+       "react-app",
+-      "react-app/jest"
++      "react-app/jest",
++      "plugin:cypress/recommended"
+     ]
+   },
+   "browserslist": {
+diff --git a/guide-getting-started-react-complete/src/App.spec.ct.js b/guide-getting-started-react-complete/src/App.spec.ct.js
+new file mode 100644
+index 0000000..21daa26
+--- /dev/null
++++ b/guide-getting-started-react-complete/src/App.spec.ct.js
+@@ -0,0 +1,8 @@
++import React from 'react';
++import { mount } from '@cypress/react';
++import App from './App';
++
++it('renders learn react link', () => {
++  mount(<App />);
++  cy.get('a').contains('Learn React');
++});
