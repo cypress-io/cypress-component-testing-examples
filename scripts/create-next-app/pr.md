@@ -2,7 +2,7 @@
    1. ${COMMAND_0}
    2. ${COMMAND_1}
    3. ${COMMIT_0}
-2. Add Cypress component testing support with sample tests
+3. Add Cypress component testing support with sample tests
    1. ${COMMAND_2}
    2. Add [cypress.json](cypress.json)
    3. Add [cypress/plugins/index.js](cypress/plugins/index.js)
