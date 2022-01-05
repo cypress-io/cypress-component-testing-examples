@@ -1,0 +1,25 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form fieldset, .login-form label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.login-form fieldset {  
+  border: 1px solid lightgray;
+  padding: 10px 80px;
+}
+
+.login-form input, .login-form button {
+  margin: 4px 0;
+}
+
+.login-form .error {
+  margin: -2px 0 4px 0;
+  color: red;
+}
