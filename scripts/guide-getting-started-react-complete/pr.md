@@ -3,7 +3,7 @@
    2. ${COMMAND_1}
    3. ${COMMIT_0}
 2. Add Cypress component testing support with a sample test
-   1. ${COMMAND_3}
+   1. ${COMMAND_2}
    2. Update [package.json](package.json) eslint config to include `"plugin:cypress/recommended"`
    3. Add [cypress.json](cypress.json)
    4. Add [cypress/plugins/index.js](cypress/plugins/index.js)

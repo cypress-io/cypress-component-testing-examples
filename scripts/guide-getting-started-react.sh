@@ -13,9 +13,8 @@ title='Guide Getting Started React'
 create_branch
 
 step
-cmd npx create-react-app guide-getting-started-react
+cmd yarn create react-app guide-getting-started-react
 cmd cd $dir
-cmd rm package-lock.json
 commit_all "Run: ${commands[-2]}"
 
 step
