@@ -34,7 +34,7 @@ trap cleanup EXIT
 create_branch
 
 step
-cmd vue create --preset "./$dir.json" $dir
+cmd vue create -m "yarn" --preset "./$dir.json" $dir
 cmd cd $dir
 commit_all "Run: ${commands[-2]}"
 
@@ -43,7 +43,7 @@ apply_patch
 commit_all "Update app to move global styles into main.css file"
 
 step
-cmd yarn add -D cypress @cypress/vue@3 @cypress/webpack-dev-server webpack-dev-server
+cmd yarn add -D https://cdn.cypress.io/beta/npm/10.0.0/circle-10.0-release-0366d4fa8971e5e5189c6fd6450cc3c8d72dcfe1/cypress.tgz @cypress/vue@3 @cypress/webpack-dev-server webpack-dev-server
 apply_patch
 commit_all "Add Cypress with example components and page tests"
 

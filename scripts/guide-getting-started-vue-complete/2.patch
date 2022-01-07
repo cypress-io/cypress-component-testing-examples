@@ -1,49 +1,41 @@
-diff --git a/guide-getting-started-vue-complete/cypress.json b/guide-getting-started-vue-complete/cypress.json
+Diff for commit HEAD
+diff --git a/guide-getting-started-vue/cypress.config.js b/guide-getting-started-vue/cypress.config.js
 new file mode 100644
-index 0000000..a57b21f
+index 0000000..54396fc
 --- /dev/null
-+++ b/guide-getting-started-vue-complete/cypress.json
-@@ -0,0 +1,6 @@
-+{
-+  "component": {
-+    "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
-+    "componentFolder": "src"
-+  }
-+}
-diff --git a/guide-getting-started-vue-complete/cypress/fixtures/example.json b/guide-getting-started-vue-complete/cypress/fixtures/example.json
++++ b/guide-getting-started-vue/cypress.config.js
+@@ -0,0 +1,15 @@
++const { defineConfig } = require('cypress');
++const { startDevServer } = require('@cypress/webpack-dev-server');
++const webpackConfig = require('@vue/cli-service/webpack.config');
++
++module.exports = defineConfig({
++  component: {
++    devServer(cypressDevServerConfig) {
++      return startDevServer({
++        options: cypressDevServerConfig,
++        webpackConfig,
++      });
++    },
++    specPattern: 'src/**/*.cy.{js,jsx,ts,tsx}',
++  },
++});
+diff --git a/guide-getting-started-vue/cypress/fixtures/example.json b/guide-getting-started-vue/cypress/fixtures/example.json
 new file mode 100644
 index 0000000..02e4254
 --- /dev/null
-+++ b/guide-getting-started-vue-complete/cypress/fixtures/example.json
++++ b/guide-getting-started-vue/cypress/fixtures/example.json
 @@ -0,0 +1,5 @@
 +{
 +  "name": "Using fixtures to represent data",
 +  "email": "hello@cypress.io",
 +  "body": "Fixtures are a great way to mock data for responses to routes"
 +}
-diff --git a/guide-getting-started-vue-complete/cypress/plugins/index.js b/guide-getting-started-vue-complete/cypress/plugins/index.js
-new file mode 100644
-index 0000000..3590bd9
---- /dev/null
-+++ b/guide-getting-started-vue-complete/cypress/plugins/index.js
-@@ -0,0 +1,12 @@
-+const { startDevServer } = require('@cypress/webpack-dev-server')
-+const webpackConfig = require('@vue/cli-service/webpack.config')
-+
-+module.exports = (on, config) => {
-+  on('dev-server:start', (options) => {
-+    return startDevServer({
-+      options,
-+      webpackConfig,
-+    })
-+  })
-+  return config
-+}
-diff --git a/guide-getting-started-vue-complete/cypress/support/commands.js b/guide-getting-started-vue-complete/cypress/support/commands.js
+diff --git a/guide-getting-started-vue/cypress/support/commands.js b/guide-getting-started-vue/cypress/support/commands.js
 new file mode 100644
 index 0000000..119ab03
 --- /dev/null
-+++ b/guide-getting-started-vue-complete/cypress/support/commands.js
++++ b/guide-getting-started-vue/cypress/support/commands.js
 @@ -0,0 +1,25 @@
 +// ***********************************************
 +// This example commands.js shows you how to
@@ -70,14 +62,14 @@ index 0000000..119ab03
 +//
 +// -- This will overwrite an existing command --
 +// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-diff --git a/guide-getting-started-vue-complete/cypress/support/index.js b/guide-getting-started-vue-complete/cypress/support/index.js
+diff --git a/guide-getting-started-vue/cypress/support/component.js b/guide-getting-started-vue/cypress/support/component.js
 new file mode 100644
-index 0000000..9b7843f
+index 0000000..b61e874
 --- /dev/null
-+++ b/guide-getting-started-vue-complete/cypress/support/index.js
++++ b/guide-getting-started-vue/cypress/support/component.js
 @@ -0,0 +1,23 @@
 +// ***********************************************************
-+// This example support/index.js is processed and
++// This example support/component.js is processed and
 +// loaded automatically before your test files.
 +//
 +// This is a great place to put global configuration and
@@ -92,33 +84,32 @@ index 0000000..9b7843f
 +// ***********************************************************
 +
 +// Import commands.js using ES2015 syntax:
-+import './commands'
++import './commands';
 +
 +// Alternatively you can use CommonJS syntax:
 +// require('./commands')
 +
 +// Ensure global app styles are loaded:
-+import '../../src/main.css'
-diff --git a/guide-getting-started-vue-complete/src/App.spec.ct.js b/guide-getting-started-vue-complete/src/App.spec.ct.js
++import '../../src/main.css';
+diff --git a/guide-getting-started-vue/src/App.cy.js b/guide-getting-started-vue/src/App.cy.js
 new file mode 100644
-index 0000000..4a912ba
+index 0000000..6a903ba
 --- /dev/null
-+++ b/guide-getting-started-vue-complete/src/App.spec.ct.js
++++ b/guide-getting-started-vue/src/App.cy.js
 @@ -0,0 +1,8 @@
-+import { mount } from '@cypress/vue'
-+import App from './App.vue'
++import { mount } from '@cypress/vue';
++import App from './App.vue';
 +
 +it('shows the App', () => {
-+  mount(App)
-+  cy.get('[alt="Vue logo"]')
-+  cy.get('h1').contains('Welcome to Your Vue.js App')
-+})
-+
-diff --git a/guide-getting-started-vue-complete/src/components/LoginForm.vue b/guide-getting-started-vue-complete/src/components/LoginForm.vue
++  mount(App);
++  cy.get('[alt="Vue logo"]');
++  cy.get('h1').contains('Welcome to Your Vue.js App');
++});
+diff --git a/guide-getting-started-vue/src/components/LoginForm.vue b/guide-getting-started-vue/src/components/LoginForm.vue
 new file mode 100644
-index 0000000..5b023cb
+index 0000000..f150a5d
 --- /dev/null
-+++ b/guide-getting-started-vue-complete/src/components/LoginForm.vue
++++ b/guide-getting-started-vue/src/components/LoginForm.vue
 @@ -0,0 +1,72 @@
 +<template>
 +  <form @submit.prevent="formSubmit" class="login-form">
@@ -192,12 +183,12 @@ index 0000000..5b023cb
 +  color: red;
 +}
 +</style>
-+
-diff --git a/guide-getting-started-vue-complete/src/components/LoginForm.spec.ct.js b/guide-getting-started-vue-complete/src/components/LoginForm.spec.ct.js
+\ No newline at end of file
+diff --git a/guide-getting-started-vue-complete/src/components/LoginForm.cy.js b/guide-getting-started-vue-complete/src/components/LoginForm.cy.js
 new file mode 100644
 index 0000000..6c134dc
 --- /dev/null
-+++ b/guide-getting-started-vue-complete/src/components/LoginForm.spec.ct.js
++++ b/guide-getting-started-vue-complete/src/components/LoginForm.cy.js
 @@ -0,0 +1,94 @@
 +import { mount } from '@cypress/vue'
 +import LoginForm from './LoginForm'

@@ -1,8 +1,9 @@
+Diff for commit HEAD~2
 diff --git a/guide-getting-started-vue/src/App.vue b/guide-getting-started-vue/src/App.vue
-index 55df315..b9ac61a 100644
+index 591a031..a92fd03 100644
 --- a/guide-getting-started-vue/src/App.vue
 +++ b/guide-getting-started-vue/src/App.vue
-@@ -18,11 +18,6 @@ export default {
+@@ -16,11 +16,6 @@ export default {
  
  <style>
  #app {
@@ -28,13 +29,12 @@ index 0000000..110b5e1
 +  color: #2c3e50;
 +}
 diff --git a/guide-getting-started-vue/src/main.js b/guide-getting-started-vue/src/main.js
-index 63eb05f..1d9028a 100644
+index 01433bc..f51c915 100644
 --- a/guide-getting-started-vue/src/main.js
 +++ b/guide-getting-started-vue/src/main.js
-@@ -1,5 +1,6 @@
- import Vue from 'vue'
+@@ -1,4 +1,5 @@
+ import { createApp } from 'vue'
  import App from './App.vue'
 +import './main.css'
  
- Vue.config.productionTip = false
- 
+ createApp(App).mount('#app')
