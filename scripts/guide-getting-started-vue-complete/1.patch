@@ -1,0 +1,40 @@
+Diff for commit HEAD~2
+diff --git a/guide-getting-started-vue-complete/src/App.vue b/guide-getting-started-vue-complete/src/App.vue
+index 591a031..a92fd03 100644
+--- a/guide-getting-started-vue-complete/src/App.vue
++++ b/guide-getting-started-vue-complete/src/App.vue
+@@ -16,11 +16,6 @@ export default {
+ 
+ <style>
+ #app {
+-  font-family: Avenir, Helvetica, Arial, sans-serif;
+-  -webkit-font-smoothing: antialiased;
+-  -moz-osx-font-smoothing: grayscale;
+-  text-align: center;
+-  color: #2c3e50;
+   margin-top: 60px;
+ }
+ </style>
+diff --git a/guide-getting-started-vue-complete/src/main.css b/guide-getting-started-vue-complete/src/main.css
+new file mode 100644
+index 0000000..110b5e1
+--- /dev/null
++++ b/guide-getting-started-vue-complete/src/main.css
+@@ -0,0 +1,7 @@
++body {
++  font-family: Avenir, Helvetica, Arial, sans-serif;
++  -webkit-font-smoothing: antialiased;
++  -moz-osx-font-smoothing: grayscale;
++  text-align: center;
++  color: #2c3e50;
++}
+diff --git a/guide-getting-started-vue-complete/src/main.js b/guide-getting-started-vue-complete/src/main.js
+index 01433bc..f51c915 100644
+--- a/guide-getting-started-vue-complete/src/main.js
++++ b/guide-getting-started-vue-complete/src/main.js
+@@ -1,4 +1,5 @@
+ import { createApp } from 'vue'
+ import App from './App.vue'
++import './main.css'
+ 
+ createApp(App).mount('#app')
