@@ -1,28 +1,91 @@
-diff --git a/guide-getting-started-react/package.json b/guide-getting-started-react/package.json
-index 2dfdaa4..c341cb6 100644
---- a/guide-getting-started-react/package.json
-+++ b/guide-getting-started-react/package.json
-@@ -20,7 +20,8 @@
-   "eslintConfig": {
-     "extends": [
-       "react-app",
--      "react-app/jest"
-+      "react-app/jest",
-+      "plugin:cypress/recommended"
-     ]
-   },
-   "browserslist": {
-diff --git a/guide-getting-started-react/src/App.spec.ct.js b/guide-getting-started-react/src/App.spec.ct.js
+Diff for commit HEAD
+diff --git a/guide-getting-started-react/src/components/LoginForm.css b/guide-getting-started-react/src/component/LoginForm.css
 new file mode 100644
-index 0000000..21daa26
+index 0000000..2747603
 --- /dev/null
-+++ b/guide-getting-started-react/src/App.spec.ct.js
-@@ -0,0 +1,8 @@
-+import React from 'react';
-+import { mount } from '@cypress/react';
-+import App from './App';
++++ b/guide-getting-started-react/src/components/LoginForm.css
+@@ -0,0 +1,25 @@
++.login-form {
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++}
 +
-+it('renders learn react link', () => {
-+  mount(<App />);
-+  cy.get('a').contains('Learn React');
-+});
++.login-form fieldset, .login-form label {
++  display: flex;
++  flex-direction: column;
++  align-items: flex-start;
++}
++
++.login-form fieldset {  
++  border: 1px solid lightgray;
++  padding: 10px 80px;
++}
++
++.login-form input, .login-form button {
++  margin: 4px 0;
++}
++
++.login-form .error {
++  margin: -2px 0 4px 0;
++  color: red;
++}
+\ No newline at end of file
+diff --git a/guide-getting-started-react/src/components/LoginForm.js b/guide-getting-started-react/src/components/LoginForm.js
+new file mode 100644
+index 0000000..b314b76
+--- /dev/null
++++ b/guide-getting-started-react/src/components/LoginForm.js
+@@ -0,0 +1,51 @@
++import { useState } from 'react'
++import './LoginForm.css'
++
++const LoginForm = ({ onLogin, title = 'Log In' }) => {
++  const [submitted, setSubmitted] = useState(false)
++  const [username, setUsername] = useState('')
++  const [password, setPassword] = useState('')
++
++  const formSubmit = (event) => {
++    event.preventDefault()
++    if (username && password) {
++      onLogin({ username, password })
++    }
++    setSubmitted(true)
++  }
++
++  return (
++    <form className="login-form" onSubmit={formSubmit}>
++      <fieldset>
++        <legend>{title}</legend>
++        <label>
++          Username:
++          <input
++            type="text"
++            name="username"
++            value={username}
++            onChange={(e) => setUsername(e.target.value)}
++          />
++          {submitted && !username && (
++            <span className="error">Username is required</span>
++          )}
++        </label>
++        <label>
++          Password:
++          <input
++            type="password"
++            name="password"
++            value={password}
++            onChange={(e) => setPassword(e.target.value)}
++          />
++          {submitted && !password && (
++            <span className="error">Password is required</span>
++          )}
++        </label>
++        <button type="submit">Login</button>
++      </fieldset>
++    </form>
++  )
++}
++
++export default LoginForm
+
