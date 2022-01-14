@@ -39,8 +39,8 @@
 
     <v-main>
       <HelloWorld/>
-      <Buttons/>
-      <Card/>
+      <Card title="Hello, World!"/>
+      <Hover/>
     </v-main>
   </v-app>
 </template>
@@ -48,6 +48,7 @@
 <script>
 import HelloWorld from './components/HelloWorld';
 import Card from './components/Card';
+import Hover from './components/Hover';
 
 export default {
   name: 'App',
@@ -55,6 +56,7 @@ export default {
   components: {
     Card,
     HelloWorld,
+    Hover
   },
 
   data: () => ({
