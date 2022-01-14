@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "cypress open-ct"
   },
   "dependencies": {
     "next": "latest",
