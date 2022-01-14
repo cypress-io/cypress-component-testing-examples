@@ -9,7 +9,7 @@ describe("Parallax.vue", () => {
     // cy.viewport(1024, 2500);
   });
 
-  it.only("the background image should move as the page is scrolled", () => {
+  it("the background image should move as the page is scrolled", () => {
     mount(Parallax);
 
     cy.getBySel("parallax").within(() => {

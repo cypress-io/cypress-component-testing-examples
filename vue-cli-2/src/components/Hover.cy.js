@@ -9,7 +9,7 @@ describe("Hover.vue", () => {
     vuetify = new Vuetify();
   });
 
-  it.only("should display the price when the image is hovered over", () => {
+  it("should display the price when the image is hovered over", () => {
     mount(Hover);
 
     cy.get(".v-card--reveal").should("not.exist");

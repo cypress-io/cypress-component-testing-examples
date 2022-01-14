@@ -18,7 +18,7 @@ describe("CustomCard.vue", () => {
     cy.get("[data-test='title']").contains("Hello, World!");
   });
 
-  it.only("should emit an event when the action v-btn is clicked", () => {
+  it("should emit an event when the action v-btn is clicked", () => {
     mount(Card, {
       vuetify,
       propsData: {
