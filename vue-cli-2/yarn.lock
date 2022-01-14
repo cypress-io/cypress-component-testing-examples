@@ -3674,9 +3674,9 @@ cypress-real-events@^1.6.0:
   resolved "https://registry.yarnpkg.com/cypress-real-events/-/cypress-real-events-1.6.0.tgz#277024b62a324b6937760a700e831e795c021040"
   integrity sha512-QxXm0JsQkCrb2uH+fMXNDQ5kNWTzX3OtndBafdsZmNV19j+6JuTK9n52B1YVxrDrr/qzPAojcHJc5PNoQvwp+w==
 
-"cypress@https://cdn.cypress.io/beta/npm/10.0.0/circle-10.0-release-8b53acb3b2442c9d8ef032b1fc4abf01190b132c/cypress.tgz":
+"cypress@https://cdn.cypress.io/beta/npm/10.0.0/circle-10.0-release-2755f139d9036ce0d8c4b3b1a9d7e9ef34cb6b32/cypress.tgz":
   version "10.0.0"
-  resolved "https://cdn.cypress.io/beta/npm/10.0.0/circle-10.0-release-8b53acb3b2442c9d8ef032b1fc4abf01190b132c/cypress.tgz#72e1bec3aeb838f5fc2aea370cf6af26d1a47b0c"
+  resolved "https://cdn.cypress.io/beta/npm/10.0.0/circle-10.0-release-2755f139d9036ce0d8c4b3b1a9d7e9ef34cb6b32/cypress.tgz#009b1ec89349c2ffb820c4f4492a9a7c913eed6c"
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
@@ -3733,7 +3733,7 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-dayjs@1.10.7, dayjs@^1.10.4:
+dayjs@1.10.7, dayjs@^1.10.4, dayjs@^1.10.7:
   version "1.10.7"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.7.tgz#2cf5f91add28116748440866a0a1d26f3a6ce468"
   integrity sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig==

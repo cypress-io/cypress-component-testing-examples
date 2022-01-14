@@ -41,6 +41,7 @@
       <HelloWorld/>
       <Card title="Hello, World!"/>
       <Hover/>
+      <DatePicker/>
       <Parallax/>
     </v-main>
   </v-app>
@@ -51,6 +52,7 @@ import HelloWorld from './components/HelloWorld';
 import Card from './components/Card';
 import Hover from './components/Hover';
 import Parallax from './components/Parallax';
+import DatePicker from './components/DatePicker';
 
 export default {
   name: 'App',
@@ -59,7 +61,8 @@ export default {
     Card,
     HelloWorld,
     Hover,
-    Parallax
+    Parallax,
+    DatePicker
   },
 
   data: () => ({
