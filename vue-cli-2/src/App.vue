@@ -41,6 +41,7 @@
       <HelloWorld/>
       <Card title="Hello, World!"/>
       <Hover/>
+      <Parallax/>
     </v-main>
   </v-app>
 </template>
@@ -49,6 +50,7 @@
 import HelloWorld from './components/HelloWorld';
 import Card from './components/Card';
 import Hover from './components/Hover';
+import Parallax from './components/Parallax';
 
 export default {
   name: 'App',
@@ -56,7 +58,8 @@ export default {
   components: {
     Card,
     HelloWorld,
-    Hover
+    Hover,
+    Parallax
   },
 
   data: () => ({
