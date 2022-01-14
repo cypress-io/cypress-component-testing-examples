@@ -1,14 +1,7 @@
 import { mount } from "@cypress/vue";
 import Parallax from "./Parallax.vue";
-import Vuetify from "vuetify";
 
 describe("Parallax.vue", () => {
-  let vuetify;
-
-  beforeEach(() => {
-    // cy.viewport(1024, 2500);
-  });
-
   it("the background image should move as the page is scrolled", () => {
     mount(Parallax);
 

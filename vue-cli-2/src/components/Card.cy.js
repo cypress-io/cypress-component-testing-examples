@@ -1,14 +1,7 @@
 import { mount } from "@cypress/vue";
 import Card from "./Card.vue";
-import Vuetify from "vuetify";
 
 describe("CustomCard.vue", () => {
-  let vuetify;
-
-  beforeEach(() => {
-    vuetify = new Vuetify();
-  });
-
   it("displays the correct title", () => {
     mount(Card, {
       propsData: {
@@ -20,7 +13,6 @@ describe("CustomCard.vue", () => {
 
   it("should emit an event when the action v-btn is clicked", () => {
     mount(Card, {
-      vuetify,
       propsData: {
         title: "Hello, World!",
       },
