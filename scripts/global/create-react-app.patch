@@ -1,43 +1,35 @@
-diff --git a/create-react-app/cypress.json b/create-react-app/cypress.json
+Diff for commit HEAD~1
+diff --git a/guide-getting-started-react/cypress.config.js b/guide-getting-started-react/cypress.config.js
 new file mode 100644
-index 0000000..ee59bec
+index 0000000..a4df5ed
 --- /dev/null
-+++ b/create-react-app/cypress.json
-@@ -0,0 +1,6 @@
-+{
-+  "component": {
-+    "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
-+    "componentFolder": "src"
-+  }
-+}
-diff --git a/create-react-app/cypress/fixtures/example.json b/create-react-app/cypress/fixtures/example.json
++++ b/guide-getting-started-react/cypress.config.js
+@@ -0,0 +1,9 @@
++const { defineConfig } = require('cypress');
++const { devServer } = require('@cypress/react/plugins/react-scripts');
++
++module.exports = defineConfig({
++  component: {
++    specPattern: '**/*.cy.{js,jsx,ts,tsx}',
++    devServer: devServer,
++  },
++});
+diff --git a/guide-getting-started-react/cypress/fixtures/example.json b/guide-getting-started-react/cypress/fixtures/example.json
 new file mode 100644
 index 0000000..02e4254
 --- /dev/null
-+++ b/create-react-app/cypress/fixtures/example.json
++++ b/guide-getting-started-react/cypress/fixtures/example.json
 @@ -0,0 +1,5 @@
 +{
 +  "name": "Using fixtures to represent data",
 +  "email": "hello@cypress.io",
 +  "body": "Fixtures are a great way to mock data for responses to routes"
 +}
-diff --git a/create-react-app/cypress/plugins/index.js b/create-react-app/cypress/plugins/index.js
-new file mode 100644
-index 0000000..5398153
---- /dev/null
-+++ b/create-react-app/cypress/plugins/index.js
-@@ -0,0 +1,6 @@
-+const injectDevServer = require("@cypress/react/plugins/react-scripts");
-+
-+module.exports = (on, config) => {
-+  injectDevServer(on, config);
-+  return config;
-+};
-diff --git a/create-react-app/cypress/support/commands.js b/create-react-app/cypress/support/commands.js
+diff --git a/guide-getting-started-react/cypress/support/commands.js b/guide-getting-started-react/cypress/support/commands.js
 new file mode 100644
 index 0000000..119ab03
 --- /dev/null
-+++ b/create-react-app/cypress/support/commands.js
++++ b/guide-getting-started-react/cypress/support/commands.js
 @@ -0,0 +1,25 @@
 +// ***********************************************
 +// This example commands.js shows you how to
@@ -64,14 +56,14 @@ index 0000000..119ab03
 +//
 +// -- This will overwrite an existing command --
 +// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-diff --git a/create-react-app/cypress/support/index.js b/create-react-app/cypress/support/index.js
+diff --git a/guide-getting-started-react/cypress/support/component.js b/guide-getting-started-react/cypress/support/component.js
 new file mode 100644
-index 0000000..c63e2c9
+index 0000000..597e61e
 --- /dev/null
-+++ b/create-react-app/cypress/support/index.js
++++ b/guide-getting-started-react/cypress/support/component.js
 @@ -0,0 +1,23 @@
 +// ***********************************************************
-+// This example support/index.js is processed and
++// This example support/component.js is processed and
 +// loaded automatically before your test files.
 +//
 +// This is a great place to put global configuration and
@@ -93,3 +85,35 @@ index 0000000..c63e2c9
 +
 +// Ensure global app styles are loaded:
 +import '../../src/index.css'
+\ No newline at end of file
+diff --git a/guide-getting-started-react/cypress/support/e2e.js b/guide-getting-started-react/cypress/support/e2e.js
+new file mode 100644
+index 0000000..e69de29
+diff --git a/guide-getting-started-react/package.json b/guide-getting-started-react/package.json
+index 82e4de7..f6c28ef 100644
+--- a/guide-getting-started-react/package.json
++++ b/guide-getting-started-react/package.json
+@@ -20,7 +20,8 @@
+   "eslintConfig": {
+     "extends": [
+       "react-app",
+-      "react-app/jest"
++      "react-app/jest",
++      "plugin:cypress/recommended"
+     ]
+   },
+   "browserslist": {
+diff --git a/guide-getting-started-react/src/App.cy.js b/guide-getting-started-react/src/App.cy.js
+new file mode 100644
+index 0000000..21daa26
+--- /dev/null
++++ b/guide-getting-started-react/src/App.cy.js
+@@ -0,0 +1,8 @@
++import React from 'react';
++import { mount } from '@cypress/react';
++import App from './App';
++
++it('renders learn react link', () => {
++  mount(<App />);
++  cy.get('a').contains('Learn React');
++});

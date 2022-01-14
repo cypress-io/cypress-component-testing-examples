@@ -23,7 +23,7 @@ commit_all "Update app redux store to be more testable"
 
 step
 cmd yarn add -D cypress @cypress/react @cypress/webpack-dev-server eslint-plugin-cypress
-apply_patch global/create-react-app.patch
+apply_patch global/create-react-app-4.patch
 apply_patch
 commit_all "Add Cypress with example component test"
 
