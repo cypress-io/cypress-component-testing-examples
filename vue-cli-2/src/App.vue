@@ -39,10 +39,12 @@
 
     <v-main>
       <HelloWorld/>
+      <Tabs/>
+      <DatePicker/>
       <Card title="Hello, World!"/>
       <Hover/>
-      <DatePicker/>
       <Parallax/>
+      
     </v-main>
   </v-app>
 </template>
@@ -53,6 +55,7 @@ import Card from './components/Card';
 import Hover from './components/Hover';
 import Parallax from './components/Parallax';
 import DatePicker from './components/DatePicker';
+import Tabs from './components/Tabs';
 
 export default {
   name: 'App',
@@ -62,7 +65,8 @@ export default {
     HelloWorld,
     Hover,
     Parallax,
-    DatePicker
+    DatePicker,
+    Tabs
   },
 
   data: () => ({

@@ -3,8 +3,6 @@
     <v-date-picker
       v-model="date"
       class="mt-4"
-      :min="date"
-      :max="maximumDate"
     ></v-date-picker>
   </v-row>
 </template>
