@@ -1,10 +1,10 @@
 import React from "react";
-import { DatePicker } from "antd";
+import DatePicker from "./components/Datepicker";
 import "./App.css";
 
 const App = () => (
   <div className="App">
-    <DatePicker data-test="date-picker" />
+    <DatePicker />
   </div>
 );
 
