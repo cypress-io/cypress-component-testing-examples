@@ -1,26 +1,76 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <Counter />
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
+
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <HelloWorld/>
+      <Tabs/>
+      <DatePicker/>
+      <Card title="Hello, World!"/>
+      <Hover/>
+      <Parallax/>
+      
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import Counter from './components/Counter.vue'
+import HelloWorld from './components/HelloWorld';
+import Card from './components/Card';
+import Hover from './components/Hover';
+import Parallax from './components/Parallax';
+import DatePicker from './components/DatePicker';
+import Tabs from './components/Tabs';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld,
-    Counter
-  }
-}
-</script>
 
-<style>
-#app {
-  margin-top: 60px;
-}
-</style>
+  components: {
+    Card,
+    HelloWorld,
+    Hover,
+    Parallax,
+    DatePicker,
+    Tabs
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>
