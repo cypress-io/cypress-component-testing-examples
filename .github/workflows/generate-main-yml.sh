@@ -28,7 +28,7 @@ function add_workflow() {
       - name: "Setup $name"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: $dir
+          working-directory: $dir
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "$dir/package.json" }}
           runTests: false
 
@@ -45,7 +45,7 @@ function add_workflow() {
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "$dir/package.json" }}
-          working_directory: $dir
+          working-directory: $dir
           command: yarn cypress run-ct
           timeout: 3m
 

@@ -16,7 +16,7 @@ jobs:
       - name: "Setup Create Next App + Webpack 5"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: create-next-app-webpack-5
+          working-directory: create-next-app-webpack-5
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app-webpack-5/package.json" }}
           runTests: false
 
@@ -33,7 +33,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app-webpack-5/package.json" }}
-          working_directory: create-next-app-webpack-5
+          working-directory: create-next-app-webpack-5
           command: yarn cypress run-ct
           timeout: 3m
 
@@ -47,7 +47,7 @@ jobs:
       - name: "Setup Create Next App"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: create-next-app
+          working-directory: create-next-app
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app/package.json" }}
           runTests: false
 
@@ -64,7 +64,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app/package.json" }}
-          working_directory: create-next-app
+          working-directory: create-next-app
           command: yarn cypress run-ct
           timeout: 3m
 
@@ -78,7 +78,7 @@ jobs:
       - name: "Setup Create Nuxt App"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: create-nuxt-app
+          working-directory: create-nuxt-app
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-nuxt-app/package.json" }}
           runTests: false
 
@@ -95,7 +95,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-nuxt-app/package.json" }}
-          working_directory: create-nuxt-app
+          working-directory: create-nuxt-app
           command: yarn cypress run-ct
           timeout: 3m
 
@@ -109,7 +109,7 @@ jobs:
       - name: "Setup Create React App + React Router"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: create-react-app-react-router
+          working-directory: create-react-app-react-router
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-react-router/package.json" }}
           runTests: false
 
@@ -126,7 +126,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-react-router/package.json" }}
-          working_directory: create-react-app-react-router
+          working-directory: create-react-app-react-router
           command: yarn cypress run-ct
           timeout: 3m
 
@@ -140,7 +140,7 @@ jobs:
       - name: "Setup Create React App + Redux"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: create-react-app-redux
+          working-directory: create-react-app-redux
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-redux/package.json" }}
           runTests: false
 
@@ -157,7 +157,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-redux/package.json" }}
-          working_directory: create-react-app-redux
+          working-directory: create-react-app-redux
           command: yarn cypress run-ct
           timeout: 3m
 
@@ -171,7 +171,7 @@ jobs:
       - name: "Setup Create React App + Tailwind CSS"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: create-react-app-tailwind
+          working-directory: create-react-app-tailwind
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-tailwind/package.json" }}
           runTests: false
 
@@ -188,7 +188,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-tailwind/package.json" }}
-          working_directory: create-react-app-tailwind
+          working-directory: create-react-app-tailwind
           command: yarn cypress run-ct
           timeout: 3m
 
@@ -202,7 +202,7 @@ jobs:
       - name: "Setup Create React App TypeScript"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: create-react-app-typescript
+          working-directory: create-react-app-typescript
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-typescript/package.json" }}
           runTests: false
 
@@ -219,7 +219,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-typescript/package.json" }}
-          working_directory: create-react-app-typescript
+          working-directory: create-react-app-typescript
           command: yarn cypress run-ct
           timeout: 3m
 
@@ -233,7 +233,7 @@ jobs:
       - name: "Setup Create React App"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: create-react-app
+          working-directory: create-react-app
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app/package.json" }}
           runTests: false
 
@@ -250,7 +250,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app/package.json" }}
-          working_directory: create-react-app
+          working-directory: create-react-app
           command: yarn cypress run-ct
           timeout: 3m
 
@@ -264,7 +264,7 @@ jobs:
       - name: "Setup Ionic React"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: ionic-react
+          working-directory: ionic-react
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "ionic-react/package.json" }}
           runTests: false
 
@@ -281,7 +281,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "ionic-react/package.json" }}
-          working_directory: ionic-react
+          working-directory: ionic-react
           command: yarn cypress run-ct
           timeout: 3m
 
@@ -295,7 +295,7 @@ jobs:
       - name: "Setup Vite + React"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: vite-react
+          working-directory: vite-react
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-react/package.json" }}
           runTests: false
 
@@ -312,7 +312,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-react/package.json" }}
-          working_directory: vite-react
+          working-directory: vite-react
           command: yarn cypress run-ct
           timeout: 3m
 
@@ -326,7 +326,7 @@ jobs:
       - name: "Setup Vite + Vue"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: vite-vue
+          working-directory: vite-vue
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-vue/package.json" }}
           runTests: false
 
@@ -343,7 +343,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-vue/package.json" }}
-          working_directory: vite-vue
+          working-directory: vite-vue
           command: yarn cypress run-ct
           timeout: 3m
 
@@ -357,7 +357,7 @@ jobs:
       - name: "Setup Vue CLI (Vue 2)"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: vue-cli-2
+          working-directory: vue-cli-2
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-2/package.json" }}
           runTests: false
 
@@ -374,7 +374,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-2/package.json" }}
-          working_directory: vue-cli-2
+          working-directory: vue-cli-2
           command: yarn cypress run-ct
           timeout: 3m
 
@@ -388,7 +388,7 @@ jobs:
       - name: "Setup Vue CLI (Vue 3)"
         uses: cypress-io/github-action@runs-node16
         with:
-          working_directory: vue-cli-3
+          working-directory: vue-cli-3
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-3/package.json" }}
           runTests: false
 
@@ -405,7 +405,7 @@ jobs:
         uses: cypress-io/github-action@runs-node16
         with:
           cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-3/package.json" }}
-          working_directory: vue-cli-3
+          working-directory: vue-cli-3
           command: yarn cypress run-ct
           timeout: 3m
 
