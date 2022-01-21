@@ -1,3 +1,6 @@
+name: main
+on: [push]
+
 jobs:
   matrix:
     runs-on: ubuntu-latest
