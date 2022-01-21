@@ -11,7 +11,7 @@ jobs:
 
       - id: set-matrix
         run: |
-          matrix=($(
+          matrix=$(
             for dir in */; do
               dir=$(basename $dir)
               [[ ! -e "$dir/README.md" ]] && continue
@@ -19,5 +19,6 @@ jobs:
               [[ ! "$name" ]] && continue
               echo "{ dir: $dir name: $name }"
             done
-          ))
+          )
           echo $matrix
+          echo "[$matrix]" | jq '.[].dir'
