@@ -1,24 +1,411 @@
-name: main
-on: [push]
+name: Cypress Tests
+
+on:
+  push:
+    branches-ignore:
+      - "renovate/**"
 
 jobs:
-  matrix:
+  create-next-app-webpack-5-install:
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    container: cypress/browsers:node16.13.0-chrome95-ff94
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - id: set-matrix
-        run: |
-          matrix=$(
-            for dir in */; do
-              dir=$(basename $dir)
-              [[ ! -e "$dir/README.md" ]] && continue
-              name="$(less $dir/README.md | sed -n 's/# Component Testing Example: //p')"
-              [[ ! "$name" ]] && continue
-              echo "{ dir: $dir name: $name }"
-            done
-          )
-          echo $matrix
-          echo "[$matrix]" | jq '.[].dir'
+      - name: "Setup Create Next App + Webpack 5"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: create-next-app-webpack-5
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app-webpack-5/package.json" }}
+          runTests: false
+
+  create-next-app-webpack-5-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: create-next-app-webpack-5-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Create Next App + Webpack 5 Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app-webpack-5/package.json" }}
+          working_directory: create-next-app-webpack-5
+          command: yarn cypress run-ct
+          timeout: 3m
+
+  create-next-app-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Setup Create Next App"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: create-next-app
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app/package.json" }}
+          runTests: false
+
+  create-next-app-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: create-next-app-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Create Next App Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-next-app/package.json" }}
+          working_directory: create-next-app
+          command: yarn cypress run-ct
+          timeout: 3m
+
+  create-nuxt-app-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Setup Create Nuxt App"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: create-nuxt-app
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-nuxt-app/package.json" }}
+          runTests: false
+
+  create-nuxt-app-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: create-nuxt-app-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Create Nuxt App Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-nuxt-app/package.json" }}
+          working_directory: create-nuxt-app
+          command: yarn cypress run-ct
+          timeout: 3m
+
+  create-react-app-react-router-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Setup Create React App + React Router"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: create-react-app-react-router
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-react-router/package.json" }}
+          runTests: false
+
+  create-react-app-react-router-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: create-react-app-react-router-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Create React App + React Router Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-react-router/package.json" }}
+          working_directory: create-react-app-react-router
+          command: yarn cypress run-ct
+          timeout: 3m
+
+  create-react-app-redux-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Setup Create React App + Redux"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: create-react-app-redux
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-redux/package.json" }}
+          runTests: false
+
+  create-react-app-redux-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: create-react-app-redux-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Create React App + Redux Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-redux/package.json" }}
+          working_directory: create-react-app-redux
+          command: yarn cypress run-ct
+          timeout: 3m
+
+  create-react-app-tailwind-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Setup Create React App + Tailwind CSS"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: create-react-app-tailwind
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-tailwind/package.json" }}
+          runTests: false
+
+  create-react-app-tailwind-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: create-react-app-tailwind-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Create React App + Tailwind CSS Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-tailwind/package.json" }}
+          working_directory: create-react-app-tailwind
+          command: yarn cypress run-ct
+          timeout: 3m
+
+  create-react-app-typescript-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Setup Create React App TypeScript"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: create-react-app-typescript
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-typescript/package.json" }}
+          runTests: false
+
+  create-react-app-typescript-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: create-react-app-typescript-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Create React App TypeScript Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app-typescript/package.json" }}
+          working_directory: create-react-app-typescript
+          command: yarn cypress run-ct
+          timeout: 3m
+
+  create-react-app-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Setup Create React App"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: create-react-app
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app/package.json" }}
+          runTests: false
+
+  create-react-app-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: create-react-app-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Create React App Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "create-react-app/package.json" }}
+          working_directory: create-react-app
+          command: yarn cypress run-ct
+          timeout: 3m
+
+  ionic-react-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Setup Ionic React"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: ionic-react
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "ionic-react/package.json" }}
+          runTests: false
+
+  ionic-react-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: ionic-react-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Ionic React Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "ionic-react/package.json" }}
+          working_directory: ionic-react
+          command: yarn cypress run-ct
+          timeout: 3m
+
+  vite-react-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Setup Vite + React"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: vite-react
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-react/package.json" }}
+          runTests: false
+
+  vite-react-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: vite-react-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Vite + React Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-react/package.json" }}
+          working_directory: vite-react
+          command: yarn cypress run-ct
+          timeout: 3m
+
+  vite-vue-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Setup Vite + Vue"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: vite-vue
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-vue/package.json" }}
+          runTests: false
+
+  vite-vue-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: vite-vue-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Vite + Vue Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vite-vue/package.json" }}
+          working_directory: vite-vue
+          command: yarn cypress run-ct
+          timeout: 3m
+
+  vue-cli-2-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Setup Vue CLI (Vue 2)"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: vue-cli-2
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-2/package.json" }}
+          runTests: false
+
+  vue-cli-2-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: vue-cli-2-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Vue CLI (Vue 2) Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-2/package.json" }}
+          working_directory: vue-cli-2
+          command: yarn cypress run-ct
+          timeout: 3m
+
+  vue-cli-3-install:
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Setup Vue CLI (Vue 3)"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          working_directory: vue-cli-3
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-3/package.json" }}
+          runTests: false
+
+  vue-cli-3-run:
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node16.13.0-chrome95-ff94
+    needs: vue-cli-3-install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Run Vue CLI (Vue 3) Component Tests"
+        uses: cypress-io/github-action@runs-node16
+        with:
+          cache-key: cache-{{ arch }}-{{ .Branch }}-{{ checksum "vue-cli-3/package.json" }}
+          working_directory: vue-cli-3
+          command: yarn cypress run-ct
+          timeout: 3m
+
