@@ -11,13 +11,14 @@ jobs:
 
       - id: set-matrix
         run: |
-          matrix=$(
+          matrix=($(
             for dir in */; do
               dir=$(basename $dir)
               [[ ! -e "$dir/README.md" ]] && continue
               name="$(less $dir/README.md | sed -n 's/# Component Testing Example: //p')"
               [[ ! "$name" ]] && continue
-              echo "{ dir: $dir name: $name) }"
+              echo "{ dir: $dir name: $name }"
             done
-          )
+          ))
           echo $matrix
+          echo $matrix | jq .
