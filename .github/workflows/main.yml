@@ -1,0 +1,20 @@
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - id: set-matrix
+        run: |
+          matrix=$(
+            for dir in */; do
+              dir=$(basename $dir)
+              [[ ! -e "$dir/README.md" ]] && continue
+              name="$(less $dir/README.md | sed -n 's/# Component Testing Example: //p')"
+              [[ ! "$name" ]] && continue
+              echo "Adding workflow $dir ($name)"
+            done
+          )
+          echo $matrix
