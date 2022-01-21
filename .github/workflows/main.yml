@@ -17,7 +17,7 @@ jobs:
               [[ ! -e "$dir/README.md" ]] && continue
               name="$(less $dir/README.md | sed -n 's/# Component Testing Example: //p')"
               [[ ! "$name" ]] && continue
-              echo "Adding workflow $dir ($name)"
+              echo "{ dir: $dir name: $name) }"
             done
           )
           echo $matrix
