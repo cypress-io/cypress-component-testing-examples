@@ -21,4 +21,3 @@ jobs:
             done
           ))
           echo $matrix
-          echo $matrix | jq .
