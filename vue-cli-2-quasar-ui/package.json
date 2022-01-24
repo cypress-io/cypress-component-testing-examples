@@ -1,0 +1,51 @@
+{
+  "name": "vue-cli-quasar-ui",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.0.0",
+    "core-js": "^3.6.5",
+    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/circle-10.0-release-d307abe1f152601a0c17abc64cd0d96bccb0522b/cypress.tgz",
+    "quasar": "^2.0.0",
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@cypress/vue": "^3.1.0",
+    "@cypress/webpack-dev-server": "^1.8.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^7.0.0",
+    "html-webpack-plugin": "4",
+    "sass": "1.32.12",
+    "sass-loader": "^10.1.0",
+    "vue-cli-plugin-quasar": "~4.0.4"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
