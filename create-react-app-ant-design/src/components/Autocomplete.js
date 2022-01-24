@@ -29,7 +29,7 @@ export default function AutocompleteDemo() {
       placeholder="input here"
     >
       {result.map((email) => (
-        <Option key={email} value={email}>
+        <Option key={email} value={email} data-test="autocomplete-option">
           {email}
         </Option>
       ))}
