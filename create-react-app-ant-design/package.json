@@ -40,7 +40,7 @@
   "devDependencies": {
     "@cypress/react": "^5.12.1",
     "@cypress/webpack-dev-server": "^1.8.0",
-    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/circle-10.0-release-73ad6d4de833c3d5167f86f6e80fdd9e3fe5755f/cypress.tgz",
+    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/circle-10.0-release-e629ae04ce4fb325c4c0480a1df903ecbeec8a1f/cypress.tgz",
     "html-webpack-plugin": "^4.5.2"
   }
 }
