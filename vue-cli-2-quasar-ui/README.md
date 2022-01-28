@@ -1,4 +1,4 @@
-# vue-cli-quasar-ui
+# Component Testing Example: vue-cli-quasar-ui
 
 ## Project setup
 ```
