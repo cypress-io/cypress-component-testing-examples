@@ -10,7 +10,9 @@
   "dependencies": {
     "chart.js": "2.9.4",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "dayjs": "^1.10.7",
+    "vue": "^2.6.11",
+    "vue2-datepicker": "^3.10.4"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.12",
