@@ -5,6 +5,7 @@
     <Counter />
     <Datepicker />
     <Breadstick />
+    <Toastification />
   </div>
 </template>
 
@@ -13,6 +14,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import Counter from './components/Counter.vue'
 import Datepicker from './components/Datepicker.vue'
 import Breadstick from './components/Breadstick.vue'
+import Toastification from './components/Toastification.vue'
 
 export default {
   name: 'App',
@@ -20,7 +22,8 @@ export default {
     HelloWorld,
     Counter,
     Datepicker,
-    Breadstick
+    Breadstick,
+    Toastification
   }
 }
 </script>

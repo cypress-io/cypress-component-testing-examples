@@ -14,9 +14,6 @@
 <script>
 export default {
   name: "App",
-  mounted() {
-    this.showNotification();
-  },
   methods: {
     showNotification() {
       this.$breadstick.notify("Top right pancakes", {
