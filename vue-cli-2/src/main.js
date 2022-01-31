@@ -15,6 +15,12 @@ const options = {
 
 Vue.use(Toast, options);
 
+import VueTour from "vue-tour";
+
+require("vue-tour/dist/vue-tour.css");
+
+Vue.use(VueTour);
+
 Vue.config.productionTip = false;
 
 new Vue({
