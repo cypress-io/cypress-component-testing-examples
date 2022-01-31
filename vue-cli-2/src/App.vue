@@ -7,6 +7,7 @@
     <Breadstick />
     <Toastification />
     <Tour />
+    <Multiselect />
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import Datepicker from './components/Datepicker.vue'
 import Breadstick from './components/Breadstick.vue'
 import Toastification from './components/Toastification.vue'
 import Tour from './components/Tour.vue'
+import Multiselect from './components/Multiselect.vue'
 
 export default {
   name: 'App',
@@ -26,7 +28,8 @@ export default {
     Datepicker,
     Breadstick,
     Toastification,
-    Tour
+    Tour,
+    Multiselect
   }
 }
 </script>
