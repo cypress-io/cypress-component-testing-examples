@@ -4,6 +4,7 @@
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     <Counter />
     <Datepicker />
+    <Breadstick />
   </div>
 </template>
 
@@ -11,13 +12,15 @@
 import HelloWorld from './components/HelloWorld.vue'
 import Counter from './components/Counter.vue'
 import Datepicker from './components/Datepicker.vue'
+import Breadstick from './components/Breadstick.vue'
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
     Counter,
-    Datepicker
+    Datepicker,
+    Breadstick
   }
 }
 </script>

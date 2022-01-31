@@ -1,9 +1,13 @@
-import Vue from 'vue'
-import App from './App.vue'
-import './main.css'
+import Vue from "vue";
+import App from "./App.vue";
+import "./main.css";
 
-Vue.config.productionTip = false
+import { BreadstickBakery } from "breadstick";
+
+Vue.use(BreadstickBakery);
+
+Vue.config.productionTip = false;
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  render: (h) => h(App),
+}).$mount("#app");

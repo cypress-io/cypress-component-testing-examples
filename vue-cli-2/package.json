@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "animejs": "^3.2.1",
+    "breadstick": "^0.2.15",
     "chart.js": "2.9.4",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.7",
