@@ -41,8 +41,9 @@ new file mode 100644
 index 0000000..6ef432c
 --- /dev/null
 +++ b/setup-vite-vue/cypress/support/component.js
-@@ -0,0 +1 @@
-+// TODO: source the example support file
+@@ -0,0 +1,2 @@
++// Ensure global app styles are loaded:
++import '../../src/main.css'
 \ No newline at end of file
 diff --git a/setup-vite-vue/cypress/fixtures/example.json b/setup-vite-vue/cypress/fixtures/example.json
 new file mode 100644
