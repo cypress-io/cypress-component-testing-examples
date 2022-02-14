@@ -11,51 +11,47 @@ index a547bf3..e98cec5 100644
 
  # Editor directories and files
  .vscode/*
-diff --git a/setup-vite-vue/cypress.json b/setup-vite-vue/cypress.json
-index ab25fd8..e44ce02 100644
---- a/setup-vite-vue/cypress.json
-+++ b/setup-vite-vue/cypress.json
-@@ -1,4 +1,5 @@
- {
-+  "coverage": true,
-   "component": {
-     "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
-     "componentFolder": "src"
-diff --git a/setup-vite-vue/cypress/plugins/index.js b/setup-vite-vue/cypress/plugins/index.js
-index 523f1fd..e111f19 100644
---- a/setup-vite-vue/cypress/plugins/index.js
-+++ b/setup-vite-vue/cypress/plugins/index.js
-@@ -1,15 +1,20 @@
- const path = require('path')
- const { startDevServer } = require('@cypress/vite-dev-server')
-+const codeCoverageTask = require('@cypress/code-coverage/task')
+diff --git a/setup-vite-vue/cypress.config.js b/setup-vite-vue/cypress.config.js
+index 3a9269e..65dd010 100644
+--- a/setup-vite-vue/cypress.config.js
++++ b/setup-vite-vue/cypress.config.js
+@@ -1,10 +1,25 @@
+ const { defineConfig } = require('cypress')
+ const { devServer } = require('@cypress/vite-dev-server')
++const codeCoverageTask = require("@cypress/code-coverage/task")
 +const istanbul = require('vite-plugin-istanbul')
- 
- module.exports = (on, config) => {
-   on('dev-server:start', (options) => {
-     return startDevServer({
-       options,
-       viteConfig: {
--        configFile: path.resolve(__dirname, '../../vite.config.js'),
+
+ module.exports = defineConfig({
++  coverage: true,
++  codeCoverage: {
++    exclude: "cypress/**/*.*",
++  },
+   // Component testing, JavaScript, Vue.js, Vite
+   component: {
+     devServer,
+-    devServerConfig: {}
++    devServerConfig: {
++      viteConfig: {
 +        clearScreen: false,
 +        plugins: [istanbul({})],
-       },
-     })
-   })
- 
-+  codeCoverageTask(on, config);
++      },
++    },
++    setupNodeEvents(on, config) {
++      codeCoverageTask(on, config);
++      return config;
++    },
+   },
+ })
+\ No newline at end of file
+diff --git a/setup-vite-vue/cypress/support/component.js b/setup-vite-vue/cypress/support/component.js
+index 6ecf682..d3bbbfe 100644
+--- a/setup-vite-vue/cypress/support/component.js
++++ b/setup-vite-vue/cypress/support/component.js
+@@ -1,2 +1,4 @@
+ // Ensure global app styles are loaded:
+-import '../../src/main.css'
+\ No newline at end of file
++import '../../src/main.css'
 +
-   return config
- }
-diff --git a/setup-vite-vue/cypress/support/index.js b/setup-vite-vue/cypress/support/index.js
-index 9b7843f..05cf3eb 100644
---- a/setup-vite-vue/cypress/support/index.js
-+++ b/setup-vite-vue/cypress/support/index.js
-@@ -13,6 +13,8 @@
- // https://on.cypress.io/configuration
- // ***********************************************************
-
-+import '@cypress/code-coverage/support'
-+
- // Import commands.js using ES2015 syntax:
- import './commands'
++import "@cypress/code-coverage/support";
+\ No newline at end of file

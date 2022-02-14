@@ -31,7 +31,7 @@ apply_patch
 commit_all "Add Cypress component testing support with sample tests"
 
 step
-cmd yarn add -D @cypress/code-coverage vite-plugin-istanbul
+cmd yarn add -D @cypress/code-coverage@3.10.0-dev.1 vite-plugin-istanbul
 apply_patch
 commit_all "Configure Cypress Code Coverage plugin"
 
