@@ -1,15 +1,48 @@
-diff --git a/setup-vite-vue/cypress.json b/setup-vite-vue/cypress.json
+diff --git a/setup-vite-vue/cypress.config.js b/setup-vite-vue/cypress.config.js
 new file mode 100644
-index 0000000..ab25fd8
+index 0000000..3a9269e
 --- /dev/null
-+++ b/setup-vite-vue/cypress.json
-@@ -0,0 +1,6 @@
-+{
-+  "component": {
-+    "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
-+    "componentFolder": "src"
-+  }
-+}
++++ b/setup-vite-vue/cypress.config.js
+@@ -0,0 +1,10 @@
++const { defineConfig } = require('cypress')
++const { devServer } = require('@cypress/vite-dev-server')
++
++module.exports = defineConfig({
++  // Component testing, JavaScript, Vue.js, Vite
++  component: {
++    devServer,
++    devServerConfig: {}
++  },
++})
+\ No newline at end of file
+diff --git a/setup-vite-vue/cypress/component/index.html b/setup-vite-vue/cypress/component/index.html
+new file mode 100644
+index 0000000..410b588
+--- /dev/null
++++ b/setup-vite-vue/cypress/component/index.html
+@@ -0,0 +1,14 @@
++<!DOCTYPE html>
++<html>
++  <head>
++    <meta charset="utf-8">
++    <meta http-equiv="X-UA-Compatible" content="IE=edge">
++    <meta name="viewport" content="width=device-width,initial-scale=1.0">
++    <title>Components App</title>
++
++  </head>
++  <body>
++
++    <div id="__cy_root"></div>
++  </body>
++</html>
+\ No newline at end of file
+diff --git a/setup-vite-vue/cypress/support/component.js b/setup-vite-vue/cypress/support/component.js
+new file mode 100644
+index 0000000..6ef432c
+--- /dev/null
++++ b/setup-vite-vue/cypress/support/component.js
+@@ -0,0 +1 @@
++// TODO: source the example support file
 \ No newline at end of file
 diff --git a/setup-vite-vue/cypress/fixtures/example.json b/setup-vite-vue/cypress/fixtures/example.json
 new file mode 100644
@@ -22,58 +55,6 @@ index 0000000..02e4254
 +  "email": "hello@cypress.io",
 +  "body": "Fixtures are a great way to mock data for responses to routes"
 +}
-diff --git a/setup-vite-vue/cypress/plugins/index.js b/setup-vite-vue/cypress/plugins/index.js
-new file mode 100644
-index 0000000..523f1fd
---- /dev/null
-+++ b/setup-vite-vue/cypress/plugins/index.js
-@@ -0,0 +1,15 @@
-+const path = require('path')
-+const { startDevServer } = require('@cypress/vite-dev-server')
-+
-+module.exports = (on, config) => {
-+  on('dev-server:start', (options) => {
-+    return startDevServer({
-+      options,
-+      viteConfig: {
-+        configFile: path.resolve(__dirname, '../../vite.config.js'),
-+      },
-+    })
-+  })
-+
-+  return config
-+}
-diff --git a/setup-vite-vue/cypress/support/commands.js b/setup-vite-vue/cypress/support/commands.js
-new file mode 100644
-index 0000000..119ab03
---- /dev/null
-+++ b/setup-vite-vue/cypress/support/commands.js
-@@ -0,0 +1,25 @@
-+// ***********************************************
-+// This example commands.js shows you how to
-+// create various custom commands and overwrite
-+// existing commands.
-+//
-+// For more comprehensive examples of custom
-+// commands please read more here:
-+// https://on.cypress.io/custom-commands
-+// ***********************************************
-+//
-+//
-+// -- This is a parent command --
-+// Cypress.Commands.add('login', (email, password) => { ... })
-+//
-+//
-+// -- This is a child command --
-+// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-+//
-+//
-+// -- This is a dual command --
-+// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-+//
-+//
-+// -- This will overwrite an existing command --
-+// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 diff --git a/setup-vite-vue/cypress/support/index.js b/setup-vite-vue/cypress/support/index.js
 new file mode 100644
 index 0000000..9b7843f
@@ -103,11 +84,11 @@ index 0000000..9b7843f
 +
 +// Ensure global app styles are loaded:
 +import '../../src/main.css'
-diff --git a/setup-vite-vue/src/App.spec.ct.js b/setup-vite-vue/src/App.spec.ct.js
+diff --git a/setup-vite-vue/src/App.cy.js b/setup-vite-vue/src/App.cy.js
 new file mode 100644
 index 0000000..37ae4a4
 --- /dev/null
-+++ b/setup-vite-vue/src/App.spec.ct.js
++++ b/setup-vite-vue/src/App.cy.js
 @@ -0,0 +1,8 @@
 +import { mount } from '@cypress/vue'
 +import App from './App.vue'
@@ -117,11 +98,11 @@ index 0000000..37ae4a4
 +  cy.get('[alt="Vue logo"]')
 +  cy.get('h1').contains('Hello Vue 3 + Vite')
 +})
-diff --git a/setup-vite-vue/src/components/HelloWorld.spec.ct.js b/setup-vite-vue/src/components/HelloWorld.spec.ct.js
+diff --git a/setup-vite-vue/src/components/HelloWorld.cy.js b/setup-vite-vue/src/components/HelloWorld.cy.js
 new file mode 100644
 index 0000000..33bcedd
 --- /dev/null
-+++ b/setup-vite-vue/src/components/HelloWorld.spec.ct.js
++++ b/setup-vite-vue/src/components/HelloWorld.cy.js
 @@ -0,0 +1,22 @@
 +import { mount } from '@cypress/vue'
 +import HelloWorld from './HelloWorld.vue'

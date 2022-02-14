@@ -1,16 +1,16 @@
 diff --git a/setup-vite-vue/.gitignore b/setup-vite-vue/.gitignore
-index 53f7466..cb02162 100644
+index a547bf3..e98cec5 100644
 --- a/setup-vite-vue/.gitignore
 +++ b/setup-vite-vue/.gitignore
-@@ -2,4 +2,6 @@ node_modules
- .DS_Store
+@@ -11,6 +11,8 @@ node_modules
  dist
  dist-ssr
--*.local
-\ No newline at end of file
-+*.local
+ *.local
 +.nyc_output
 +coverage
+
+ # Editor directories and files
+ .vscode/*
 diff --git a/setup-vite-vue/cypress.json b/setup-vite-vue/cypress.json
 index ab25fd8..e44ce02 100644
 --- a/setup-vite-vue/cypress.json
