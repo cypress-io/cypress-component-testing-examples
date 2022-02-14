@@ -1,7 +1,7 @@
-diff --git a/vite-vue/src/App.vue b/vite-vue/src/App.vue
+diff --git a/setup-vite-vue/src/App.vue b/setup-vite-vue/src/App.vue
 index a058d17..ab4ea68 100644
---- a/vite-vue/src/App.vue
-+++ b/vite-vue/src/App.vue
+--- a/setup-vite-vue/src/App.vue
++++ b/setup-vite-vue/src/App.vue
 @@ -12,11 +12,6 @@ import HelloWorld from './components/HelloWorld.vue'
  
  <style>
@@ -14,11 +14,11 @@ index a058d17..ab4ea68 100644
    margin-top: 60px;
  }
  </style>
-diff --git a/vite-vue/src/main.css b/vite-vue/src/main.css
+diff --git a/setup-vite-vue/src/main.css b/setup-vite-vue/src/main.css
 new file mode 100644
 index 0000000..110b5e1
 --- /dev/null
-+++ b/vite-vue/src/main.css
++++ b/setup-vite-vue/src/main.css
 @@ -0,0 +1,7 @@
 +body {
 +  font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -27,10 +27,10 @@ index 0000000..110b5e1
 +  text-align: center;
 +  color: #2c3e50;
 +}
-diff --git a/vite-vue/src/main.js b/vite-vue/src/main.js
+diff --git a/setup-vite-vue/src/main.js b/setup-vite-vue/src/main.js
 index 01433bc..f51c915 100644
---- a/vite-vue/src/main.js
-+++ b/vite-vue/src/main.js
+--- a/setup-vite-vue/src/main.js
++++ b/setup-vite-vue/src/main.js
 @@ -1,4 +1,5 @@
  import { createApp } from 'vue'
  import App from './App.vue'

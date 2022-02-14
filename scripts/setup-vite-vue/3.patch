@@ -1,7 +1,7 @@
-diff --git a/vite-vue/.gitignore b/vite-vue/.gitignore
+diff --git a/setup-vite-vue/.gitignore b/setup-vite-vue/.gitignore
 index 53f7466..cb02162 100644
---- a/vite-vue/.gitignore
-+++ b/vite-vue/.gitignore
+--- a/setup-vite-vue/.gitignore
++++ b/setup-vite-vue/.gitignore
 @@ -2,4 +2,6 @@ node_modules
  .DS_Store
  dist
@@ -11,20 +11,20 @@ index 53f7466..cb02162 100644
 +*.local
 +.nyc_output
 +coverage
-diff --git a/vite-vue/cypress.json b/vite-vue/cypress.json
+diff --git a/setup-vite-vue/cypress.json b/setup-vite-vue/cypress.json
 index ab25fd8..e44ce02 100644
---- a/vite-vue/cypress.json
-+++ b/vite-vue/cypress.json
+--- a/setup-vite-vue/cypress.json
++++ b/setup-vite-vue/cypress.json
 @@ -1,4 +1,5 @@
  {
 +  "coverage": true,
    "component": {
      "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
      "componentFolder": "src"
-diff --git a/vite-vue/cypress/plugins/index.js b/vite-vue/cypress/plugins/index.js
+diff --git a/setup-vite-vue/cypress/plugins/index.js b/setup-vite-vue/cypress/plugins/index.js
 index 523f1fd..e111f19 100644
---- a/vite-vue/cypress/plugins/index.js
-+++ b/vite-vue/cypress/plugins/index.js
+--- a/setup-vite-vue/cypress/plugins/index.js
++++ b/setup-vite-vue/cypress/plugins/index.js
 @@ -1,15 +1,20 @@
  const path = require('path')
  const { startDevServer } = require('@cypress/vite-dev-server')
@@ -47,10 +47,10 @@ index 523f1fd..e111f19 100644
 +
    return config
  }
-diff --git a/vite-vue/cypress/support/index.js b/vite-vue/cypress/support/index.js
+diff --git a/setup-vite-vue/cypress/support/index.js b/setup-vite-vue/cypress/support/index.js
 index 9b7843f..05cf3eb 100644
---- a/vite-vue/cypress/support/index.js
-+++ b/vite-vue/cypress/support/index.js
+--- a/setup-vite-vue/cypress/support/index.js
++++ b/setup-vite-vue/cypress/support/index.js
 @@ -13,6 +13,8 @@
  // https://on.cypress.io/configuration
  // ***********************************************************
