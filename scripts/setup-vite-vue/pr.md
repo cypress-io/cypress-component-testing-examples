@@ -11,16 +11,14 @@
    3. ${COMMIT_2}
 4. Add Cypress component testing support with sample tests
    1. ${COMMAND_3}
-   2. Add [cypress.json](cypress.json)
-   3. Add [cypress/plugins/index.js](cypress/plugins/index.js)
-   4. Add [src/App.spec.ct.js](src/App.spec.ct.js), [src/components/HelloWorld.spec.ct.js](src/components/HelloWorld.spec.ct.js)
-   5. `npx cypress open-ct` (Notice that the fonts don't inherit global app styles)
-   6. Edit [cypress/support/index.js](cypress/support/index.js) to import global app styles, the Cypress test preview should update automatically
+   2. Add [cypress.config.js](cypress.config.js)
+   3. Add [src/App.cy.js](src/App.cy.js), [src/components/HelloWorld.cy.js](src/components/HelloWorld.cy.js)
+   5. `npx cypress open` (Notice that the fonts don't inherit global app styles)
+   6. Edit [cypress/support/component.js](cypress/support/component.js) to import global app styles, the Cypress test preview should update automatically
    7. ${COMMIT_3}
 5. Add Cypress Code Coverage
    1. ${COMMAND_4}
    2. Edit [.gitignore](.gitignore) to ignore .nyc_output and coverage directories
-   3. Edit [cypress.json](cypress.json) to enable `coverage`
-   4. Edit [cypress/plugins/index.js](cypress/plugins/index.js) to configure the Cypress code coverage task with Istanbul
-   5. Edit [cypress/support/index.js](cypress/support/index.js) to import Cypress code coverage support
-   6. ${COMMIT_4}
+   3. Edit [cypress.config.js](cypress.config.js) to enable `coverage` and configure the Cypress code coverage task with Istanbul
+   4. Edit [cypress/support/component.js](cypress/support/component.js) to import Cypress code coverage support
+   5. ${COMMIT_4}
