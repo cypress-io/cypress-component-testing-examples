@@ -1,0 +1,129 @@
+diff --git a/setup-vite-vue/cypress.config.js b/setup-vite-vue/cypress.config.js
+new file mode 100644
+index 0000000..3a9269e
+--- /dev/null
++++ b/setup-vite-vue/cypress.config.js
+@@ -0,0 +1,10 @@
++const { defineConfig } = require('cypress')
++const { devServer } = require('@cypress/vite-dev-server')
++
++module.exports = defineConfig({
++  // Component testing, JavaScript, Vue.js, Vite
++  component: {
++    devServer,
++    devServerConfig: {}
++  },
++})
+\ No newline at end of file
+diff --git a/setup-vite-vue/cypress/component/index.html b/setup-vite-vue/cypress/component/index.html
+new file mode 100644
+index 0000000..410b588
+--- /dev/null
++++ b/setup-vite-vue/cypress/component/index.html
+@@ -0,0 +1,14 @@
++<!DOCTYPE html>
++<html>
++  <head>
++    <meta charset="utf-8">
++    <meta http-equiv="X-UA-Compatible" content="IE=edge">
++    <meta name="viewport" content="width=device-width,initial-scale=1.0">
++    <title>Components App</title>
++
++  </head>
++  <body>
++
++    <div id="__cy_root"></div>
++  </body>
++</html>
+\ No newline at end of file
+diff --git a/setup-vite-vue/cypress/support/component.js b/setup-vite-vue/cypress/support/component.js
+new file mode 100644
+index 0000000..6ef432c
+--- /dev/null
++++ b/setup-vite-vue/cypress/support/component.js
+@@ -0,0 +1,2 @@
++// Ensure global app styles are loaded:
++import '../../src/main.css'
+\ No newline at end of file
+diff --git a/setup-vite-vue/cypress/fixtures/example.json b/setup-vite-vue/cypress/fixtures/example.json
+new file mode 100644
+index 0000000..02e4254
+--- /dev/null
++++ b/setup-vite-vue/cypress/fixtures/example.json
+@@ -0,0 +1,5 @@
++{
++  "name": "Using fixtures to represent data",
++  "email": "hello@cypress.io",
++  "body": "Fixtures are a great way to mock data for responses to routes"
++}
+diff --git a/setup-vite-vue/cypress/support/index.js b/setup-vite-vue/cypress/support/index.js
+new file mode 100644
+index 0000000..9b7843f
+--- /dev/null
++++ b/setup-vite-vue/cypress/support/index.js
+@@ -0,0 +1,23 @@
++// ***********************************************************
++// This example support/index.js is processed and
++// loaded automatically before your test files.
++//
++// This is a great place to put global configuration and
++// behavior that modifies Cypress.
++//
++// You can change the location of this file or turn off
++// automatically serving support files with the
++// 'supportFile' configuration option.
++//
++// You can read more here:
++// https://on.cypress.io/configuration
++// ***********************************************************
++
++// Import commands.js using ES2015 syntax:
++import './commands'
++
++// Alternatively you can use CommonJS syntax:
++// require('./commands')
++
++// Ensure global app styles are loaded:
++import '../../src/main.css'
+diff --git a/setup-vite-vue/src/App.cy.js b/setup-vite-vue/src/App.cy.js
+new file mode 100644
+index 0000000..37ae4a4
+--- /dev/null
++++ b/setup-vite-vue/src/App.cy.js
+@@ -0,0 +1,8 @@
++import { mount } from '@cypress/vue'
++import App from './App.vue'
++
++it('shows the App', () => {
++  mount(App)
++  cy.get('[alt="Vue logo"]')
++  cy.get('h1').contains('Hello Vue 3 + Vite')
++})
+diff --git a/setup-vite-vue/src/components/HelloWorld.cy.js b/setup-vite-vue/src/components/HelloWorld.cy.js
+new file mode 100644
+index 0000000..33bcedd
+--- /dev/null
++++ b/setup-vite-vue/src/components/HelloWorld.cy.js
+@@ -0,0 +1,22 @@
++import { mount } from '@cypress/vue'
++import HelloWorld from './HelloWorld.vue'
++
++beforeEach(() => {
++  mount(HelloWorld, {
++    propsData: {
++      msg: 'Hello World',
++    },
++  })
++})
++
++it('shows the header', () => {
++  cy.get('h1').contains('Hello World')
++})
++
++it('renders the counter', () => {
++  cy.get('button').contains('count is: 0')
++})
++
++it('increments counter when clicked', () => {
++  cy.get('button').click().contains('count is: 1')
++})
