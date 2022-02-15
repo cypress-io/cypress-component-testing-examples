@@ -15,8 +15,8 @@
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@cypress/vue": "^3.1.0",
-    "@cypress/webpack-dev-server": "^1.8.0",
+    "@cypress/vue": "^3.1.1",
+    "@cypress/webpack-dev-server": "^1.8.1",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
