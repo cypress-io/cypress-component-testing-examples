@@ -62,4 +62,4 @@ index 315212d..c7be54c 100644
  export default defineConfig({
 -  plugins: [vue()]
 +  plugins: [vue(), istanbul({})]
-})
+ })
