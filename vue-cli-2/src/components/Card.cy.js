@@ -3,7 +3,7 @@ import Card from "./Card.vue";
 
 describe("CustomCard.vue", () => {
   it("displays the correct title", () => {
-    mount(Card, {
+    cy.mount(Card, {
       propsData: {
         title: "Hello, World!",
       },
@@ -12,17 +12,18 @@ describe("CustomCard.vue", () => {
   });
 
   it("should emit an event when the action v-btn is clicked", () => {
-    mount(Card, {
+    cy.mount(Card, {
       propsData: {
         title: "Hello, World!",
       },
+      listeners: {
+        'action-btn:clicked': cy.spy().as('onActionButtonClicked') 
+      }
     });
 
     cy.get("[data-test='action-button']")
       .click()
-      .vue() // this is a custom Cypress command - located in cypress/support/component.js
-      .then((wrapper) => {
-        expect(wrapper.emitted("action-btn:clicked")).to.have.length(1);
-      });
+      .get('@onActionButtonClicked')
+      .should('have.been.called')
   });
 });
