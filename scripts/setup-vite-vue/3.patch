@@ -12,14 +12,13 @@ index a547bf3..e98cec5 100644
  # Editor directories and files
  .vscode/*
 diff --git a/setup-vite-vue/cypress.config.js b/setup-vite-vue/cypress.config.js
-index 3a9269e..65dd010 100644
+index 3a9269e..213d00f 100644
 --- a/setup-vite-vue/cypress.config.js
 +++ b/setup-vite-vue/cypress.config.js
-@@ -1,11 +1,21 @@
+@@ -1,10 +1,19 @@
  const { defineConfig } = require('cypress')
  const { devServer } = require('@cypress/vite-dev-server')
 +const codeCoverageTask = require("@cypress/code-coverage/task")
-+const istanbul = require('vite-plugin-istanbul')
 
  module.exports = defineConfig({
 +  coverage: true,
