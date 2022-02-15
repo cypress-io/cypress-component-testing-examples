@@ -11,7 +11,10 @@
     "vue": "^3.2.25"
   },
   "devDependencies": {
+    "@cypress/vite-dev-server": "^2.2.2",
+    "@cypress/vue": "3",
     "@vitejs/plugin-vue": "^2.2.0",
+    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/circle-10.0-release-e7718f7489276cac2e8ad71bc57a627eb0135fbd/cypress.tgz",
     "vite": "^2.8.0"
   }
 }
