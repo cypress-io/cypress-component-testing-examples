@@ -20,7 +20,7 @@ index 0000000..3a40283
 +    "src/**/*.{js,vue}"
 +  ],
 +  "exclude": [
-+    "src/**/*.spec.ct.js"
++    "src/**/*.cy.js"
 +  ],
 +  "extension": [
 +    ".js",
@@ -51,44 +51,44 @@ index e955840..f4b8fdb 100644
 +  plugins
 +}
 \ No newline at end of file
-diff --git a/setup-vue-cli-2/cypress.json b/setup-vue-cli-2/cypress.json
-index ee59bec..622829d 100644
---- a/setup-vue-cli-2/cypress.json
-+++ b/setup-vue-cli-2/cypress.json
-@@ -1,4 +1,5 @@
- {
-+  "coverage": true,
-   "component": {
-     "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
-     "componentFolder": "src"
-diff --git a/setup-vue-cli-2/cypress/plugins/index.js b/setup-vue-cli-2/cypress/plugins/index.js
-index 3590bd9..9fa1b7a 100644
---- a/setup-vue-cli-2/cypress/plugins/index.js
-+++ b/setup-vue-cli-2/cypress/plugins/index.js
-@@ -1,5 +1,6 @@
- const { startDevServer } = require('@cypress/webpack-dev-server')
+diff --git a/setup-vue-cli-2/cypress.config.js b/setup-vue-cli-2/cypress.config.js
+index eabdc78..6c3dd60 100644
+--- a/setup-vue-cli-2/cypress.config.js
++++ b/setup-vue-cli-2/cypress.config.js
+@@ -1,11 +1,20 @@
+ const { defineConfig } = require('cypress')
+ const { devServer } = require('@cypress/webpack-dev-server')
  const webpackConfig = require('@vue/cli-service/webpack.config')
-+const codeCoverageTask = require('@cypress/code-coverage/task')
- 
- module.exports = (on, config) => {
-   on('dev-server:start', (options) => {
-@@ -8,5 +9,6 @@ module.exports = (on, config) => {
-       webpackConfig,
-     })
-   })
-+  codeCoverageTask(on, config)
-   return config
- }
-diff --git a/setup-vue-cli-2/cypress/support/index.js b/setup-vue-cli-2/cypress/support/index.js
-index 9b7843f..05cf3eb 100644
---- a/setup-vue-cli-2/cypress/support/index.js
-+++ b/setup-vue-cli-2/cypress/support/index.js
-@@ -13,6 +13,8 @@
- // https://on.cypress.io/configuration
- // ***********************************************************
- 
-+import '@cypress/code-coverage/support'
-+
- // Import commands.js using ES2015 syntax:
++const codeCoverageTask = require("@cypress/code-coverage/task")
+
+ module.exports = defineConfig({
++  coverage: true,
++  codeCoverage: {
++    exclude: "cypress/**/*.*",
++  },
+   // Component testing, JavaScript, Vue CLI, Webpack
+   component: {
+     devServer,
+-    devServerConfig: { webpackConfig }
++    devServerConfig: { webpackConfig },
++    setupNodeEvents(on, config) {
++      codeCoverageTask(on, config);
++      return config;
++    },
+   },
+ })
+\ No newline at end of file
+diff --git a/setup-vue-cli-2/cypress/support/component.js b/setup-vue-cli-2/cypress/support/component.js
+index 7e654cd..a5eff01 100644
+--- a/setup-vue-cli-2/cypress/support/component.js
++++ b/setup-vue-cli-2/cypress/support/component.js
+@@ -2,4 +2,6 @@
  import './commands'
- 
+
+ // Ensure global app styles are loaded:
+-import '../../src/main.css'
+\ No newline at end of file
++import '../../src/main.css'
++
++import '@cypress/code-coverage/support'
+\ No newline at end of file

@@ -47,9 +47,9 @@ cmd yarn add -D https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/circle-10.0-rel
 apply_patch
 commit_all "Add Cypress with example component and page tests"
 
-# step
-# cmd yarn add -D @cypress/code-coverage babel-plugin-istanbul
-# apply_patch
-# commit_all "Configure Cypress Code Coverage plugin"
+step
+cmd yarn add -D @cypress/code-coverage@3.10.0-dev.1 babel-plugin-istanbul
+apply_patch
+commit_all "Configure Cypress Code Coverage plugin"
 
 finalize
