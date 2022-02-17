@@ -1,7 +1,7 @@
-diff --git a/vue-cli-3/.gitignore b/vue-cli-3/.gitignore
+diff --git a/setup-vue-cli-3/.gitignore b/setup-vue-cli-3/.gitignore
 index 403adbc..f6061b7 100644
---- a/vue-cli-3/.gitignore
-+++ b/vue-cli-3/.gitignore
+--- a/setup-vue-cli-3/.gitignore
++++ b/setup-vue-cli-3/.gitignore
 @@ -2,6 +2,8 @@
  node_modules
  /dist
@@ -11,11 +11,11 @@ index 403adbc..f6061b7 100644
  
  # local env files
  .env.local
-diff --git a/vue-cli-3/.nycrc b/vue-cli-3/.nycrc
+diff --git a/setup-vue-cli-3/.nycrc b/setup-vue-cli-3/.nycrc
 new file mode 100644
 index 0000000..3a40283
 --- /dev/null
-+++ b/vue-cli-3/.nycrc
++++ b/setup-vue-cli-3/.nycrc
 @@ -0,0 +1,13 @@
 +{
 +  "include": [
@@ -31,10 +31,10 @@ index 0000000..3a40283
 +  "all": true
 +}
 \ No newline at end of file
-diff --git a/vue-cli-3/babel.config.js b/vue-cli-3/babel.config.js
+diff --git a/setup-vue-cli-3/babel.config.js b/setup-vue-cli-3/babel.config.js
 index e955840..9f7fe23 100644
---- a/vue-cli-3/babel.config.js
-+++ b/vue-cli-3/babel.config.js
+--- a/setup-vue-cli-3/babel.config.js
++++ b/setup-vue-cli-3/babel.config.js
 @@ -1,5 +1,12 @@
 +const plugins = []
 +
@@ -51,20 +51,20 @@ index e955840..9f7fe23 100644
 +  plugins
 +}
 \ No newline at end of file
-diff --git a/vue-cli-3/cypress.json b/vue-cli-3/cypress.json
+diff --git a/setup-vue-cli-3/cypress.json b/setup-vue-cli-3/cypress.json
 index ee59bec..622829d 100644
---- a/vue-cli-3/cypress.json
-+++ b/vue-cli-3/cypress.json
+--- a/setup-vue-cli-3/cypress.json
++++ b/setup-vue-cli-3/cypress.json
 @@ -1,4 +1,5 @@
  {
 +  "coverage": true,
    "component": {
      "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
      "componentFolder": "src"
-diff --git a/vue-cli-3/cypress/plugins/index.js b/vue-cli-3/cypress/plugins/index.js
+diff --git a/setup-vue-cli-3/cypress/plugins/index.js b/setup-vue-cli-3/cypress/plugins/index.js
 index 3590bd9..1f08a26 100644
---- a/vue-cli-3/cypress/plugins/index.js
-+++ b/vue-cli-3/cypress/plugins/index.js
+--- a/setup-vue-cli-3/cypress/plugins/index.js
++++ b/setup-vue-cli-3/cypress/plugins/index.js
 @@ -1,5 +1,6 @@
  const { startDevServer } = require('@cypress/webpack-dev-server')
  const webpackConfig = require('@vue/cli-service/webpack.config')
@@ -80,10 +80,10 @@ index 3590bd9..1f08a26 100644
 +  codeCoverageTask(on, config)
    return config
  }
-diff --git a/vue-cli-3/cypress/support/index.js b/vue-cli-3/cypress/support/index.js
+diff --git a/setup-vue-cli-3/cypress/support/index.js b/setup-vue-cli-3/cypress/support/index.js
 index 9b7843f..05cf3eb 100644
---- a/vue-cli-3/cypress/support/index.js
-+++ b/vue-cli-3/cypress/support/index.js
+--- a/setup-vue-cli-3/cypress/support/index.js
++++ b/setup-vue-cli-3/cypress/support/index.js
 @@ -13,6 +13,8 @@
  // https://on.cypress.io/configuration
  // ***********************************************************

@@ -1,8 +1,8 @@
-diff --git a/vue-cli-2/cypress.json b/vue-cli-2/cypress.json
+diff --git a/setup-vue-cli-3/cypress.json b/setup-vue-cli-3/cypress.json
 new file mode 100644
 index 0000000..a57b21f
 --- /dev/null
-+++ b/vue-cli-2/cypress.json
++++ b/setup-vue-cli-3/cypress.json
 @@ -0,0 +1,6 @@
 +{
 +  "component": {
@@ -10,22 +10,22 @@ index 0000000..a57b21f
 +    "componentFolder": "src"
 +  }
 +}
-diff --git a/vue-cli-2/cypress/fixtures/example.json b/vue-cli-2/cypress/fixtures/example.json
+diff --git a/setup-vue-cli-3/cypress/fixtures/example.json b/setup-vue-cli-3/cypress/fixtures/example.json
 new file mode 100644
 index 0000000..02e4254
 --- /dev/null
-+++ b/vue-cli-2/cypress/fixtures/example.json
++++ b/setup-vue-cli-3/cypress/fixtures/example.json
 @@ -0,0 +1,5 @@
 +{
 +  "name": "Using fixtures to represent data",
 +  "email": "hello@cypress.io",
 +  "body": "Fixtures are a great way to mock data for responses to routes"
 +}
-diff --git a/vue-cli-2/cypress/plugins/index.js b/vue-cli-2/cypress/plugins/index.js
+diff --git a/setup-vue-cli-3/cypress/plugins/index.js b/setup-vue-cli-3/cypress/plugins/index.js
 new file mode 100644
 index 0000000..3590bd9
 --- /dev/null
-+++ b/vue-cli-2/cypress/plugins/index.js
++++ b/setup-vue-cli-3/cypress/plugins/index.js
 @@ -0,0 +1,12 @@
 +const { startDevServer } = require('@cypress/webpack-dev-server')
 +const webpackConfig = require('@vue/cli-service/webpack.config')
@@ -39,11 +39,11 @@ index 0000000..3590bd9
 +  })
 +  return config
 +}
-diff --git a/vue-cli-2/cypress/support/commands.js b/vue-cli-2/cypress/support/commands.js
+diff --git a/setup-vue-cli-3/cypress/support/commands.js b/setup-vue-cli-3/cypress/support/commands.js
 new file mode 100644
 index 0000000..119ab03
 --- /dev/null
-+++ b/vue-cli-2/cypress/support/commands.js
++++ b/setup-vue-cli-3/cypress/support/commands.js
 @@ -0,0 +1,25 @@
 +// ***********************************************
 +// This example commands.js shows you how to
@@ -70,11 +70,11 @@ index 0000000..119ab03
 +//
 +// -- This will overwrite an existing command --
 +// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-diff --git a/vue-cli-2/cypress/support/index.js b/vue-cli-2/cypress/support/index.js
+diff --git a/setup-vue-cli-3/cypress/support/index.js b/setup-vue-cli-3/cypress/support/index.js
 new file mode 100644
 index 0000000..9b7843f
 --- /dev/null
-+++ b/vue-cli-2/cypress/support/index.js
++++ b/setup-vue-cli-3/cypress/support/index.js
 @@ -0,0 +1,23 @@
 +// ***********************************************************
 +// This example support/index.js is processed and
@@ -99,11 +99,11 @@ index 0000000..9b7843f
 +
 +// Ensure global app styles are loaded:
 +import '../../src/main.css'
-diff --git a/vue-cli-2/src/App.spec.ct.js b/vue-cli-2/src/App.spec.ct.js
+diff --git a/setup-vue-cli-3/src/App.spec.ct.js b/setup-vue-cli-3/src/App.spec.ct.js
 new file mode 100644
 index 0000000..4a912ba
 --- /dev/null
-+++ b/vue-cli-2/src/App.spec.ct.js
++++ b/setup-vue-cli-3/src/App.spec.ct.js
 @@ -0,0 +1,11 @@
 +import { mount } from '@cypress/vue'
 +import App from './App.vue'
@@ -116,11 +116,11 @@ index 0000000..4a912ba
 +  cy.get('[data-test=count]').should("have.text", "Total clicks: 1")
 +  cy.get('button').click()
 +})
-diff --git a/vue-cli-2/src/components/HelloWorld.spec.ct.js b/vue-cli-2/src/components/HelloWorld.spec.ct.js
+diff --git a/setup-vue-cli-3/src/components/HelloWorld.spec.ct.js b/setup-vue-cli-3/src/components/HelloWorld.spec.ct.js
 new file mode 100644
 index 0000000..bbbb6c3
 --- /dev/null
-+++ b/vue-cli-2/src/components/HelloWorld.spec.ct.js
++++ b/setup-vue-cli-3/src/components/HelloWorld.spec.ct.js
 @@ -0,0 +1,11 @@
 +import { mount } from '@cypress/vue'
 +import HelloWorld from './HelloWorld.vue'
