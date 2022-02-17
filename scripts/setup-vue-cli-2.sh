@@ -43,13 +43,13 @@ apply_patch
 commit_all "Update app to move global styles into main.css file"
 
 step
-cmd yarn add -D https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/circle-10.0-release-e7718f7489276cac2e8ad71bc57a627eb0135fbd/cypress.tgz @cypress/vue @cypress/webpack-dev-server webpack-dev-server
+cmd yarn add -D https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/circle-10.0-release-e7718f7489276cac2e8ad71bc57a627eb0135fbd/cypress.tgz @cypress/vue@^2.2.4 @cypress/webpack-dev-server webpack-dev-server
 apply_patch
 commit_all "Add Cypress with example component and page tests"
 
-step
-cmd yarn add -D @cypress/code-coverage babel-plugin-istanbul
-apply_patch
-commit_all "Configure Cypress Code Coverage plugin"
+# step
+# cmd yarn add -D @cypress/code-coverage babel-plugin-istanbul
+# apply_patch
+# commit_all "Configure Cypress Code Coverage plugin"
 
 finalize
