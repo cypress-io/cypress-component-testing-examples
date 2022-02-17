@@ -23,6 +23,7 @@
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-vue": "^7.0.0",
     "html-webpack-plugin": "4",
     "sass": "1.32.12",
@@ -36,7 +37,8 @@
     },
     "extends": [
       "plugin:vue/vue3-essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "plugin:cypress/recommended"
     ],
     "parserOptions": {
       "parser": "babel-eslint"
