@@ -12,11 +12,11 @@ index 2dfdaa4..c341cb6 100644
      ]
    },
    "browserslist": {
-diff --git a/setup-create-react-app/src/App.spec.ct.js b/setup-create-react-app/src/App.spec.ct.js
+diff --git a/setup-create-react-app/src/App.cy.js b/setup-create-react-app/src/App.cy.js
 new file mode 100644
 index 0000000..21daa26
 --- /dev/null
-+++ b/setup-create-react-app/src/App.spec.ct.js
++++ b/setup-create-react-app/src/App.cy.js
 @@ -0,0 +1,8 @@
 +import React from 'react';
 +import { mount } from '@cypress/react';

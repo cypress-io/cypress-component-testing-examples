@@ -1,43 +1,35 @@
-diff --git a/create-react-app/cypress.json b/create-react-app/cypress.json
+diff --git a/setup-create-react-app/cypress.config.js b/setup-create-react-app/cypress.config.js
 new file mode 100644
-index 0000000..ee59bec
+index 0000000..3fe0bca
 --- /dev/null
-+++ b/create-react-app/cypress.json
-@@ -0,0 +1,6 @@
-+{
-+  "component": {
-+    "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
-+    "componentFolder": "src"
-+  }
-+}
-diff --git a/create-react-app/cypress/fixtures/example.json b/create-react-app/cypress/fixtures/example.json
++++ b/setup-create-react-app/cypress.config.js
+@@ -0,0 +1,10 @@
++const { defineConfig } = require('cypress')
++const { devServer } = require('@cypress/react/plugins/react-scripts')
++
++module.exports = defineConfig({
++  // Component testing, JavaScript, Create React App, Webpack
++  component: {
++    devServer,
++    devServerConfig: {}
++  },
++})
+diff --git a/setup-create-react-app/cypress/fixtures/example.json b/setup-create-react-app/cypress/fixtures/example.json
 new file mode 100644
 index 0000000..02e4254
 --- /dev/null
-+++ b/create-react-app/cypress/fixtures/example.json
++++ b/setup-create-react-app/cypress/fixtures/example.json
 @@ -0,0 +1,5 @@
 +{
 +  "name": "Using fixtures to represent data",
 +  "email": "hello@cypress.io",
 +  "body": "Fixtures are a great way to mock data for responses to routes"
 +}
-diff --git a/create-react-app/cypress/plugins/index.js b/create-react-app/cypress/plugins/index.js
-new file mode 100644
-index 0000000..5398153
---- /dev/null
-+++ b/create-react-app/cypress/plugins/index.js
-@@ -0,0 +1,6 @@
-+const injectDevServer = require("@cypress/react/plugins/react-scripts");
-+
-+module.exports = (on, config) => {
-+  injectDevServer(on, config);
-+  return config;
-+};
-diff --git a/create-react-app/cypress/support/commands.js b/create-react-app/cypress/support/commands.js
+diff --git a/setup-create-react-app/cypress/support/commands.js b/setup-create-react-app/cypress/support/commands.js
 new file mode 100644
 index 0000000..119ab03
 --- /dev/null
-+++ b/create-react-app/cypress/support/commands.js
++++ b/setup-create-react-app/cypress/support/commands.js
 @@ -0,0 +1,25 @@
 +// ***********************************************
 +// This example commands.js shows you how to
@@ -64,32 +56,36 @@ index 0000000..119ab03
 +//
 +// -- This will overwrite an existing command --
 +// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-diff --git a/create-react-app/cypress/support/index.js b/create-react-app/cypress/support/index.js
+diff --git a/setup-create-react-app/cypress/component/index.html b/setup-create-react-app/cypress/component/index.html
 new file mode 100644
-index 0000000..c63e2c9
+index 0000000..410b588
 --- /dev/null
-+++ b/create-react-app/cypress/support/index.js
-@@ -0,0 +1,23 @@
-+// ***********************************************************
-+// This example support/index.js is processed and
-+// loaded automatically before your test files.
-+//
-+// This is a great place to put global configuration and
-+// behavior that modifies Cypress.
-+//
-+// You can change the location of this file or turn off
-+// automatically serving support files with the
-+// 'supportFile' configuration option.
-+//
-+// You can read more here:
-+// https://on.cypress.io/configuration
-+// ***********************************************************
++++ b/setup-create-react-app/cypress/component/index.html
+@@ -0,0 +1,14 @@
++<!DOCTYPE html>
++<html>
++  <head>
++    <meta charset="utf-8">
++    <meta http-equiv="X-UA-Compatible" content="IE=edge">
++    <meta name="viewport" content="width=device-width,initial-scale=1.0">
++    <title>Components App</title>
 +
++  </head>
++  <body>
++
++    <div id="__cy_root"></div>
++  </body>
++</html>
+\ No newline at end of file
+diff --git a/setup-create-react-app/cypress/support/component.js b/setup-create-react-app/cypress/support/component.js
+new file mode 100644
+index 0000000..6560890
+--- /dev/null
++++ b/setup-create-react-app/cypress/support/component.js
+@@ -0,0 +1,5 @@
 +// Import commands.js using ES2015 syntax:
 +import './commands'
 +
-+// Alternatively you can use CommonJS syntax:
-+// require('./commands')
-+
 +// Ensure global app styles are loaded:
 +import '../../src/index.css'
+\ No newline at end of file
