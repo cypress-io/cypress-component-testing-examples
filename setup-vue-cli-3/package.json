@@ -12,13 +12,17 @@
     "vue": "^3.0.0"
   },
   "devDependencies": {
+    "@cypress/vue": "3",
+    "@cypress/webpack-dev-server": "^1.8.1",
     "@vue/cli-plugin-babel": "~4.5.15",
     "@vue/cli-plugin-eslint": "~4.5.15",
     "@vue/cli-service": "~4.5.15",
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
+    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/circle-10.0-release-e7718f7489276cac2e8ad71bc57a627eb0135fbd/cypress.tgz",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-plugin-vue": "^7.0.0",
+    "webpack-dev-server": "^4.7.4"
   },
   "eslintConfig": {
     "root": true,
