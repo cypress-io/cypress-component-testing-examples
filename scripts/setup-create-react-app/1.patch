@@ -1,7 +1,7 @@
-diff --git a/create-react-app/package.json b/create-react-app/package.json
+diff --git a/setup-create-react-app/package.json b/setup-create-react-app/package.json
 index 2dfdaa4..c341cb6 100644
---- a/create-react-app/package.json
-+++ b/create-react-app/package.json
+--- a/setup-create-react-app/package.json
++++ b/setup-create-react-app/package.json
 @@ -20,7 +20,8 @@
    "eslintConfig": {
      "extends": [
@@ -12,11 +12,11 @@ index 2dfdaa4..c341cb6 100644
      ]
    },
    "browserslist": {
-diff --git a/create-react-app/src/App.spec.ct.js b/create-react-app/src/App.spec.ct.js
+diff --git a/setup-create-react-app/src/App.spec.ct.js b/setup-create-react-app/src/App.spec.ct.js
 new file mode 100644
 index 0000000..21daa26
 --- /dev/null
-+++ b/create-react-app/src/App.spec.ct.js
++++ b/setup-create-react-app/src/App.spec.ct.js
 @@ -0,0 +1,8 @@
 +import React from 'react';
 +import { mount } from '@cypress/react';
