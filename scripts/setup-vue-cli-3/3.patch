@@ -1,0 +1,94 @@
+diff --git a/setup-vue-cli-3/.gitignore b/setup-vue-cli-3/.gitignore
+index 403adbc..f6061b7 100644
+--- a/setup-vue-cli-3/.gitignore
++++ b/setup-vue-cli-3/.gitignore
+@@ -2,6 +2,8 @@
+ node_modules
+ /dist
+ 
++.nyc_output
++coverage
+ 
+ # local env files
+ .env.local
+diff --git a/setup-vue-cli-3/.nycrc b/setup-vue-cli-3/.nycrc
+new file mode 100644
+index 0000000..3a40283
+--- /dev/null
++++ b/setup-vue-cli-3/.nycrc
+@@ -0,0 +1,13 @@
++{
++  "include": [
++    "src/**/*.{js,vue}"
++  ],
++  "exclude": [
++    "src/**/*.spec.ct.js"
++  ],
++  "extension": [
++    ".js",
++    ".vue"
++  ],
++  "all": true
++}
+\ No newline at end of file
+diff --git a/setup-vue-cli-3/babel.config.js b/setup-vue-cli-3/babel.config.js
+index e955840..9f7fe23 100644
+--- a/setup-vue-cli-3/babel.config.js
++++ b/setup-vue-cli-3/babel.config.js
+@@ -1,5 +1,12 @@
++const plugins = []
++
++if (process.env.CYPRESS) {
++  plugins.push('istanbul')
++}
++
+ module.exports = {
+   presets: [
+     '@vue/cli-plugin-babel/preset'
+-  ]
+-}
++  ],
++  plugins
++}
+\ No newline at end of file
+diff --git a/setup-vue-cli-3/cypress.config.js b/setup-vue-cli-3/cypress.config.js
+index eabdc78..6c3dd60 100644
+--- a/setup-vue-cli-3/cypress.config.js
++++ b/setup-vue-cli-3/cypress.config.js
+@@ -1,11 +1,20 @@
+ const { defineConfig } = require('cypress')
+ const { devServer } = require('@cypress/webpack-dev-server')
+ const webpackConfig = require('@vue/cli-service/webpack.config')
++const codeCoverageTask = require("@cypress/code-coverage/task")
+
+ module.exports = defineConfig({
++  coverage: true,
++  codeCoverage: {
++    exclude: "cypress/**/*.*",
++  },
+   // Component testing, JavaScript, Vue CLI, Webpack
+   component: {
+     devServer,
+-    devServerConfig: { webpackConfig }
++    devServerConfig: { webpackConfig },
++    setupNodeEvents(on, config) {
++      codeCoverageTask(on, config);
++      return config;
++    },
+   },
+ })
+\ No newline at end of file
+diff --git a/setup-vue-cli-3/cypress/support/component.js b/setup-vue-cli-3/cypress/support/component.js
+index 7e654cd..a5eff01 100644
+--- a/setup-vue-cli-3/cypress/support/component.js
++++ b/setup-vue-cli-3/cypress/support/component.js
+@@ -2,4 +2,6 @@
+ import './commands'
+
+ // Ensure global app styles are loaded:
+-import '../../src/main.css'
+\ No newline at end of file
++import '../../src/main.css'
++
++import '@cypress/code-coverage/support'
+\ No newline at end of file

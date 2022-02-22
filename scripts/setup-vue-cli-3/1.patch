@@ -1,7 +1,7 @@
-diff --git a/vue-cli-2/src/App.vue b/vue-cli-2/src/App.vue
+diff --git a/setup-vue-cli-3/src/App.vue b/setup-vue-cli-3/src/App.vue
 index 55df315..b9ac61a 100644
---- a/vue-cli-2/src/App.vue
-+++ b/vue-cli-2/src/App.vue
+--- a/setup-vue-cli-3/src/App.vue
++++ b/setup-vue-cli-3/src/App.vue
 @@ -18,11 +18,6 @@ export default {
  
  <style>
@@ -14,11 +14,11 @@ index 55df315..b9ac61a 100644
    margin-top: 60px;
  }
  </style>
-diff --git a/vue-cli-2/src/main.css b/vue-cli-2/src/main.css
+diff --git a/setup-vue-cli-3/src/main.css b/setup-vue-cli-3/src/main.css
 new file mode 100644
 index 0000000..110b5e1
 --- /dev/null
-+++ b/vue-cli-2/src/main.css
++++ b/setup-vue-cli-3/src/main.css
 @@ -0,0 +1,7 @@
 +body {
 +  font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -27,10 +27,10 @@ index 0000000..110b5e1
 +  text-align: center;
 +  color: #2c3e50;
 +}
-diff --git a/vue-cli-2/src/main.js b/vue-cli-2/src/main.js
+diff --git a/setup-vue-cli-3/src/main.js b/setup-vue-cli-3/src/main.js
 index 63eb05f..1d9028a 100644
---- a/vue-cli-2/src/main.js
-+++ b/vue-cli-2/src/main.js
+--- a/setup-vue-cli-3/src/main.js
++++ b/setup-vue-cli-3/src/main.js
 @@ -1,5 +1,6 @@
  import Vue from 'vue'
  import App from './App.vue'

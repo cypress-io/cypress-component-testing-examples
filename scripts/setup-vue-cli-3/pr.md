@@ -8,13 +8,13 @@
    3. ${COMMIT_1}
 3. Add Cypress component testing support with sample tests
    1. ${COMMAND_2}
-   2. Add [cypress.json](cypress.json)
-   3. Add [cypress/plugins/index.js](cypress/plugins/index.js)
+   2. Add [cypress.config.js](cypress.config.js)
+   3. Add [cypress/component/index.html](cypress/component/index.html)
    1. Update [src/App.vue](src/App.vue) to reference new [src/components/Counter.vue](src/components/Counter.vue) component
-   1. Add [src/App.spec.ct.js](src/App.spec.ct.js), [src/components/HelloWorld.spec.ct.js](src/components/HelloWorld.spec.ct.js), [src/components/Counter.spec.ct.js](src/components/Counter.spec.ct.js) spec files
-   5. Add [src/CounterCompositionApi.vue](src/components/CounterCompositionApi.vue), a Composition API component with tests in [src/components/CounterCompositionApi.spec.ct.js](src/components/CounterCompositionApi.spec.ct.js)
-   6. `npx cypress open-ct` (Notice that the fonts don't inherit global app styles)
-   7. Edit [cypress/support/index.js](cypress/support/index.js) to import global app styles, the Cypress test preview should update automatically
+   1. Add [src/App.cy.js](src/App.cy.js), [src/components/HelloWorld.cy.js](src/components/HelloWorld.cy.js), [src/components/Counter.cy.js](src/components/Counter.cy.js) spec files
+   5. Add [src/CounterCompositionApi.vue](src/components/CounterCompositionApi.vue), a Composition API component with tests in [src/components/CounterCompositionApi.cy.js](src/components/CounterCompositionApi.cy.js)
+   6. `npx cypress open` (Notice that the fonts don't inherit global app styles)
+   7. Edit [cypress/support/component.js](cypress/support/component.js) to import global app styles, the Cypress test preview should update automatically
    8. ${COMMIT_2}
 4. Add Cypress Code Coverage
    1. ${COMMAND_3}
