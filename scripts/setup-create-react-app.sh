@@ -23,9 +23,9 @@ apply_patch global/setup-create-react-app.patch
 apply_patch
 commit_all "Add Cypress with example component test"
 
-# step
-# cmd yarn add -D @cypress/code-coverage@3.10.0-dev.1 @cypress/instrument-cra
-# apply_patch global/setup-create-react-app-code-coverage.patch
-# commit_all "Configure Cypress Code Coverage plugin"
+step
+cmd yarn add -D @cypress/code-coverage@3.10.0-dev.1 @cypress/instrument-cra
+apply_patch global/setup-create-react-app-code-coverage.patch
+commit_all "Configure Cypress Code Coverage plugin"
 
 finalize
