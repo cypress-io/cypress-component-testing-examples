@@ -38,6 +38,8 @@
     ]
   },
   "devDependencies": {
+    "@cypress/code-coverage": "3.10.0-dev.1",
+    "@cypress/instrument-cra": "^1.4.0",
     "@cypress/react": "^5.12.3",
     "@cypress/webpack-dev-server": "^1.8.1",
     "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/circle-10.0-release-e7718f7489276cac2e8ad71bc57a627eb0135fbd/cypress.tgz",
