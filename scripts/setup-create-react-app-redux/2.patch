@@ -1,7 +1,7 @@
-diff --git a/create-react-app-redux/package.json b/create-react-app-redux/package.json
+diff --git a/setup-create-react-app-redux/package.json b/setup-create-react-app-redux/package.json
 index b5a2612..f8a555b 100644
---- a/create-react-app-redux/package.json
-+++ b/create-react-app-redux/package.json
+--- a/setup-create-react-app-redux/package.json
++++ b/setup-create-react-app-redux/package.json
 @@ -19,7 +19,10 @@
      "eject": "react-scripts eject"
    },
@@ -14,11 +14,11 @@ index b5a2612..f8a555b 100644
    },
    "browserslist": {
      "production": [
-diff --git a/create-react-app-redux/src/features/counter/Counter.spec.ct.js b/create-react-app-redux/src/features/counter/Counter.spec.ct.js
+diff --git a/setup-create-react-app-redux/src/features/counter/Counter.cy.js b/setup-create-react-app-redux/src/features/counter/Counter.cy.js
 new file mode 100644
 index 0000000..d468200
 --- /dev/null
-+++ b/create-react-app-redux/src/features/counter/Counter.spec.ct.js
++++ b/setup-create-react-app-redux/src/features/counter/Counter.cy.js
 @@ -0,0 +1,56 @@
 +import { mount } from '@cypress/react';
 +import { Provider } from 'react-redux';
