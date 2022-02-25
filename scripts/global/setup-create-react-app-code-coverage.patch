@@ -1,0 +1,49 @@
+diff --git a/setup-create-react-app/.gitignore b/setup-create-react-app/.gitignore
+index 4d29575..5d716fe 100644
+--- a/setup-create-react-app/.gitignore
++++ b/setup-create-react-app/.gitignore
+@@ -7,6 +7,7 @@
+
+ # testing
+ /coverage
++/.nyc_output
+
+ # production
+ /build
+diff --git a/setup-create-react-app/cypress.config.js b/setup-create-react-app/cypress.config.js
+index 3fe0bca..e67dd8a 100644
+--- a/setup-create-react-app/cypress.config.js
++++ b/setup-create-react-app/cypress.config.js
+@@ -1,10 +1,20 @@
+ const { defineConfig } = require('cypress')
+ const { devServer } = require('@cypress/react/plugins/react-scripts')
++const codeCoverageTask = require("@cypress/code-coverage/task")
++require("@cypress/instrument-cra")
+
+ module.exports = defineConfig({
++  coverage: true,
++  codeCoverage: {
++    exclude: "cypress/**/*.*",
++  },
+   // Component testing, JavaScript, Create React App, Webpack
+   component: {
+     devServer,
+-    devServerConfig: {}
++    devServerConfig: {},
++    setupNodeEvents(on, config) {
++      codeCoverageTask(on, config);
++      return config;
++    },
+   },
+ })
+diff --git a/setup-create-react-app/cypress/support/component.js b/setup-create-react-app/cypress/support/component.js
+index 6560890..f101514 100644
+--- a/setup-create-react-app/cypress/support/component.js
++++ b/setup-create-react-app/cypress/support/component.js
+@@ -1,3 +1,5 @@
++import '@cypress/code-coverage/support'
++
+ // Import commands.js using ES2015 syntax:
+ import './commands'
+
+ 

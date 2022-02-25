@@ -1,0 +1,105 @@
+diff --git a/setup-create-react-app-typescript/cypress.config.ts b/setup-create-react-app-typescript/cypress.config.ts
+new file mode 100644
+index 0000000..3fe0bca
+--- /dev/null
++++ b/setup-create-react-app-typescript/cypress.config.ts
+@@ -0,0 +1,10 @@
++const { defineConfig } = require('cypress')
++const { devServer } = require('@cypress/react/plugins/react-scripts')
++
++module.exports = defineConfig({
++  // Component testing, JavaScript, Create React App, Webpack
++  component: {
++    devServer,
++    devServerConfig: {}
++  },
++})
+diff --git a/setup-create-react-app-typescript/cypress/fixtures/example.json b/setup-create-react-app-typescript/cypress/fixtures/example.json
+new file mode 100644
+index 0000000..02e4254
+--- /dev/null
++++ b/setup-create-react-app-typescript/cypress/fixtures/example.json
+@@ -0,0 +1,5 @@
++{
++  "name": "Using fixtures to represent data",
++  "email": "hello@cypress.io",
++  "body": "Fixtures are a great way to mock data for responses to routes"
++}
+diff --git a/setup-create-react-app-typescript/cypress/support/commands.ts b/setup-create-react-app-typescript/cypress/support/commands.ts
+new file mode 100644
+index 0000000..119ab03
+--- /dev/null
++++ b/setup-create-react-app-typescript/cypress/support/commands.ts
+@@ -0,0 +1,25 @@
++// ***********************************************
++// This example commands.js shows you how to
++// create various custom commands and overwrite
++// existing commands.
++//
++// For more comprehensive examples of custom
++// commands please read more here:
++// https://on.cypress.io/custom-commands
++// ***********************************************
++//
++//
++// -- This is a parent command --
++// Cypress.Commands.add('login', (email, password) => { ... })
++//
++//
++// -- This is a child command --
++// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
++//
++//
++// -- This is a dual command --
++// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
++//
++//
++// -- This will overwrite an existing command --
++// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+diff --git a/setup-create-react-app-typescript/cypress/component/index.html b/setup-create-react-app-typescript/cypress/component/index.html
+new file mode 100644
+index 0000000..410b588
+--- /dev/null
++++ b/setup-create-react-app-typescript/cypress/component/index.html
+@@ -0,0 +1,14 @@
++<!DOCTYPE html>
++<html>
++  <head>
++    <meta charset="utf-8">
++    <meta http-equiv="X-UA-Compatible" content="IE=edge">
++    <meta name="viewport" content="width=device-width,initial-scale=1.0">
++    <title>Components App</title>
++
++  </head>
++  <body>
++
++    <div id="__cy_root"></div>
++  </body>
++</html>
+\ No newline at end of file
+diff --git a/setup-create-react-app-typescript/cypress/support/component.ts b/setup-create-react-app-typescript/cypress/support/component.ts
+new file mode 100644
+index 0000000..6560890
+--- /dev/null
++++ b/setup-create-react-app-typescript/cypress/support/component.ts
+@@ -0,0 +1,5 @@
++// Import commands.js using ES2015 syntax:
++import './commands'
++
++// Ensure global app styles are loaded:
++import '../../src/index.css'
+\ No newline at end of file
+diff --git a/setup-create-react-app-typescript/cypress/tsconfig.json b/setup-create-react-app-typescript/cypress/tsconfig.json
+new file mode 100644
+index 0000000..78f2e27
+--- /dev/null
++++ b/setup-create-react-app-typescript/cypress/tsconfig.json
+@@ -0,0 +1,8 @@
++{
++  "compilerOptions": {
++    "target": "es5",
++    "lib": ["es5", "dom"],
++    "types": ["cypress", "node"]
++  },
++  "include": ["**/*.ts", "**/*.tsx"]
++}

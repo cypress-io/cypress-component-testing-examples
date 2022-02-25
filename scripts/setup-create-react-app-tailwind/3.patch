@@ -1,0 +1,42 @@
+diff --git a/setup-create-react-app-tailwind/cypress/support/component.js b/setup-create-react-app-tailwind/cypress/support/component.js
+index 6560890..f02e234 100644
+--- a/setup-create-react-app-tailwind/cypress/support/component.js
++++ b/setup-create-react-app-tailwind/cypress/support/component.js
+@@ -1,5 +1,8 @@
+ // Import commands.js using ES2015 syntax:
+ import './commands'
+
++// Ensure tailwind styles are loaded:
++import 'tailwindcss/dist/tailwind.css'
++
+ // Ensure global app styles are loaded:
+ import '../../src/index.css'
+\ No newline at end of file
+diff --git a/setup-create-react-app-tailwind/package.json b/setup-create-react-app-tailwind/package.json
+index 9c064e8..7c968d6 100644
+--- a/setup-create-react-app-tailwind/package.json
++++ b/setup-create-react-app-tailwind/package.json
+@@ -21,7 +21,8 @@
+   "eslintConfig": {
+     "extends": [
+       "react-app",
+-      "react-app/jest"
++      "react-app/jest",
++      "plugin:cypress/recommended"
+     ]
+   },
+   "browserslist": {
+diff --git a/setup-create-react-app-tailwind/src/App.cy.js b/setup-create-react-app-tailwind/src/App.cy.js
+new file mode 100644
+index 0000000..21daa26
+--- /dev/null
++++ b/setup-create-react-app-tailwind/src/App.cy.js
+@@ -0,0 +1,8 @@
++import React from 'react';
++import { mount } from '@cypress/react';
++import App from './App';
++
++it('renders learn react link', () => {
++  mount(<App />);
++  cy.get('a').contains('Learn React');
++});

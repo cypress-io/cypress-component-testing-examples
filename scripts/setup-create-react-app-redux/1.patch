@@ -1,7 +1,7 @@
-diff --git a/create-react-app-redux/src/app/store.js b/create-react-app-redux/src/app/store.js
+diff --git a/setup-create-react-app-redux/src/app/store.js b/setup-create-react-app-redux/src/app/store.js
 index 9eca6d2..57b1c0c 100644
---- a/create-react-app-redux/src/app/store.js
-+++ b/create-react-app-redux/src/app/store.js
+--- a/setup-create-react-app-redux/src/app/store.js
++++ b/setup-create-react-app-redux/src/app/store.js
 @@ -1,8 +1,10 @@
  import { configureStore } from '@reduxjs/toolkit';
  import counterReducer from '../features/counter/counterSlice';
