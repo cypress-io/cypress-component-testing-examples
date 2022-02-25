@@ -1,14 +1,3 @@
-diff --git a/create-react-app-typescript/cypress/support/index.ts b/create-react-app-typescript/cypress/support/index.ts
-index d68db96..c63e2c9 100644
---- a/create-react-app-typescript/cypress/support/index.ts
-+++ b/create-react-app-typescript/cypress/support/index.ts
-@@ -18,3 +18,6 @@ import './commands'
- 
- // Alternatively you can use CommonJS syntax:
- // require('./commands')
-+
-+// Ensure global app styles are loaded:
-+import '../../src/index.css'
 diff --git a/create-react-app-typescript/package.json b/create-react-app-typescript/package.json
 index b12408e..5343d42 100644
 --- a/create-react-app-typescript/package.json
@@ -23,11 +12,11 @@ index b12408e..5343d42 100644
      ]
    },
    "browserslist": {
-diff --git a/create-react-app-typescript/src/App.spec.ct.tsx b/create-react-app-typescript/src/App.spec.ct.tsx
+diff --git a/create-react-app-typescript/src/App.cy.tsx b/create-react-app-typescript/src/App.cy.tsx
 new file mode 100644
 index 0000000..21daa26
 --- /dev/null
-+++ b/create-react-app-typescript/src/App.spec.ct.tsx
++++ b/create-react-app-typescript/src/App.cy.tsx
 @@ -0,0 +1,8 @@
 +import React from 'react';
 +import { mount } from '@cypress/react';
@@ -37,3 +26,14 @@ index 0000000..21daa26
 +  mount(<App />);
 +  cy.get('a').contains('Learn React');
 +});
+diff --git a/setup-create-react-app-typescript/src/App.test.tsx b/setup-create-react-app-typescript/src/App.test.tsx
+index 2a68616..6d40586 100644
+--- a/setup-create-react-app-typescript/src/App.test.tsx
++++ b/setup-create-react-app-typescript/src/App.test.tsx
+@@ -5,5 +5,6 @@ import App from './App';
+ test('renders learn react link', () => {
+   render(<App />);
+   const linkElement = screen.getByText(/learn react/i);
++  // @ts-ignore
+   expect(linkElement).toBeInTheDocument();
+ });
