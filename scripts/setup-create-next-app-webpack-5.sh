@@ -8,18 +8,18 @@ set -o nounset
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 source "$script_dir/global/functions.sh"
 
-title='Create Next App'
+title='Create Next App (Webpack 5)'
 
 create_branch
 
 step
-cmd npx create-next-app --example nested-components $dir
+cmd yarn create next-app --example nested-components $dir
 cmd cd $dir
 commit_all "Run: ${commands[-2]}"
 
 step
-cmd npm install -D cypress@8.7.0 @cypress/react @cypress/webpack-dev-server webpack-dev-server@3 html-webpack-plugin@5
-apply_patch global/create-next-app.patch
+cmd yarn add -D https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/circle-10.0-release-e7718f7489276cac2e8ad71bc57a627eb0135fbd/cypress.tgz @cypress/react @cypress/webpack-dev-server
+apply_patch global/setup-create-next-app.patch
 apply_patch 
 commit_all "Add Cypress with example component and page tests"
 
