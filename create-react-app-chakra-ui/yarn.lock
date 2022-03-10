@@ -4415,10 +4415,10 @@
   "resolved" "https://registry.npmjs.org/csstype/-/csstype-3.0.10.tgz"
   "version" "3.0.10"
 
-"cypress@*", "cypress@https://cdn.cypress.io/beta/npm/9.4.1/circle-10.0-release-4787cc18043344b1c6057b7f9d714436aab3bf0e/cypress.tgz":
-  "integrity" "sha512-7AGsVfUh9UvJ40pkJRGz0K54j4bLDcN4y86xCBZ8oizXFoGvcnUMEIeTeZn4pYRZexixbxy473KLL5OUQ//vSA=="
-  "resolved" "https://cdn.cypress.io/beta/npm/9.4.1/circle-10.0-release-4787cc18043344b1c6057b7f9d714436aab3bf0e/cypress.tgz"
-  "version" "9.4.1"
+"cypress@*", "cypress@https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/10.0-release-188b9a742ee2ef51102167bfd84b3696a3f72a26/cypress.tgz":
+  "integrity" "sha512-wbHG4RXNYWJ/7QJfXWiEHpPe9rhvDju2PRv4PaeKvh6gt8JHXZWSzGyInNhax+/YR6ZCteJ/NcuV5ir3/NRS7Q=="
+  "resolved" "https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/10.0-release-188b9a742ee2ef51102167bfd84b3696a3f72a26/cypress.tgz"
+  "version" "10.0.0"
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
