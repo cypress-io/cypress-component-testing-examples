@@ -10,7 +10,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.6.5",
-    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/circle-10.0-release-8c01c7031701c349b114ff9b73e691d7cff091f8/cypress.tgz",
+    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/10.0-release-188b9a742ee2ef51102167bfd84b3696a3f72a26/cypress.tgz",
     "quasar": "^2.0.0",
     "vue": "^3.0.0"
   },
