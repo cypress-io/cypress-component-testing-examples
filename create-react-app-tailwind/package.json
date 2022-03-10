@@ -43,7 +43,7 @@
     "@cypress/react": "^5.10.3",
     "@cypress/webpack-dev-server": "^1.7.0",
     "autoprefixer": "^9",
-    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/circle-10.0-release-9cad97a3c838733dd8d8768cd972b0b1204f2ed8/cypress.tgz",
+    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/10.0-release-188b9a742ee2ef51102167bfd84b3696a3f72a26/cypress.tgz",
     "eslint-plugin-cypress": "^2.12.1",
     "postcss": "^7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
