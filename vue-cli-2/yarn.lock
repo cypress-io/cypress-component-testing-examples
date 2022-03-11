@@ -3674,10 +3674,9 @@ cypress-real-events@^1.6.0:
   resolved "https://registry.npmjs.org/cypress-real-events/-/cypress-real-events-1.6.0.tgz"
   integrity sha512-QxXm0JsQkCrb2uH+fMXNDQ5kNWTzX3OtndBafdsZmNV19j+6JuTK9n52B1YVxrDrr/qzPAojcHJc5PNoQvwp+w==
 
-"cypress@https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/circle-10.0-release-73e936e28992d5f533a8341a923dd61719bd12d5/cypress.tgz":
+"cypress@https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/10.0-release-188b9a742ee2ef51102167bfd84b3696a3f72a26/cypress.tgz":
   version "10.0.0"
-  resolved "https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/circle-10.0-release-73e936e28992d5f533a8341a923dd61719bd12d5/cypress.tgz"
-  integrity sha512-WBF3tejVtdF/foaREATAlc+5MRpl3dWpkwhjQ0trVu+CvAlVqQdEQyORI9KsbHx01Z+p4K2chZkWbymQPcm3HA==
+  resolved "https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/10.0-release-188b9a742ee2ef51102167bfd84b3696a3f72a26/cypress.tgz#d5e7c2f3da9cd1576aa7b9f20bfdbd9574062be0"
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"

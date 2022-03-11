@@ -23,7 +23,7 @@
     "@vue/cli-service": "~4.5.15",
     "babel-eslint": "^10.1.0",
     "babel-plugin-istanbul": "^6.1.1",
-    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/circle-10.0-release-73e936e28992d5f533a8341a923dd61719bd12d5/cypress.tgz",
+    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/linux-x64/10.0-release-188b9a742ee2ef51102167bfd84b3696a3f72a26/cypress.tgz",
     "eslint": "^8.6.0",
     "eslint-plugin-vue": "^8.3.0",
     "html-webpack-plugin": "4",
