@@ -1,9 +1,9 @@
 diff --git a/setup-create-next-app-webpack-5/cypress.config.js b/setup-create-next-app-webpack-5/cypress.config.js
 new file mode 100644
-index 0000000..540c8fb
+index 0000000..f645f49
 --- /dev/null
 +++ b/setup-create-next-app-webpack-5/cypress.config.js
-@@ -1 +1,10 @@
+@@ -0,0 +1,9 @@
 +const { defineConfig } = require('cypress')
 +const { devServer } = require('@cypress/react/plugins/next')
 +
@@ -13,6 +13,7 @@ index 0000000..540c8fb
 +    devServer,
 +  },
 +})
+\ No newline at end of file
 diff --git a/create-next-app/cypress/fixtures/example.json b/create-next-app/cypress/fixtures/example.json
 new file mode 100644
 index 0000000..02e4254
