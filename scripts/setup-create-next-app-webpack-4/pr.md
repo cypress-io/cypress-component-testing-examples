@@ -9,3 +9,9 @@
    4. Add [components/paragraph.spec.ct.js](components/paragraph.spec.ct.js), [components/post.spec.ct.js](components/post.spec.ct.js), [pages/index.spec.ct.js](pages/index.spec.ct.js)
    5. `npx cypress open-ct`
    6. ${COMMIT_1}
+3. Add Cypress Code Coverage
+   1. ${COMMAND_3}
+   2. Edit [cypress.config.js](cypress.config.js) to enable `coverage` and configure the Cypress code coverage task
+   3. Edit [.gitignore](.gitignore) to ignore .nyc_output directory
+   4. Edit [cypress/support/component.js](cypress/support/component.js) to import Cypress code coverage support
+   5. ${COMMIT_2}

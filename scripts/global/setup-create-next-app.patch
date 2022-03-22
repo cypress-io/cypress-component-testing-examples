@@ -3,12 +3,11 @@ new file mode 100644
 index 0000000..f645f49
 --- /dev/null
 +++ b/setup-create-next-app-webpack-5/cypress.config.js
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,8 @@
 +const { defineConfig } = require('cypress')
 +const { devServer } = require('@cypress/react/plugins/next')
 +
 +module.exports = defineConfig({
-+  nodeVersion: 'system',
 +  component: {
 +    devServer,
 +  },

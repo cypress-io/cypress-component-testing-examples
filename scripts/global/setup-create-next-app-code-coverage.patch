@@ -1,0 +1,54 @@
+diff --git a/setup-create-next-app/.gitignore b/setup-create-next-app/.gitignore
+index 4d29575..5d716fe 100644
+--- a/setup-create-next-app/.gitignore
++++ b/setup-create-next-app/.gitignore
+@@ -7,6 +7,7 @@
+
+ # testing
+ /coverage
++/.nyc_output
+
+ # production
+ /build
+diff --git a/setup-create-next-app-webpack-5/cypress.config.js b/setup-create-next-app-webpack-5/cypress.config.js
+index f645f49..217ccaa 100644
+--- a/setup-create-next-app-webpack-5/cypress.config.js
++++ b/setup-create-next-app-webpack-5/cypress.config.js
+@@ -1,8 +1,18 @@
+ const { defineConfig } = require('cypress')
+ const { devServer } = require('@cypress/react/plugins/next')
++const codeCoverageTask = require("@cypress/code-coverage/task")
+
+ module.exports = defineConfig({
++  coverage: true,
++  codeCoverage: {
++    exclude: "cypress/**/*.*",
++  },
+   component: {
+     devServer,
++    devServerConfig: {},
++    setupNodeEvents(on, config) {
++      codeCoverageTask(on, config);
++      return config;
++    },
+   },
+ })
+\ No newline at end of file
+diff --git a/setup-create-next-app-webpack-5/cypress/support/component.js b/setup-create-next-app-webpack-5/cypress/support/component.js
+index 67d7208..edad7a3 100644
+--- a/setup-create-next-app-webpack-5/cypress/support/component.js
++++ b/setup-create-next-app-webpack-5/cypress/support/component.js
+@@ -13,8 +13,10 @@
+ // https://on.cypress.io/configuration
+ // ***********************************************************
+
++import '@cypress/code-coverage/support'
++
+ // Import commands.js using ES2015 syntax:
+ import './commands'
+
+ // Alternatively you can use CommonJS syntax:
+-// require('./commands')
+\ No newline at end of file
++// require('./commands')
+ 

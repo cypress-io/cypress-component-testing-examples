@@ -23,4 +23,8 @@ apply_patch global/setup-create-next-app.patch
 apply_patch 
 commit_all "Add Cypress with example component and page tests"
 
+cmd yarn add -D @cypress/code-coverage@3.10.0-dev.1
+apply_patch global/setup-create-next-app-code-coverage.patch
+commit_all "Configure Cypress Code Coverage plugin"
+
 finalize
