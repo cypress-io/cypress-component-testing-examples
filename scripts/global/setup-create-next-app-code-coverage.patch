@@ -51,4 +51,15 @@ index 67d7208..edad7a3 100644
 -// require('./commands')
 \ No newline at end of file
 +// require('./commands')
+diff --git a/setup-create-next-app-webpack-5/.babelrc b/setup-create-next-app-webpack-5/.babelrc
+new file mode 100644
+index 0000000..fad4078
+--- /dev/null
++++ b/setup-create-next-app-webpack-5/.babelrc
+@@ -0,0 +1,4 @@
++{
++  "presets": ["next/babel"],
++  "plugins": ["istanbul"]
++}
+\ No newline at end of file
  
