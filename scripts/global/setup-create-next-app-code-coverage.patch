@@ -62,4 +62,16 @@ index 0000000..fad4078
 +  "plugins": ["istanbul"]
 +}
 \ No newline at end of file
+diff --git a/setup-create-next-app-webpack-4/next.config.js b/setup-create-next-app-webpack-4/next.config.js
+new file mode 100644
+index 0000000..3f61f6f
+--- /dev/null
++++ b/setup-create-next-app-webpack-4/next.config.js
+@@ -0,0 +1,5 @@
++module.exports = {
++  // Webpack 5 is enabled by default
++  // You can still use webpack 4 while upgrading to the latest version of Next.js by adding the "webpack5: false" flag
++  webpack5: false,
++}
+\ No newline at end of file
  
