@@ -1,8 +1,8 @@
-diff --git a/create-next-app/components/paragraph.spec.ct.js b/create-next-app/components/paragraph.spec.ct.js
+diff --git a/setup-create-next-app-webpack-4/components/paragraph.cy.js b/setup-create-next-app-webpack-4/components/paragraph.cy.js
 new file mode 100644
 index 0000000..dd66f90
 --- /dev/null
-+++ b/create-next-app/components/paragraph.spec.ct.js
++++ b/setup-create-next-app-webpack-4/components/paragraph.cy.js
 @@ -0,0 +1,7 @@
 +import { mount } from '@cypress/react'
 +import P from './paragraph'
@@ -11,11 +11,11 @@ index 0000000..dd66f90
 +  mount(<P>hello world</P>)
 +  cy.get('p').contains('hello world')
 +})
-diff --git a/create-next-app/components/post.spec.ct.js b/create-next-app/components/post.spec.ct.js
+diff --git a/setup-create-next-app-webpack-4/components/post.cy.js b/setup-create-next-app-webpack-4/components/post.cy.js
 new file mode 100644
 index 0000000..e915019
 --- /dev/null
-+++ b/create-next-app/components/post.spec.ct.js
++++ b/setup-create-next-app-webpack-4/components/post.cy.js
 @@ -0,0 +1,12 @@
 +import { mount } from '@cypress/react'
 +import Post from './post'
@@ -29,11 +29,11 @@ index 0000000..e915019
 +  cy.get('h1').contains('Hello World')
 +  cy.get('p').contains('This is some sample content')
 +})
-diff --git a/create-next-app/pages/index.spec.ct.js b/create-next-app/pages/index.spec.ct.js
+diff --git a/setup-create-next-app-webpack-4/pages/index.cy.js b/setup-create-next-app-webpack-4/pages/index.cy.js
 new file mode 100644
 index 0000000..11e4f24
 --- /dev/null
-+++ b/create-next-app/pages/index.spec.ct.js
++++ b/setup-create-next-app-webpack-4/pages/index.cy.js
 @@ -0,0 +1,9 @@
 +import { mount } from '@cypress/react'
 +import Home from './index'

@@ -1,15 +1,18 @@
-diff --git a/create-next-app/cypress.json b/create-next-app/cypress.json
+diff --git a/setup-create-next-app-webpack-5/cypress.config.js b/setup-create-next-app-webpack-5/cypress.config.js
 new file mode 100644
-index 0000000..a57b21f
+index 0000000..f645f49
 --- /dev/null
-+++ b/create-next-app/cypress.json
-@@ -0,0 +1,6 @@
-+{
-+  "component": {
-+    "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
-+    "componentFolder": "."
-+  }
-+}
++++ b/setup-create-next-app-webpack-5/cypress.config.js
+@@ -0,0 +1,8 @@
++const { defineConfig } = require('cypress')
++const { devServer } = require('@cypress/react/plugins/next')
++
++module.exports = defineConfig({
++  component: {
++    devServer,
++  },
++})
+\ No newline at end of file
 diff --git a/create-next-app/cypress/fixtures/example.json b/create-next-app/cypress/fixtures/example.json
 new file mode 100644
 index 0000000..02e4254
@@ -20,18 +23,6 @@ index 0000000..02e4254
 +  "name": "Using fixtures to represent data",
 +  "email": "hello@cypress.io",
 +  "body": "Fixtures are a great way to mock data for responses to routes"
-+}
-diff --git a/create-next-app/cypress/plugins/index.js b/create-next-app/cypress/plugins/index.js
-new file mode 100644
-index 0000000..6afd87c
---- /dev/null
-+++ b/create-next-app/cypress/plugins/index.js
-@@ -0,0 +1,6 @@
-+const injectDevServer = require('@cypress/react/plugins/next')
-+
-+module.exports = (on, config) => {
-+  injectDevServer(on, config)
-+  return config
 +}
 diff --git a/create-next-app/cypress/support/commands.js b/create-next-app/cypress/support/commands.js
 new file mode 100644
@@ -64,14 +55,14 @@ index 0000000..119ab03
 +//
 +// -- This will overwrite an existing command --
 +// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-diff --git a/create-next-app/cypress/support/index.js b/create-next-app/cypress/support/index.js
+diff --git a/setup-create-next-app-webpack-5/cypress/support/component.js b/setup-create-next-app-webpack-5/cypress/support/component.js
 new file mode 100644
-index 0000000..d68db96
+index 0000000..67d7208
 --- /dev/null
-+++ b/create-next-app/cypress/support/index.js
++++ b/setup-create-next-app-webpack-5/cypress/support/component.js
 @@ -0,0 +1,20 @@
 +// ***********************************************************
-+// This example support/index.js is processed and
++// This example support/component.js is processed and
 +// loaded automatically before your test files.
 +//
 +// This is a great place to put global configuration and
@@ -90,3 +81,25 @@ index 0000000..d68db96
 +
 +// Alternatively you can use CommonJS syntax:
 +// require('./commands')
+\ No newline at end of file
+diff --git a/setup-create-next-app-webpack-5/cypress/support/component-index.html b/setup-create-next-app-webpack-5/cypress/support/component-index.html
+new file mode 100644
+index 0000000..13b583b
+--- /dev/null
++++ b/setup-create-next-app-webpack-5/cypress/support/component-index.html
+@@ -0,0 +1,14 @@
++<!DOCTYPE html>
++<html>
++  <head>
++    <meta charset="utf-8">
++    <meta http-equiv="X-UA-Compatible" content="IE=edge">
++    <meta name="viewport" content="width=device-width,initial-scale=1.0">
++    <title>Components App</title>
++    <div id="__next_css__DO_NOT_USE__"></div>
++  </head>
++  <body>
++
++    <div id="__cy_root"></div>
++  </body>
++</html>
+\ No newline at end of file
