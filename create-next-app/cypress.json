@@ -1,6 +1,6 @@
 {
   "component": {
-    "testFiles": "**/*.spec.ct.{js,ts,jsx,tsx}",
+    "testFiles": "**/*.spec.cy.{js,ts,jsx,tsx}",
     "componentFolder": "."
   }
 }

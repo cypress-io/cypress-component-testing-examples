@@ -15,7 +15,7 @@
   "devDependencies": {
     "@cypress/react": "^5.8.0",
     "@cypress/webpack-dev-server": "^1.3.0",
-    "cypress": "^7.4.0",
+    "cypress": "https://cdn.cypress.io/beta/npm/10.0.0/darwin-x64/10.0-release-c110aa19412ca42c6f83fd87acca81729f955af9/cypress.tgz",
     "html-webpack-plugin": "^5.3.1",
     "webpack-dev-server": "^3.11.2"
   }
