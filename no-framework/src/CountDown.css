@@ -1,0 +1,12 @@
+span {
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  display: inline-block;
+  font-size: 1.5em;
+  transition: all 0.2s;
+  background: rgb(195, 4, 61);
+  border: 0.16em solid rgb(0, 0, 0, 0);
+  border-radius: 2em;
+  padding: 0.3em 1.2em;
+  color: #ffffff;
+  text-align: center;
+}

@@ -1,0 +1,11 @@
+{
+  "name": "component-testing-no-framework",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "@cypress/mount-utils": "^1.0.2",
+    "@cypress/vite-dev-server": "^2.0.7",
+    "cypress": "^8.2.0",
+    "vite": "^2.4.4"
+  }
+}
